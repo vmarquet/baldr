@@ -5,7 +5,7 @@
  *$Id$
  */
 
-package imhbalder;
+package Ihm;
 import Main.*;
 import javax.swing.JComponent;
 import javax.swing.UIManager;
@@ -36,7 +36,7 @@ public class windowBalder extends javax.swing.JFrame {
         setBounds((screen.width - frame.width)/2,(screen.height - frame.height)/2,frame.width,frame.height);
         
         //javax.swing.ImageIcon iconBaldr= new javax.swing.ImageIcon("./ihmbalder/baldr.gif");
-        java.awt.Image iconBaldr = java.awt.Toolkit.getDefaultToolkit().getImage("images/baldr.gif");
+        java.awt.Image iconBaldr = java.awt.Toolkit.getDefaultToolkit().getImage("Images/baldr.gif");
         setIconImage(iconBaldr);
         
         for(i=0;i<Main.MAXONGLET;i++) listeOnglets[i]=false;

@@ -5,7 +5,7 @@
  *$Id$
  */
 
-package imhbalder;
+package Ihm;
 
 /**
  *
@@ -64,7 +64,7 @@ public class aPropos extends javax.swing.JFrame {
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon("images/Baldur.jpg"));
+        jLabel1.setIcon(new javax.swing.ImageIcon("Images/Baldur.jpg"));
 
         jLabel2.setText("Balder, dieu scandinave de l'innocence");
 
@@ -78,7 +78,7 @@ public class aPropos extends javax.swing.JFrame {
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(10, 10, 10)
                         .add(jLabel2))
-                    .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                    .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -105,7 +105,7 @@ public class aPropos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
-setVisible(false);// TODO add your handling code here:
+setVisible(false);
     }//GEN-LAST:event_formFocusLost
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked

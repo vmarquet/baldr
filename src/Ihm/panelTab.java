@@ -5,7 +5,7 @@
  *$Id$
  */
 
-package imhbalder;
+package Ihm;
 import java.io.File;
 import java.util.Enumeration;
 import javax.swing.JFileChooser;
@@ -276,7 +276,7 @@ public class panelTab extends javax.swing.JPanel {
                         .addContainerGap())
                     .add(jPanel4Layout.createSequentialGroup()
                         .add(jLabel6)
-                        .addContainerGap(193, Short.MAX_VALUE))
+                        .addContainerGap(194, Short.MAX_VALUE))
                     .add(jPanel4Layout.createSequentialGroup()
                         .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -316,11 +316,15 @@ public class panelTab extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel3Layout.createSequentialGroup()
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel5)
                     .add(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .add(jButton10))
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
+                    .add(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jLabel5)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -342,7 +346,7 @@ public class panelTab extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(jSplitPane1)
+                .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

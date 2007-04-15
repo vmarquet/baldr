@@ -22,7 +22,7 @@ public class Task {
     
     public void setFiles(File[] fichs)
     {
-        files=fichs;
+       files=fichs;
        return;
     }
     

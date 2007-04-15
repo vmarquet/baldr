@@ -6,7 +6,7 @@
  */
 
 package Main;
-import imhbalder.*;
+import Ihm.windowBalder;
 import Noyau.*;
 /**
  *
@@ -22,19 +22,19 @@ public class Main {
     public Main() {
     }
     
-      public static void main(String args[]) {
-      main=new Main();
-      
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            noyau = new Noyau();
-            }
-        });
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            ihm = new windowBalder();
-            }
-        });
+    public static void main(String args[]) {
+    main=new Main();
+
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+        noyau = new Noyau();
+        }
+    });
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+        ihm = new windowBalder();
+        }
+    });
     }
     
 }

@@ -5,7 +5,7 @@
  *$Id$
  */
 
-package imhbalder;
+package Ihm;
 
 import javax.swing.JFileChooser;
 

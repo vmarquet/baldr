@@ -25,6 +25,7 @@ public class panelTab extends javax.swing.JPanel {
         monNumero=monNum;
         jButton10.setVisible(false);
         jComboBox1.setSelectedIndex(0);
+        jLabel3.setText("sur "+Integer.toString(jComboBox1.getItemCount()));
     }
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {

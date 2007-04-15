@@ -9,9 +9,10 @@ package Ihm;
 import java.io.File;
 import java.util.Enumeration;
 import javax.swing.JFileChooser;
-import javax.swing.TransferHandler;
 import javax.swing.tree.*;
 import Main.*;
+import Noyau.*;
+import javax.swing.*;
 /**
  * @author  Baldr Team
  */
@@ -43,7 +44,7 @@ public class panelTab extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        jProgressBar1 = new JProgressBar (0,10000);
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jSplitPane2 = new javax.swing.JSplitPane();
@@ -179,18 +180,14 @@ public class panelTab extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(jLabel1)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 89, Short.MAX_VALUE))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .add(10, 10, 10))
-            .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel1)
+                            .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(10, 10, 10))
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -334,7 +331,7 @@ public class panelTab extends javax.swing.JPanel {
             .add(jPanel4Layout.createSequentialGroup()
                 .add(jLabel6)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel4)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -352,7 +349,7 @@ public class panelTab extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
+                .add(jSplitPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 773, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -563,8 +560,29 @@ retirerFichiers();
             for(File file: files){
                 System.out.println(file.toString());
             }
-            
-            Main.noyau.newTask(monNumero,files);
+            try{
+            wait(2); //for test
+            }catch(Exception e){};
+            Task analys=Main.noyau.newTask(monNumero,files);
+            if(analys!=null)
+            {
+             
+                analys.start();
+                while(analys.getState()!=Thread.State.TERMINATED)
+                {
+                    float a=analys.getStateCount();
+                    jProgressBar1.setValue(Math.round(a*10000));
+                    jProgressBar1.updateUI();
+                    //System.out.println(Thread.State.TERMINATED+" "+analys.getState());
+                 }
+                    float a=analys.getStateCount();
+                    jProgressBar1.setValue(Math.round(a*10000));
+                    System.out.println(Thread.State.TERMINATED+" "+analys.getState());
+
+                 JOptionPane.showMessageDialog(null, "Analyse Terminée" ,"Info",JOptionPane.INFORMATION_MESSAGE);
+   
+                
+            }
     }//GEN-LAST:event_jButton3ActionPerformed
         
         else{

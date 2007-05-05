@@ -6,12 +6,15 @@
  */
 
 package Ihm;
-
+import java.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 /**
  *
  * @author  Baldr Team
  */
-public class aPropos extends javax.swing.JFrame {
+public class aPropos extends javax.swing.JFrame implements ActionListener{
     
     /** Creates new form aPropos */
     public aPropos(java.awt.Component win) {
@@ -23,7 +26,9 @@ public class aPropos extends javax.swing.JFrame {
         setLocationRelativeTo(win); 
         setVisible(true);
              
-
+        Timer t=new Timer(5000,this);
+        t.start();
+         
         //System.out.println(new java.io.File("").getAbsolutePath());
         
     }
@@ -104,12 +109,18 @@ public class aPropos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void fprop()
+    {
+ setVisible(false);
+this.dispose();
+    }
+    
     private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
-setVisible(false);
+fprop();
     }//GEN-LAST:event_formFocusLost
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        setVisible(false);
+fprop();
     }//GEN-LAST:event_formMouseClicked
 
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
@@ -119,6 +130,11 @@ setVisible(false);
     private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
 // TODO add your handling code here:
     }//GEN-LAST:event_jPanel1FocusGained
+
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("ok");
+        fprop();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

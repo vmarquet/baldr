@@ -17,6 +17,8 @@ import javax.swing.*;
 public class aPropos extends javax.swing.JFrame implements ActionListener{
     
     /** Creates new form aPropos */
+    
+    Timer t;
     public aPropos(java.awt.Component win) {
         initComponents();
         
@@ -26,7 +28,7 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
         setLocationRelativeTo(win); 
         setVisible(true);
              
-        Timer t=new Timer(5000,this);
+        t=new Timer(5000,this);
         t.start();
          
         //System.out.println(new java.io.File("").getAbsolutePath());
@@ -132,8 +134,9 @@ fprop();
     }//GEN-LAST:event_jPanel1FocusGained
 
     public void actionPerformed(ActionEvent e) {
-        System.out.println("ok");
+      t.stop();
         fprop();
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

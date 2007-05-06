@@ -8,19 +8,18 @@
 package Noyau;
 
 import java.io.File;
-import Main.*;
 
 /**
  *
  * @author zeta
  */
-public class Task extends Thread{
-    File[] files;
-    float [][] res;
-    float state;
-    String stateMessage;
-    int numAnalyse; //nbr de fichier
-    
+public abstract class Task extends Thread{
+    private File[] files;
+    private float [][] res;
+    protected float state=0;
+    protected String stateMessage="";
+    private int numAnalyse; //nbr de fichier
+   
     /** Creates a new instance of Task */
     public Task() {
         setPriority(Thread.MIN_PRIORITY);
@@ -29,7 +28,7 @@ public class Task extends Thread{
       setPriority(Thread.MIN_PRIORITY);
          setFiles(fichs);
     }
-    
+   
     public void setFiles(File[] fichs)
     {
         int i,j;
@@ -45,8 +44,9 @@ public class Task extends Thread{
        if(i==j)
        {
        res[i][j]=0;
-       }
+       }else{
        this.numAnalyse++;
+       }
        }
        }
        
@@ -54,18 +54,21 @@ public class Task extends Thread{
     
       public void run()
     {
-      for(File fich1:files){
-      for(File fich2:files){
-      if(fich1!=fich2 && getRes(fich1,fich2)==-1)
+          int i,j;
+      for(i=0;i<files.length;i++){
+      for(j=0;j<files.length;j++){
+      if(i!=j && getRes(i,j)==-1)
       {
-       setRes(fich1,fich2,analyse(fich1,fich2));
-       setState(fich1,fich2);
+       setRes(i,j,analyse(files[i],files[j]));
+       setState(i,j);
       }
       
       }
       
       }
       stateMessage="Analyse Terminée";
+      this.state=1;
+    finalState();
         //System.out.println("Finished");
     }
     
@@ -125,17 +128,24 @@ public class Task extends Thread{
       
       private float analyse(File fich1,File fich2)
       {
-      //faisons la super anlayse :D 
+          // TODO ecrire la vrai analyse
+          
+      //faisons la super anlayse :D avec sleep pour etre lent
+          try{
+          sleep(100);
+          }catch(Exception e){};
       return (float)Math.random();
       }
       
-      private void setState(File f1,File f2)
+      private void setState(int i,int j)
       {
         this.state+=1.0/this.numAnalyse;
-        stateMessage="Analyse de "+f1.getName()+" vs "+f2.getName();
-          //System.out.println(stateMessage);
-          yield();
+        stateMessage="Analyse de "+files[i].getName()+" vs "+files[j].getName();
+        printState();
       }
+      
+      protected abstract void printState();
+      protected abstract void finalState();
 
     public float getStateCount() {
         return state;

@@ -113,6 +113,7 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
 
     private void fprop()
     {
+         t.stop();
  setVisible(false);
 this.dispose();
     }
@@ -134,7 +135,7 @@ fprop();
     }//GEN-LAST:event_jPanel1FocusGained
 
     public void actionPerformed(ActionEvent e) {
-      t.stop();
+     
         fprop();
         
     }

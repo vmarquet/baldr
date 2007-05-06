@@ -6,8 +6,11 @@
  */
 
 package Noyau;
+import Ihm.JTask;
+import Ihm.ResDispatcher;
 import Main.*;
 import java.io.File;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -35,7 +38,7 @@ public class Noyau {
         }
         
         if(i!=Main.MAXONGLET) {
-            tasks[i]=new Task();
+            tasks[i]=new DefaultTask();
             return tasks[i];
         }else{
             Utils.Errors.Error.tropAnalyse();
@@ -45,7 +48,7 @@ public class Noyau {
     
     public Task newTask(int i) {
         if(i<Main.MAXONGLET) {
-            tasks[i]=new Task();
+            tasks[i]=new DefaultTask();
             return tasks[i];
         }else{
             Utils.Errors.Error.tropAnalyse();
@@ -62,6 +65,27 @@ public class Noyau {
         return task;
     }
     
+       public Task newGUITask(int i,JProgressBar bar,ResDispatcher ret) {
+        if(i<Main.MAXONGLET) {
+            tasks[i]=new Ihm.JTask();
+            ((JTask) tasks[i]).setBar(bar);
+            ((JTask) tasks[i]).setRecall(ret);
+            return tasks[i];
+        }else{
+            Utils.Errors.Error.tropAnalyse();
+        }
+        return null;
+    }
+    
+        public Task newGUITask(int i,File[] files,JProgressBar bar,ResDispatcher ret) {
+        Task task=newGUITask(i,bar,ret);
+        if(task != null) {
+            task.setFiles(files);
+        }
+        
+        
+        return task;
+    }
     
     
 }

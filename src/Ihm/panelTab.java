@@ -16,9 +16,10 @@ import javax.swing.*;
 /**
  * @author  Baldr Team
  */
-public class panelTab extends javax.swing.JPanel {
-    int monNumero;
-    DefaultMutableTreeNode fileList;
+public class panelTab extends javax.swing.JPanel implements ResDispatcher{
+    private int monNumero;
+    private DefaultMutableTreeNode fileList;
+    private Task analys=null; 
     /** Creates new form panelTab */
     public panelTab(int monNum) {
         fileList = new DefaultMutableTreeNode("Documents");
@@ -359,34 +360,28 @@ public class panelTab extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-// TODO add your handling code here:
         itemDebut();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-// TODO add your handling code here:
         itemFin();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-// TODO add your handling code here:
         itemPrecedent();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-// TODO add your handling code here:
         itemSuivant();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-// TODO add your handling code here:
         jPanel1.setVisible(true);
         jSplitPane1.setLeftComponent(jPanel1);
         jButton10.setVisible(false);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-// TODO add your handling code here:
         jPanel1.setVisible(false);
         jButton10.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -401,7 +396,6 @@ retirerFichiers();
     
     
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
-// TODO add your handling code here:
         if (evt.getButton()==java.awt.event.MouseEvent.BUTTON2||evt.getButton()==java.awt.event.MouseEvent.BUTTON3) {
             menuContextuel.show(evt.getComponent(),evt.getX(), evt.getY());
             
@@ -552,6 +546,20 @@ retirerFichiers();
         }*/
     }
     
+    public void DispatchResult()
+    {
+        // TODO positionner analys à null quand rajout de fichier
+         if(analys!=null) 
+        {
+                System.out.println("Fi");
+    
+        JOptionPane p=new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
+        p.showMessageDialog(this,"Analyse Terminée");
+        }
+        
+    }
+    
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         File[] files = getFileTab();
         if(files!=null){
@@ -563,25 +571,12 @@ retirerFichiers();
             try{
             wait(2); //for test
             }catch(Exception e){};
-            Task analys=Main.noyau.newTask(monNumero,files);
+            analys=Main.noyau.newGUITask(monNumero,files,this.jProgressBar1,this);
             if(analys!=null)
             {
              
                 analys.start();
-                while(analys.getState()!=Thread.State.TERMINATED)
-                {
-                    float a=analys.getStateCount();
-                    jProgressBar1.setValue(Math.round(a*10000));
-                    jProgressBar1.updateUI();
-                    //System.out.println(Thread.State.TERMINATED+" "+analys.getState());
-                 }
-                    float a=analys.getStateCount();
-                    jProgressBar1.setValue(Math.round(a*10000));
-                    System.out.println(Thread.State.TERMINATED+" "+analys.getState());
-
-                 JOptionPane.showMessageDialog(null, "Analyse Terminée" ,"Info",JOptionPane.INFORMATION_MESSAGE);
-   
-                
+             
             }
     }//GEN-LAST:event_jButton3ActionPerformed
         

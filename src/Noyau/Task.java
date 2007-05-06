@@ -98,7 +98,7 @@ public abstract class Task extends Thread{
       setRes(r1,r2,val);
       }
       
-      private float getRes(File f1,File f2)
+      public float getRes(File f1,File f2)
       {
       int r1,r2,i;
       r1=-1;r2=-1;
@@ -114,7 +114,7 @@ public abstract class Task extends Thread{
       return getRes(r1,r2);
       }
       
-      private float getRes(int i,int j)
+      public float getRes(int i,int j)
       {
           //System.out.println(i+" "+j +"("+res[i].length+":"+res[j].length+")");
       if(res[i].length>j)
@@ -153,6 +153,16 @@ public abstract class Task extends Thread{
 
     public String getStateMessage() {
         return stateMessage;
+    }
+
+    public int getNumAnalyse() {
+        return numAnalyse;
+    }
+
+    
+    public File[] getFiles() {
+        
+        return files;
     }
     
 

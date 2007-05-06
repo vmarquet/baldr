@@ -9,10 +9,13 @@ package Ihm;
 import java.io.File;
 import java.util.Enumeration;
 import javax.swing.JFileChooser;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.*;
 import Main.*;
 import Noyau.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 /**
  * @author  Baldr Team
  */
@@ -546,14 +549,44 @@ retirerFichiers();
         }*/
     }
     
+    private void updateMat()
+    {
+          int j;  int i;
+        TableModel mat;
+        File [] fichs;
+        // TODO positionner analys à null quand rajout de fichier
+            fichs=analys.getFiles();
+             int nb=analys.getNumAnalyse();
+             
+             String[] heading=new String[fichs.length];
+             for(i=0;i<fichs.length;i++)
+             {
+              heading[i]=fichs[i].getName();   
+             }
+             mat = new DefaultTableModel(heading,fichs.length);
+             
+            //jTable1.setDefaultRenderer(String.class,new TableCellCustomRenderer());
+             jTable1.setModel(mat);
+             TableCellRenderer tr=new TableCellCustomRenderer();
+             for(i=0;i<fichs.length;i++){
+             jTable1.getColumnModel().getColumn(i).setHeaderRenderer(tr);
+              for(j=0;j<fichs.length;j++){
+                 if(j<i){
+              mat.setValueAt(analys.getRes(i,j),j,i);}else{break;}
+              }
+    }
+    }
+    
     public void DispatchResult()
     {
         // TODO positionner analys à null quand rajout de fichier
          if(analys!=null) 
-        {
-                System.out.println("Fi");
-    
-        JOptionPane p=new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
+        { 
+        updateMat();
+         
+        
+           
+             JOptionPane p=new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
         p.showMessageDialog(this,"Analyse Terminée");
         }
         

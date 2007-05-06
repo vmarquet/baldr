@@ -19,7 +19,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 public class TreeCellCustomRenderer implements TreeCellRenderer{
     
     /** Creates a new instance of TreeCellCustomRenderer */
-      DefaultTreeCellRenderer rend;
+     private DefaultTreeCellRenderer rend;
    
     public TreeCellCustomRenderer() {
           rend=new DefaultTreeCellRenderer();

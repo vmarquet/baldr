@@ -39,7 +39,7 @@ public class TableCellCustomRenderer implements TableCellRenderer {
        }
        reu.setText(str.toString());
        reu.setToolTipText(s);
-       System.out.println(str);
+      // System.out.println(str);
         return reu;
     }
     

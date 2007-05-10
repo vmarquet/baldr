@@ -9,6 +9,7 @@ package Ihm;
 import java.io.File;
 import java.util.Enumeration;
 import javax.swing.JFileChooser;
+import javax.swing.event.ListDataListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.*;
 import Main.*;
@@ -266,6 +267,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         jPanel5.add(jButton7, new java.awt.GridBagConstraints());
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setRenderer(new ComboCellCustomRenderer());
         jPanel5.add(jComboBox1, new java.awt.GridBagConstraints());
 
         jLabel3.setText("sur N");
@@ -555,7 +557,6 @@ retirerFichiers();
           int j;  int i;
         TableModel mat;
         File [] fichs;
-        // TODO positionner analys à null quand rajout de fichier
             fichs=analys.getFiles();
              int nb=analys.getNumAnalyse();
              
@@ -578,13 +579,36 @@ retirerFichiers();
     }
     }
     
+    private void updateDefilZone()
+    {
+             File [] fichs;
+            fichs=analys.getFiles();
+            
+            Object[] obj=new Object[fichs.length+1];
+       obj[0]="Tout";
+       int i=1;
+       for(File o:fichs)
+       {
+       obj[i]=o;
+       i++;
+       }
+            
+   
+    ComboBoxModel li=new DefaultComboBoxModel(obj);
+        jComboBox1.setModel(li);
+        jLabel3.setText("sur "+Integer.toString(jComboBox1.getItemCount()-1));
+        
+     //   jComboBox1.updateUI();
+    
+    }
+    
     public void DispatchResult()
     {
         // TODO positionner analys à null quand rajout de fichier
          if(analys!=null) 
         { 
         updateMat();
-         
+         updateDefilZone();
         
            
              JOptionPane p=new JOptionPane(JOptionPane.INFORMATION_MESSAGE);

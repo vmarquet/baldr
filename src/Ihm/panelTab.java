@@ -427,7 +427,7 @@ retirerFichiers();
     
     private File[] getFileTab() {
         Enumeration files = fileList.depthFirstEnumeration();
-        int count=fileList.getLeafCount(); /* Les fichiers à analyser sont forcément des feuilles*/
+        int count=fileList.getLeafCount(); /* Les fichiers ? analyser sont forc?ment des feuilles*/
         // files = fileList.depthFirstEnumeration();
         int i=0;
         DefaultMutableTreeNode fich;
@@ -453,7 +453,7 @@ retirerFichiers();
         chooser.setMultiSelectionEnabled(true); /* rend un tab de files */
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES); /*Soit des files soit des dirs */
         
-        TreePath ins=jTree1.getSelectionPath(); /*premier fichier selectionné*/
+        TreePath ins=jTree1.getSelectionPath(); /*premier fichier selectionn?*/
         
         lro=fileList; /*par def racine*/
         
@@ -463,14 +463,14 @@ retirerFichiers();
             DefaultMutableTreeNode fich;
             while (files.hasMoreElements()) { /*parcours*/
                 fich=(DefaultMutableTreeNode)files.nextElement(); 
-                if(ins.equals(new TreePath(fich.getPath())) ) { /*Si le selectionné == le noeud */
-                    lro=fich; /*on ajoute là */
+                if(ins.equals(new TreePath(fich.getPath())) ) { /*Si le selectionn? == le noeud */
+                    lro=fich; /*on ajoute l? */
                     break;
                 }
                 
             }
             
-            if(lro.isLeaf() && !lro.isRoot()) { /*Si le selectionné et un fichier on ajoute dans le dossier parent [sauf racine]*/
+            if(lro.isLeaf() && !lro.isRoot()) { /*Si le selectionn? et un fichier on ajoute dans le dossier parent [sauf racine]*/
                 lro=(DefaultMutableTreeNode)lro.getParent();
             }
         }
@@ -480,7 +480,7 @@ retirerFichiers();
             case JFileChooser.APPROVE_OPTION:
                 //  for(int i=0;i < chooser.getSelectedFiles().length;i++){
                 for(File fich:chooser.getSelectedFiles()){
-                    lro.add(recursDir(fich)); /*Fonction d'ajout récursive de fichiers*/
+                    lro.add(recursDir(fich)); /*Fonction d'ajout r?cursive de fichiers*/
                 }
                 jTree1.updateUI(); /*Demande de redessinage du tree*/
                 // jTree1.setModel(new DefaultTreeModel(fileList));
@@ -502,7 +502,7 @@ retirerFichiers();
         TreePath[] removeList = jTree1.getSelectionPaths();
         // System.out.println("A detruire");
         
-        for(TreePath path: removeList) { /*Pour tous les fichiers à détruire*/
+        for(TreePath path: removeList) { /*Pour tous les fichiers ? d?truire*/
             /*Possible bug, il faudrait faire l'enum ici*/
             Enumeration files = fileList.breadthFirstEnumeration(); /*Parcours en largeur*/
             
@@ -511,9 +511,9 @@ retirerFichiers();
                 fich=(DefaultMutableTreeNode)files.nextElement();
                 if(path.equals(new TreePath(fich.getPath())) ) { /*On cherche le noeud correspondant*/
                     //    System.out.println(path);
-                    fich.removeAllChildren(); /*et on le dégage, fils d'abord*/
+                    fich.removeAllChildren(); /*et on le d?gage, fils d'abord*/
                     
-                    if(!fich.isRoot()) { /*Sauf si il est à la racine*/
+                    if(!fich.isRoot()) { /*Sauf si il est ? la racine*/
                         DefaultMutableTreeNode par=(DefaultMutableTreeNode)fich.getParent();
                         par.remove(fich); /*le noeud*/
                         do {
@@ -604,7 +604,7 @@ retirerFichiers();
     
     public void DispatchResult()
     {
-        // TODO positionner analys à null quand rajout de fichier
+        // TODO positionner analys ? null quand rajout de fichier
          if(analys!=null) 
         { 
         updateMat();
@@ -612,7 +612,7 @@ retirerFichiers();
         
            
              JOptionPane p=new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
-        p.showMessageDialog(this,"Analyse Terminée");
+        p.showMessageDialog(this,"Analyse Termin?e");
         }
         
     }
@@ -621,7 +621,7 @@ retirerFichiers();
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         File[] files = getFileTab();
         if(files!=null){
-            System.out.println(files.length+" fichiers à analyser:");
+            //System.out.println(files.length+" fichiers à analyser:");
             
             for(File file: files){
                 System.out.println(file.toString());

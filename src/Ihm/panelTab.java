@@ -455,6 +455,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         DefaultMutableTreeNode lro; /*noeud ou on va add*/
         chooser.setMultiSelectionEnabled(true); /* rend un tab de files */
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES); /*Soit des files soit des dirs */
+        
         String lastdir = Noyau.opts.readPref("LAST_DIR");
         if(lastdir != null){
             chooser.setCurrentDirectory(new File(lastdir));

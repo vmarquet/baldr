@@ -19,6 +19,7 @@ public class Prefs {
     
     /** Creates a new instance of Prefs */
     public Prefs() {
+        //prefs = Preferences.userRoot();
         prefs = Preferences.userNodeForPackage(this.getClass());
     }
     
@@ -29,5 +30,21 @@ public class Prefs {
     
     public void writePref(String name, String str){
        prefs.put(name,str);
+    }
+    
+    public boolean exist(String name){
+        String[] list=null;
+        try {
+            list = prefs.keys();
+        } catch (BackingStoreException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        for(String str:list){
+            if(str.compareTo(name) == 0){
+                return true;
+            }
+        }
+        return false;
     }
 }

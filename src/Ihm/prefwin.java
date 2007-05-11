@@ -8,17 +8,20 @@
 package Ihm;
 
 import javax.swing.JFileChooser;
+import javax.swing.JTextField;
+import Noyau.Noyau;
 
 /**
  *
  * @author  Baldr Team
  */
 public class prefwin extends javax.swing.JFrame {
-    
+    String editor;
     /** Creates new form prefwin */
     public prefwin() {
         initComponents();
         this.setLocationRelativeTo(this.getParent());
+        loadPrefs();
       }
     
     /** This method is called from within the constructor to
@@ -66,6 +69,11 @@ public class prefwin extends javax.swing.JFrame {
         });
 
         jButton3.setText("Appliquer");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Annuler");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +144,10 @@ public class prefwin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        saveMods();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
 // TODO add your handling code here:
         if(evt.getStateChange() == evt.SELECTED){
@@ -157,6 +169,7 @@ public class prefwin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 // TODO add your handling code here:
+        saveMods();
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -168,7 +181,7 @@ public class prefwin extends javax.swing.JFrame {
         
         switch(res) {
             case JFileChooser.APPROVE_OPTION:
-                System.out.println(chooser.getSelectedFile());
+                jTextField1.setText(chooser.getSelectedFile().toString());
                 break;
             case JFileChooser.CANCEL_OPTION:
                 break;
@@ -187,6 +200,19 @@ public class prefwin extends javax.swing.JFrame {
                 pref.setVisible(true);
             }
         });
+    }
+    
+    private void loadPrefs(){
+        if(Noyau.opts.exist("EDITOR")){
+            jTextField1.setText(Noyau.opts.readPref("EDITOR"));
+        }
+        editor = jTextField1.getText();
+    }
+    
+    private void saveMods(){
+        if(jTextField1.getText().compareTo(editor) != 0){
+            Noyau.opts.writePref("EDITOR",jTextField1.getText());
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

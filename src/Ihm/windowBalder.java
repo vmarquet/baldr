@@ -46,7 +46,6 @@ public class windowBalder extends javax.swing.JFrame {
         setVisible(true);
         aProposBaldr = new aPropos(this);
         
-        
     }
     
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents

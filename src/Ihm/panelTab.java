@@ -6,6 +6,7 @@
  */
 
 package Ihm;
+
 import java.io.File;
 import java.util.Enumeration;
 import javax.swing.JFileChooser;
@@ -32,6 +33,10 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         jButton10.setVisible(false);
         jComboBox1.setSelectedIndex(0);
         jLabel3.setText("sur "+Integer.toString(jComboBox1.getItemCount()));
+      // TODO: Comprendre pourquoi les getWidth retournent 0 ici
+        jSplitPane2.setDividerLocation(this.getPreferredSize().width*2/3);
+        plot2DPanel1.plotToolBar.remove(3); // On dégage les entrées du menu de la toolbar qui servent à rien
+        plot2DPanel1.plotToolBar.remove(4);
     }
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -55,7 +60,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         jSplitPane2 = new javax.swing.JSplitPane();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jLabel2 = new javax.swing.JLabel();
+        plot2DPanel1 = new org.math.plot.Plot2DPanel();
         jLabel5 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -192,8 +197,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
                         .add(99, 99, 99))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
                         .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                        .addContainerGap(35, Short.MAX_VALUE))))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -208,8 +213,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         jSplitPane1.setLeftComponent(jPanel1);
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel2.setIcon(new javax.swing.ImageIcon("images/distMap2.GIF"));
-        jScrollPane3.setViewportView(jLabel2);
+        jScrollPane3.setViewportView(plot2DPanel1);
 
         jLabel5.setText("R\u00e9sultats graphiques :");
 
@@ -229,15 +233,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jButton10)
                     .add(jLabel5))
-                .addContainerGap(281, Short.MAX_VALUE))
-            .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
                 .add(jLabel5)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                 .add(16, 16, 16)
                 .add(jButton10)
                 .addContainerGap())
@@ -323,14 +327,14 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel4Layout.createSequentialGroup()
                         .add(10, 10, 10)
                         .add(jLabel6)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 85, Short.MAX_VALUE))
-                    .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 268, Short.MAX_VALUE))
+                    .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -338,7 +342,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
             .add(jPanel4Layout.createSequentialGroup()
                 .add(jLabel6)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel4)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -393,7 +397,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void supprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerActionPerformed
-retirerFichiers();
+        retirerFichiers();
     }//GEN-LAST:event_supprimerActionPerformed
     
     private void ajouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterActionPerformed
@@ -404,7 +408,6 @@ retirerFichiers();
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
         if (evt.getButton()==java.awt.event.MouseEvent.BUTTON2||evt.getButton()==java.awt.event.MouseEvent.BUTTON3) {
             menuContextuel.show(evt.getComponent(),evt.getX(), evt.getY());
-            
         }
     }//GEN-LAST:event_jTree1MouseClicked
     
@@ -612,7 +615,7 @@ retirerFichiers();
         
            
              JOptionPane p=new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
-        p.showMessageDialog(this,"Analyse Termin?e");
+        p.showMessageDialog(this,"Analyse Terminée");
         }
         
     }
@@ -704,7 +707,6 @@ retirerFichiers();
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -727,6 +729,7 @@ retirerFichiers();
     private javax.swing.JTree jTree1;
     private javax.swing.JMenuItem lancer;
     private javax.swing.JPopupMenu menuContextuel;
+    private org.math.plot.Plot2DPanel plot2DPanel1;
     private javax.swing.JMenuItem supprimer;
     // End of variables declaration//GEN-END:variables
     

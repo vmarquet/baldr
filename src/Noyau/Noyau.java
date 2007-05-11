@@ -17,10 +17,13 @@ import javax.swing.JProgressBar;
  * @author zeta
  */
 public class Noyau {
-    
     Task[] tasks;
+    public static Prefs opts;
+    
     /** Creates a new instance of Noyau */
     public Noyau() {
+        opts = new Prefs();
+        
         tasks=new Task[Main.MAXONGLET];
         int i;
         for(i=0;i<Main.MAXONGLET;i++) {

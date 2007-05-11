@@ -15,7 +15,7 @@ import Noyau.*;
 public class Main {
     public static Main main;
     public static windowBalder ihm;
-    public static Noyau noyau; 
+    public static Noyau noyau;
     public static final int MAXONGLET=10;
     
     /** Creates a new instance of Main */

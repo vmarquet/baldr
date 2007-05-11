@@ -455,6 +455,10 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         DefaultMutableTreeNode lro; /*noeud ou on va add*/
         chooser.setMultiSelectionEnabled(true); /* rend un tab de files */
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES); /*Soit des files soit des dirs */
+        String lastdir = Noyau.opts.readPref("LAST_DIR");
+        if(lastdir != null){
+            chooser.setCurrentDirectory(new File(lastdir));
+        }
         
         TreePath ins=jTree1.getSelectionPath(); /*premier fichier selectionn?*/
         
@@ -493,7 +497,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
             case JFileChooser.ERROR_OPTION:
                 break;
         }
-    }
+        String curdir = chooser.getCurrentDirectory().toString();
+        
+        if(lastdir == null || lastdir.compareTo(curdir) != 0){
+            Noyau.opts.writePref("LAST_DIR",curdir);
+        }
+ }
     
     private void retirerFichiers() {
        boolean flag;

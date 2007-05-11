@@ -7,6 +7,7 @@
 
 package Noyau;
 
+import java.io.OutputStream;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -14,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.zip.GZIPOutputStream;
+import java.util.zip.ZipOutputStream;
 
 /**
  *
@@ -55,14 +57,9 @@ public abstract class Task extends Thread{
         
     }
     
-    private static long getGZipSize(File file)
-    throws IOException, FileNotFoundException {
-        long ret = 0;
+    private static OutputStream makeComp(OutputStream gzos, File file) throws IOException{
         byte[] buf = new byte[1024];
         int len;
-        
-        ByteArrayOutputStream fos = new ByteArrayOutputStream();
-        GZIPOutputStream gzos = new GZIPOutputStream(fos);
         
         FileInputStream fin = new FileInputStream(file);
         BufferedInputStream in = new BufferedInputStream(fin);
@@ -71,6 +68,19 @@ public abstract class Task extends Thread{
             gzos.write(buf,0,len);
         }
         in.close();
+        
+        return gzos;
+    }
+    
+    private static long getGZipSize(File file)
+    throws IOException, FileNotFoundException {
+        long ret = 0;
+        
+        ByteArrayOutputStream fos = new ByteArrayOutputStream();
+        GZIPOutputStream gzos = new GZIPOutputStream(fos);
+        
+        makeComp(gzos,file);
+        
         gzos.close(); // Complete l'archive et la clot
         
         ret = fos.size();
@@ -82,28 +92,13 @@ public abstract class Task extends Thread{
     private static long getGZipSize(File file, File file2)
     throws IOException, FileNotFoundException {
         long ret = 0;
-        byte[] buf = new byte[1024];
-        int len;
         
         ByteArrayOutputStream fos = new ByteArrayOutputStream();
         GZIPOutputStream gzos = new GZIPOutputStream(fos);
         
-        FileInputStream fin1 = new FileInputStream(file);
-        BufferedInputStream in1 = new BufferedInputStream(fin1);
+        makeComp(gzos,file);
+        makeComp(gzos,file2);
         
-        FileInputStream fin2 = new FileInputStream(file2);
-        BufferedInputStream in2 = new BufferedInputStream(fin2);
-        
-        // compress file1
-        while ((len = in1.read(buf)) >= 0) {
-            gzos.write(buf,0,len);
-        }
-        in1.close();
-        //compress file2
-        while ((len = in2.read(buf)) >= 0) {
-            gzos.write(buf,0,len);
-        }
-        in2.close();
         gzos.close(); // Complete l'archive et la clot
         
         ret = fos.size();
@@ -122,7 +117,7 @@ public abstract class Task extends Thread{
         System.out.println("# " + files.length + " files");
         
         for(i=0;i<nbr;i++){
-           
+            
             System.out.println("# filename : " + files[i].getName());
             try  {
                 ci =  getGZipSize(files[i]);

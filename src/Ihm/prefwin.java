@@ -22,6 +22,7 @@ public class prefwin extends javax.swing.JFrame {
     // Cédric: Equivalent d'un struct global en C++, je trouve pas mieux :(
     private static class opts {
         static String editor;
+        static boolean expert;
     }
     
     /** Creates new form prefwin */
@@ -215,16 +216,19 @@ public class prefwin extends javax.swing.JFrame {
         }
         opts.editor = jTextField1.getText();
         
-        //if(Noyau.opts.exist("EXPERT")){
-        //    jTextField1.setText(Noyau.opts.readPref("EXPERT"));
-        //}
-        //opts.editor = jTextField1.getText();
+        if(Noyau.opts.exist("EXPERT")){
+            if((Boolean)Noyau.opts.readPref("EXPERT",false)){
+               System.out.println("Expert Mode");
+            }
+        }
+        //opts.expert = jTextField1.getText();
     }
     
     private void saveMods(){
         if(jTextField1.getText().compareTo(opts.editor) != 0){
             Noyau.opts.writePref("EDITOR",jTextField1.getText());
         }
+        Noyau.opts.writePref("EXPERT",true);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

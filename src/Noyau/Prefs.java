@@ -14,6 +14,7 @@ import java.util.prefs.*;
  *
  * @author nezetic
  */
+
 public class Prefs {
     private Preferences prefs;
     

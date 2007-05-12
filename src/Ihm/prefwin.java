@@ -7,6 +7,7 @@
 
 package Ihm;
 
+import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import Noyau.Noyau;
@@ -16,7 +17,13 @@ import Noyau.Noyau;
  * @author  Baldr Team
  */
 public class prefwin extends javax.swing.JFrame {
-    String editor;
+    //String editor;
+    
+    // Cédric: Equivalent d'un struct global en C++, je trouve pas mieux :(
+    private static class opts {
+        static String editor;
+    }
+    
     /** Creates new form prefwin */
     public prefwin() {
         initComponents();
@@ -206,11 +213,16 @@ public class prefwin extends javax.swing.JFrame {
         if(Noyau.opts.exist("EDITOR")){
             jTextField1.setText(Noyau.opts.readPref("EDITOR"));
         }
-        editor = jTextField1.getText();
+        opts.editor = jTextField1.getText();
+        
+        //if(Noyau.opts.exist("EXPERT")){
+        //    jTextField1.setText(Noyau.opts.readPref("EXPERT"));
+        //}
+        //opts.editor = jTextField1.getText();
     }
     
     private void saveMods(){
-        if(jTextField1.getText().compareTo(editor) != 0){
+        if(jTextField1.getText().compareTo(opts.editor) != 0){
             Noyau.opts.writePref("EDITOR",jTextField1.getText());
         }
     }

@@ -1,67 +1,45 @@
 /*
  * TableCellCustomRenderer.java
  *
- * Created on 6 mai 2007, 19:35
+ * Created on 12 mai 2007, 16:33
  *$Id$
  */
 
 package Ihm;
 
 import java.awt.Component;
+import javax.swing.CellRendererPane;
+import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 /**
  *
  * @author zeta
  */
-public class TableCellCustomRenderer implements TableCellRenderer {
-    
+public class TableCellCustomRenderer implements TableCellRenderer{
+    TableCellRenderer rend;
+    float min;
+    float max;
     /** Creates a new instance of TableCellCustomRenderer */
-    private TableCellRenderer rend;
     public TableCellCustomRenderer() {
-        rend=new UIResourceTableCellRenderer();
- 
+        rend=new DefaultTableCellRenderer();
     }
-        
+
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        int i;
-       DefaultTableCellRenderer reu=(DefaultTableCellRenderer) rend.getTableCellRendererComponent(table,value,isSelected,hasFocus,row,column);
-       StringBuffer str=new StringBuffer();
-       String s=value.toString();
-       
-       for(i=0;i<s.length();i++)
-       {
-       str.append(s.charAt(i)).append('\n');
-       }
-       reu.setText(str.toString());
-       reu.setToolTipText(s);
-      // System.out.println(str);
-        return reu;
+    JLabel reu=(JLabel) rend.getTableCellRendererComponent(table,value,isSelected,hasFocus,row,column);
+   if(column!=0 && value!=null){
+        //TODO : ajouter une pref pour le multiplier
+    reu.setText(Float.valueOf(value.toString())*10+"e-1");} 
+    if(value!=null){
+    reu.setToolTipText(value.toString());
+    }else{
+    reu.setToolTipText("O par définition");
+    }
+    return reu;
     }
     
     
-  }  
-
-
-   class UIResourceTableCellRenderer extends DefaultTableCellRenderer  {
-	    public Component getTableCellRendererComponent(JTable table, Object value,
-                         boolean isSelected, boolean hasFocus, int row, int column) {
-	        if (table != null) {
-	            JTableHeader header = table.getTableHeader();
-	            if (header != null) {
-	                setForeground(header.getForeground());
-	                setBackground(header.getBackground());
-	                setFont(header.getFont());
-	            }
-                }
-
-                setText((value == null) ? "" : value.toString());
-		setBorder(UIManager.getBorder("TableHeader.cellBorder"));
-	        return this;
-            }
-    }
-
+    
+}

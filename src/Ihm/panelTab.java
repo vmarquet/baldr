@@ -10,8 +10,8 @@ package Ihm;
 import java.io.File;
 import java.util.Enumeration;
 import javax.swing.JFileChooser;
-import javax.swing.event.ListDataListener;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import javax.swing.tree.*;
 import Main.*;
 import Noyau.*;
@@ -24,7 +24,7 @@ import javax.swing.table.TableModel;
 public class panelTab extends javax.swing.JPanel implements ResDispatcher{
     private int monNumero;
     private DefaultMutableTreeNode fileList;
-    private Task analys=null; 
+    private Task analys=null;
     /** Creates new form panelTab */
     public panelTab(int monNum) {
         fileList = new DefaultMutableTreeNode("Documents");
@@ -33,7 +33,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         jButton10.setVisible(false);
         jComboBox1.setSelectedIndex(0);
         jLabel3.setText("sur "+Integer.toString(jComboBox1.getItemCount()));
-      // TODO: Comprendre pourquoi les getWidth retournent 0 ici
+        // TODO: Comprendre pourquoi les getWidth retournent 0 ici
         jSplitPane2.setDividerLocation(this.getPreferredSize().width*2/3);
         plot2DPanel1.plotToolBar.remove(3); // On dégage les entrées du menu de la toolbar qui servent à rien
         plot2DPanel1.plotToolBar.remove(4);
@@ -64,6 +64,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         jLabel5 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        jPanel4.setVisible(false);
         jPanel5 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -190,14 +191,14 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(11, Short.MAX_VALUE)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
                         .add(jLabel1)
                         .add(99, 99, 99))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
                         .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(35, Short.MAX_VALUE))))
+                        .addContainerGap(36, Short.MAX_VALUE))))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -233,7 +234,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jButton10)
                     .add(jLabel5))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
             .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
@@ -241,7 +242,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
                 .add(jLabel5)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
                 .add(16, 16, 16)
                 .add(jButton10)
                 .addContainerGap())
@@ -327,14 +328,14 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel4Layout.createSequentialGroup()
                         .add(10, 10, 10)
                         .add(jLabel6)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 268, Short.MAX_VALUE))
-                    .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 294, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -342,14 +343,14 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
             .add(jPanel4Layout.createSequentialGroup()
                 .add(jLabel6)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel4)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 163, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(175, 175, 175))
+                .add(48, 48, 48))
         );
         jSplitPane2.setRightComponent(jPanel4);
 
@@ -360,7 +361,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
+                .add(jSplitPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 773, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -368,34 +369,34 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
             .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         itemDebut();
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         itemFin();
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         itemPrecedent();
     }//GEN-LAST:event_jButton7ActionPerformed
-
+    
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         itemSuivant();
     }//GEN-LAST:event_jButton5ActionPerformed
-
+    
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         jPanel1.setVisible(true);
         jSplitPane1.setLeftComponent(jPanel1);
         jButton10.setVisible(false);
     }//GEN-LAST:event_jButton10ActionPerformed
-
+    
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         jPanel1.setVisible(false);
         jButton10.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
-
+    
     private void supprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerActionPerformed
         retirerFichiers();
     }//GEN-LAST:event_supprimerActionPerformed
@@ -417,10 +418,10 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         if(fich.isDirectory()){ /*Si c'est un dossier*/
             for(File ch : fich.listFiles()) {
                 if(ch.isDirectory()){/*Ajoute tous les fils*/
-                    el.add(recursDir(ch)); 
+                    el.add(recursDir(ch));
                     
                 }else{
-                    el.add(new DefaultMutableTreeNode(ch)); 
+                    el.add(new DefaultMutableTreeNode(ch));
                 }
             }
         }
@@ -470,7 +471,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
             Enumeration files = fileList.breadthFirstEnumeration(); /*Tout l'arbre en largeur*/
             DefaultMutableTreeNode fich;
             while (files.hasMoreElements()) { /*parcours*/
-                fich=(DefaultMutableTreeNode)files.nextElement(); 
+                fich=(DefaultMutableTreeNode)files.nextElement();
                 if(ins.equals(new TreePath(fich.getPath())) ) { /*Si le selectionn? == le noeud */
                     lro=fich; /*on ajoute l? */
                     break;
@@ -503,12 +504,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         if(lastdir == null || lastdir.compareTo(curdir) != 0){
             Noyau.opts.writePref("LAST_DIR",curdir);
         }
- }
+    }
     
     private void retirerFichiers() {
-       boolean flag;
+        boolean flag;
         if(jTree1.isSelectionEmpty()){ /*Retire que les fichier* selectionnez*/
-            return; 
+            return;
         }
         //     Enumeration files = fileList.breadthFirstEnumeration();
         
@@ -520,7 +521,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
             Enumeration files = fileList.breadthFirstEnumeration(); /*Parcours en largeur*/
             
             DefaultMutableTreeNode fich;
-            while (files.hasMoreElements()) { 
+            while (files.hasMoreElements()) {
                 fich=(DefaultMutableTreeNode)files.nextElement();
                 if(path.equals(new TreePath(fich.getPath())) ) { /*On cherche le noeud correspondant*/
                     //    System.out.println(path);
@@ -530,14 +531,13 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
                         DefaultMutableTreeNode par=(DefaultMutableTreeNode)fich.getParent();
                         par.remove(fich); /*le noeud*/
                         do {
-                       flag=false;
-                         if(par.getChildCount()==0 && !par.isRoot())
-                        {
-                            flag=true;
-                            DefaultMutableTreeNode apar=(DefaultMutableTreeNode)par.getParent();
-                            apar.remove(par);
-                            par=apar;
-                        }
+                            flag=false;
+                            if(par.getChildCount()==0 && !par.isRoot()) {
+                                flag=true;
+                                DefaultMutableTreeNode apar=(DefaultMutableTreeNode)par.getParent();
+                                apar.remove(par);
+                                par=apar;
+                            }
                         }while(flag);
                     }
                     break;
@@ -565,69 +565,103 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         }*/
     }
     
-    private void updateMat()
-    {
-          int j;  int i;
+    private void updateMat() {
+        int j;  int i;
         TableModel mat;
         File [] fichs;
-            fichs=analys.getFiles();
-             int nb=analys.getNumAnalyse();
+        fichs=analys.getFiles();
+        int nb=analys.getNumAnalyse();
+             jTable1.removeEditor();
              
-             String[] heading=new String[fichs.length];
-             for(i=0;i<fichs.length;i++)
-             {
-              heading[i]=fichs[i].getName();   
-             }
-             mat = new DefaultTableModel(heading,fichs.length);
              
-            //jTable1.setDefaultRenderer(String.class,new TableCellCustomRenderer());
-             jTable1.setModel(mat);
-             TableCellRenderer tr=new TableCellCustomRenderer();
-             for(i=0;i<fichs.length;i++){
-             jTable1.getColumnModel().getColumn(i).setHeaderRenderer(tr);
-              for(j=0;j<fichs.length;j++){
-                 if(j<i){
-              mat.setValueAt(analys.getRes(i,j),j,i);}else{break;}
-              }
-    }
+             
+        String[] heading=new String[fichs.length+1];
+        for(i=1;i<=fichs.length;i++) {
+            heading[i]=fichs[i-1].getName();
+        }
+        heading[0]="Fichiers";
+        mat = new DefaultTableModel(heading,fichs.length){
+        public boolean isCellEditable(int i, int j ){return false;}
+        };
+        
+        //jTable1.setDefaultRenderer(String.class,new TableCellCustomRenderer());
+        jTable1.setModel(mat);
+        TableCellRenderer tr=new TableHeaderCellCustomRenderer();
+        TableColumn tc;
+        for(i=0;i<=fichs.length;i++){
+            tc=jTable1.getColumnModel().getColumn(i);
+            tc.setHeaderRenderer(tr);
+            tc.setCellRenderer(new TableCellCustomRenderer());
+            if(i==0){
+               //on se passe de aller chercher la font du table header... 
+                // TODO : Ameliorer ça
+           tc.setMinWidth(heading[0].length()*5); 
+            }
+            for(j=0;j<fichs.length;j++){
+                if(i==0) {
+                    mat.setValueAt(fichs[j].getName(),j,i);
+                    
+                }else{
+                    if(j!=i-1){ //j<i-1 suffit
+                        mat.setValueAt(analys.getRes(i-1,j),j,i);}
+                    //else{break;}
+                }}
+        }
     }
     
-    private void updateDefilZone()
-    {
-             File [] fichs;
-            fichs=analys.getFiles();
-            
-            Object[] obj=new Object[fichs.length+1];
-       obj[0]="Tout";
-       int i=1;
-       for(File o:fichs)
-       {
-       obj[i]=o;
-       i++;
-       }
-            
-   
-    ComboBoxModel li=new DefaultComboBoxModel(obj);
+    private void updateDefilZone() {
+        File [] fichs;
+        fichs=analys.getFiles();
+        
+        Object[] obj=new Object[fichs.length+1];
+        obj[0]="Tout";
+        int i=1;
+        for(File o:fichs) {
+            obj[i]=o;
+            i++;
+        }
+        
+        
+        ComboBoxModel li=new DefaultComboBoxModel(obj);
         jComboBox1.setModel(li);
         jLabel3.setText("sur "+Integer.toString(jComboBox1.getItemCount()-1));
         
-     //   jComboBox1.updateUI();
-    
+        //   jComboBox1.updateUI();
+        
+    }
+    private void updatePlot() {
+        int  i, j;
+        int nb = analys.getNumAnalyse();
+        double[] val= new double[nb];
+        File [] fichs;
+        fichs=analys.getFiles();
+        int a=0;
+        for(i=0;i<fichs.length;i++){
+            for(j=0;j<fichs.length;j++){
+                if(j<i){
+                    val[a++]=analys.getRes(i,j);}else{break;}
+            }
+        }
+        plot2DPanel1.removeAllPlots();
+        plot2DPanel1.addHistogramPlot("Histogramme des valeurs",val,nb);
+        
     }
     
-    public void DispatchResult()
-    {
+    public void DispatchResult() {
         // TODO positionner analys ? null quand rajout de fichier
-         if(analys!=null) 
-        { 
-        updateMat();
-         updateDefilZone();
-        
-           
-             JOptionPane p=new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
-        p.showMessageDialog(this,"Analyse Terminée");
+        if(analys!=null) {
+            updateMat();
+            updateDefilZone();
+            updatePlot();
+            
+            
+            jPanel4.setVisible(true);
+            //TODO : Ouvrir le splitPane à la bonne taille
+            jSplitPane2.setDividerLocation(this.getSize().width*1/2);
+            
+            JOptionPane p=new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
+            p.showMessageDialog(this,"Analyse Terminée");
         }
-        
     }
     
     
@@ -640,14 +674,13 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
                 System.out.println(file.toString());
             }
             try{
-            wait(2); //for test
+                wait(2); //for test
             }catch(Exception e){};
             analys=Main.noyau.newGUITask(monNumero,files,this.jProgressBar1,this);
-            if(analys!=null)
-            {
-             
+            if(analys!=null) {
+                
                 analys.start();
-             
+                
             }
     }//GEN-LAST:event_jButton3ActionPerformed
         
@@ -676,33 +709,29 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         retirerFichiers();
     }//GEN-LAST:event_jButton2ActionPerformed
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
             Main.ihm.fermerTab(this,monNumero);
     }//GEN-LAST:event_jButton8ActionPerformed
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                 ajouterFichiers();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void itemSuivant()
-    {
-       int suivant = jComboBox1.getSelectedIndex()+1;
-       if(suivant<=jComboBox1.getItemCount()-1)
-        jComboBox1.setSelectedIndex(suivant);
-    }
-    private void itemPrecedent()
-    {
-       int prec = jComboBox1.getSelectedIndex()-1;
-       if(prec!=-1)
-        jComboBox1.setSelectedIndex(prec);
-    }
-    private void itemDebut()
-    {
-       jComboBox1.setSelectedIndex(0);
-    }
-        private void itemFin()
-    {
-       jComboBox1.setSelectedIndex(jComboBox1.getItemCount()-1);
-    }       
+            
+            private void itemSuivant() {
+                int suivant = jComboBox1.getSelectedIndex()+1;
+                if(suivant<=jComboBox1.getItemCount()-1)
+                    jComboBox1.setSelectedIndex(suivant);
+            }
+            private void itemPrecedent() {
+                int prec = jComboBox1.getSelectedIndex()-1;
+                if(prec!=-1)
+                    jComboBox1.setSelectedIndex(prec);
+            }
+            private void itemDebut() {
+                jComboBox1.setSelectedIndex(0);
+            }
+            private void itemFin() {
+                jComboBox1.setSelectedIndex(jComboBox1.getItemCount()-1);
+            }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ajouter;
     private javax.swing.JButton jButton1;

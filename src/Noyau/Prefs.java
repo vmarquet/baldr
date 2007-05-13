@@ -86,4 +86,12 @@ public class Prefs {
         }
         return false;
     }
+    
+    public void flush(){
+        try {
+            prefs.flush();
+        } catch (BackingStoreException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

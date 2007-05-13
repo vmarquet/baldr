@@ -218,17 +218,23 @@ public class prefwin extends javax.swing.JFrame {
         
         if(Noyau.opts.exist("EXPERT")){
             if((Boolean)Noyau.opts.readPref("EXPERT",false)){
-               System.out.println("Expert Mode");
-            }
+               jRadioButton1.doClick();
+               opts.expert = true;
+            }else{opts.expert = false;}
         }
-        //opts.expert = jTextField1.getText();
     }
     
     private void saveMods(){
         if(jTextField1.getText().compareTo(opts.editor) != 0){
             Noyau.opts.writePref("EDITOR",jTextField1.getText());
         }
-        Noyau.opts.writePref("EXPERT",true);
+        if(jRadioButton1.isSelected() && !opts.expert){
+            Noyau.opts.writePref("EXPERT",true);
+        }
+        if(jRadioButton2.isSelected() && opts.expert){
+            Noyau.opts.writePref("EXPERT",false);
+        }
+        Noyau.opts.flush();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

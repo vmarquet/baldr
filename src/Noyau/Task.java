@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Random;
 import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipOutputStream;
 
@@ -24,10 +25,19 @@ import java.util.zip.ZipOutputStream;
 public abstract class Task extends Thread{
     private File[] files;
     private float [][] res;
+    protected int size;
     protected float state=0;
     protected String stateMessage="";
     private int numAnalyse; //nbr de fichier
+    
+    protected float[][] errorMatrix = null;
     protected float meanDist;
+    public float meanErr;
+    protected int dimension;
+    protected float[][] vectors = null;
+    protected float[] errorVector = null;
+    protected boolean[] selection = null;
+    
     
     /** Creates a new instance of Task */
     public Task() {
@@ -42,6 +52,7 @@ public abstract class Task extends Thread{
         int i,j;
         files=fichs;
         
+        size = fichs.length;
         res= new float[fichs.length][];
         for(i=0;i<fichs.length;i++) {
             res[i]=new float[i+1];
@@ -105,6 +116,186 @@ public abstract class Task extends Thread{
         fos.close();
         
         return ret;
+    }
+    
+    private void allocateVectors(int dim) {
+        dimension = 3;  //!! 3D for display
+        vectors = new float[size][dimension]; //allocation
+        int i,j;
+        Random r = new Random();
+        for(i=0;i<size;i++)  //random init
+            for(j=0;j<dimension;j++) {
+            vectors[i][j] = r.nextFloat()*0.1F; //!!param
+            }
+    }
+    private void shuffle(int[] tab) {
+        int n,i,j;
+        Random r = new Random();
+        for(n=0;n<tab.length;n++) {
+            i = r.nextInt(tab.length);
+            j = r.nextInt(tab.length);
+            tab[i] = tab[i] ^ tab[j];
+            tab[j] = tab[i] ^ tab[j];
+            tab[i] = tab[i] ^ tab[j];
+        }
+    }
+    
+    private float distanceVector(int i, int j) {
+        float d = 0;
+        int k;
+        //System.out.println("#DistanceVector");
+        for(k=0;k<dimension;k++) {
+            //System.out.println(vectors[i][k]+" "+vectors[j][k]);
+            d += (float)Math.pow((double)(vectors[i][k]-vectors[j][k]),2D);
+        }
+        d = (float)(Math.sqrt(d));// was /(float)dimension; //!! //??
+        //System.out.println("d = "+d);
+        return d;
+    }
+    
+    public void dist2vect() {
+        errorMatrix = new float[size][size];
+        
+        // allocate "size" vectors of dimension "dim"
+        allocateVectors(3); //!! 3D display
+        int i,j,k;
+        
+        //then searches (itertatively) vector coordinates from distance matrix
+        // until reaching acceptable error.
+        float[] vij = new float[dimension];
+        int x,y,tmp;
+        //Random r = new Random();
+        int randTabI[] = new int[size];
+        int randTabJ[] = new int[size];
+        float norm, dist, howMuch;
+        int iter = 0;
+        
+        //init randTab i & j
+        for(i=0;i<size;i++) {
+            randTabI[i] = i;
+            randTabJ[i] = i;
+        }
+        do {
+            // move vector coordinate to satisfy distanceMatrix information
+            // TODO synchronized vector moves (with tmp vectors)!!
+            //to empowerrandom selection of vector i & j
+            
+            //test
+                       /*for(i=0;i<size;i++)
+                          System.out.print(randTabI[i]+" ");
+                          System.out.println();
+                        */
+            howMuch = 0;
+            shuffle(randTabI);
+            for(i=0;i<size;i++) { // sweep all vector pair i & j randomly (better result expected)
+                x = randTabI[i];
+                shuffle(randTabJ);
+                for(j=0;j<size;j++) { //size was i
+                    y = randTabJ[j];
+                    
+                    // restore old formula (without rand selection), almost...
+                    x = i;
+                    y = j;
+                    
+                    if (y>x) { //ensure y<x
+                        tmp = x;
+                        x = y;
+                        y = tmp;
+                    }
+                    if (x==y)
+                        continue;
+                    //compute vij (vxy in fact...)
+                    for(k=0;k<dimension;k++)
+                        vij[k] = vectors[y][k]-vectors[x][k]; // xy was ij
+                    
+                    // normalise vij
+                    norm = 0F; // init
+                    for(k=0;k<dimension;k++)
+                        norm += vij[k]*vij[k];
+                    norm = (float)Math.sqrt(norm);
+                    if (norm != 0)
+                        for(k=0;k<dimension;k++)
+                            vij[k] /= norm;
+                    
+                    //heuristic
+                    float threshold = 0.23F; //param!!
+                    dist = distanceVector(x,y);
+                    if ((getRes(x,y) >= threshold) && (dist >= threshold)) {
+                        //System.out.println("continue!!");
+                        continue;
+                    }
+                    //System.out.println("test distanceMatrix["+x+"]["+y+"]"+distanceMatrix[x][y]);
+                    // check kind of move : >-< or <->
+                    if (dist > getRes(x,y)) // xy was ij
+                        howMuch = 0.01F*(float)Math.pow(1F-getRes(x,y),1); // get i & j closer
+                    else
+                        howMuch = -0.01F; // set i & j apart
+                    // modify vector i & j according to distance goal
+                    // move vector i & j
+                    for(k=0;k<dimension;k++) {
+                        vectors[x][k] += howMuch*vij[k]; // xy was ij
+                        vectors[y][k] -= howMuch*vij[k]; // xy was ij
+                    }
+                } // end of j loop
+            } // end of i loop
+            // compute meanErr & erroMatrix
+            float err=0F;
+            meanErr = 0;
+            for(i=0;i<size;i++)
+                for(j=0;j<i;j++) {
+                err = Math.abs(getRes(i,j)-distanceVector(i,j));
+                meanErr += err;
+                errorMatrix[i][j] = err;
+                errorMatrix[j][i] = err;
+                //System.out.println("err = "+err);
+                }
+            meanErr /= ((float)(size*(size-1F)/2F)); // normalize meanErr
+            //System.out.println("#meanErr = "+meanErr);
+        } while((meanErr>0.00001)&&(iter++ < 10000));
+        // param!! (2x) //END OF MAIN LOOP
+        
+        System.out.println("#meanErr = "+meanErr+" (iter="+iter+")");
+    }
+    
+    public void filter(float errorThreshold) { // select points/vectors that have "correct" distance
+        int i,j;                    // only call after dist2vect call that sets the errorMatrix values
+        float err, maxErr;
+        
+        errorVector = new float[size];
+        int[][] m = new int[size][size];
+        for(i=0;i<size;i++) // init m
+            for(j=0;j<size;j++)
+                m[i][j] = 0;
+        selection = new boolean[size];
+        
+        for(i=0;i<size;i++) {
+            errorVector[i] = 0F;
+            maxErr = 0F;
+            for(j=0;j<size;j++) {
+                if (i==j)
+                    continue;
+                err = errorMatrix[j][i];
+                if (err >= errorThreshold)
+                    m[i][j]++;
+                if (err >= maxErr)
+                    maxErr = err;
+            }
+            errorVector[i] = maxErr;
+            if (maxErr <= errorThreshold) // to delete when doing following TODO (see below)
+                selection[i] = true;
+            else
+                selection[i] = false;
+        }
+        // TODO better selection using greedy algo' to get rid of worst placed vectors
+        // use boolean matrix m to wisely select vectors/points
+        for(i=0;i<size;i++) {
+            //selection[i] = true; // be optimistic assume selection
+            for(j=0;j<size;j++) {
+                //if (m[i][j]) { // there is an error > threshold on (i, j) pair
+                //      selection[i]
+                //}
+            }
+        }
     }
     
     public void run() {

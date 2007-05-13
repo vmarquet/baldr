@@ -8,6 +8,8 @@
 package Ihm;
 
 import java.io.File;
+import java.math.MathContext;
+import java.util.Arrays;
 import java.util.Enumeration;
 import javax.swing.JFileChooser;
 import javax.swing.table.TableCellRenderer;
@@ -565,37 +567,38 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         }*/
     }
     
-    private void updateMat() {
+    private void updateMat(File [] fichs,int nb,double [] val) {
         int j;  int i;
         TableModel mat;
-        File [] fichs;
-        fichs=analys.getFiles();
-        int nb=analys.getNumAnalyse();
-             jTable1.removeEditor();
-             
-             
-             
+           
+             jTable1.setColumnSelectionAllowed(true);
+             jTable1.setRowSelectionAllowed(true);
         String[] heading=new String[fichs.length+1];
         for(i=1;i<=fichs.length;i++) {
             heading[i]=fichs[i-1].getName();
         }
         heading[0]="Fichiers";
         mat = new DefaultTableModel(heading,fichs.length){
-        public boolean isCellEditable(int i, int j ){return false;}
+            public boolean isCellEditable(int i, int j ){return false;}
         };
-        
+        double [] val2= val.clone();
+        Arrays.sort(val2);
         //jTable1.setDefaultRenderer(String.class,new TableCellCustomRenderer());
         jTable1.setModel(mat);
         TableCellRenderer tr=new TableHeaderCellCustomRenderer();
+        TableCellRenderer td=new TableCellCustomRenderer(val2[0],val2[val.length-1]);
         TableColumn tc;
         for(i=0;i<=fichs.length;i++){
             tc=jTable1.getColumnModel().getColumn(i);
             tc.setHeaderRenderer(tr);
-            tc.setCellRenderer(new TableCellCustomRenderer());
+            tc.setCellRenderer(td);
             if(i==0){
-               //on se passe de aller chercher la font du table header... 
+                //on se passe de aller chercher la font du table header...
                 // TODO : Ameliorer ça
-           tc.setMinWidth(heading[0].length()*5); 
+                tc.setMinWidth(heading[0].length()*5);
+                tc.setCellRenderer(tr);
+            }else{
+            tc.setCellRenderer(td);
             }
             for(j=0;j<fichs.length;j++){
                 if(i==0) {
@@ -609,10 +612,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         }
     }
     
-    private void updateDefilZone() {
-        File [] fichs;
-        fichs=analys.getFiles();
-        
+    private void updateDefilZone(File [] fichs) {
+     
         Object[] obj=new Object[fichs.length+1];
         obj[0]="Tout";
         int i=1;
@@ -629,19 +630,10 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
         //   jComboBox1.updateUI();
         
     }
-    private void updatePlot() {
-        int  i, j;
-        int nb = analys.getNumAnalyse();
-        double[] val= new double[nb];
-        File [] fichs;
-        fichs=analys.getFiles();
-        int a=0;
-        for(i=0;i<fichs.length;i++){
-            for(j=0;j<fichs.length;j++){
-                if(j<i){
-                    val[a++]=analys.getRes(i,j);}else{break;}
-            }
-        }
+    private void updatePlot(double[] val, int nb) {
+        
+        
+        
         plot2DPanel1.removeAllPlots();
         plot2DPanel1.addHistogramPlot("Histogramme des valeurs",val,nb);
         
@@ -650,9 +642,25 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
     public void DispatchResult() {
         // TODO positionner analys ? null quand rajout de fichier
         if(analys!=null) {
-            updateMat();
-            updateDefilZone();
-            updatePlot();
+            int nb = analys.getNumAnalyse();
+            File [] fichs;
+            
+            fichs=analys.getFiles();
+            int  i, j;
+            
+            double[] val= new double[nb];
+            int a=0;
+            for(i=0;i<fichs.length;i++){
+                for(j=0;j<fichs.length;j++){
+                    if(j<i){
+                        val[a++]=analys.getRes(i,j);}else{break;}
+                }
+            }
+            
+            
+            updateMat(fichs,nb,val);
+            updateDefilZone(fichs);
+            updatePlot(val,nb);
             
             
             jPanel4.setVisible(true);

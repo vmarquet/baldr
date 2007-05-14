@@ -632,7 +632,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
     }
     private void updatePlot(double[] val, int nb) {
         
-        
+        /*double[][] v2 =new double[1][];
+        v2[0]=val;*/
         
         plot2DPanel1.removeAllPlots();
         plot2DPanel1.addHistogramPlot("Histogramme des valeurs",val,nb);
@@ -684,7 +685,17 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
             try{
                 wait(2); //for test
             }catch(Exception e){};
+            if(analys==null){
             analys=Main.noyau.newGUITask(monNumero,files,this.jProgressBar1,this);
+            }else{
+                File[] exfiles = analys.getFiles();
+                float [][] exRes= analys.getResults();
+                //on peux pas faire repartir un thread donc faut en faire un autre
+             analys=Main.noyau.newGUITask(monNumero,files,this.jProgressBar1,this);
+             analys.setExRes(exfiles,exRes);
+    
+            //analys.setFiles(files);
+            }
             if(analys!=null) {
                 
                 analys.start();

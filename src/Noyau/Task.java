@@ -14,7 +14,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipOutputStream;
 
@@ -23,7 +27,7 @@ import java.util.zip.ZipOutputStream;
  * @author zeta
  */
 public abstract class Task extends Thread{
-    private File[] files;
+    private File[] files=null;
     private float [][] res;
     protected int size;
     protected float state=0;
@@ -50,21 +54,22 @@ public abstract class Task extends Thread{
     
     public void setFiles(File[] fichs) {
         int i,j;
-        files=fichs;
-        
-        size = fichs.length;
-        res= new float[fichs.length][];
-        for(i=0;i<fichs.length;i++) {
-            res[i]=new float[i+1];
-            for(j=0;j<i+1;j++) {
-                res[i][j]=-1;
-                if(i==j) {
-                    res[i][j]=0;
-                }else{
-                    this.numAnalyse++;
+            files=fichs;
+            
+            size = fichs.length;
+            res= new float[fichs.length][];
+            for(i=0;i<fichs.length;i++) {
+                res[i]=new float[i+1];
+                for(j=0;j<i+1;j++) {
+                    res[i][j]=-1;
+                    if(i==j) {
+                        res[i][j]=0;
+                    }else{
+                        this.numAnalyse++;
+                    }
                 }
             }
-        }
+   
         
     }
     
@@ -321,12 +326,16 @@ public abstract class Task extends Thread{
             
             for(j=0;j<i;j++){
                 cj = files[j].length();
+                if(getRes(i,j)==-1){
                 try  {
                     cij = getGZipSize(files[i],files[j]);
                 } catch (Exception e) {
                     System.err.println(e);
                 }
                 setRes(i,j,1F-(float)(ci + cj - cij) / (float) java.lang.Math.max(ci,cj));
+                }else{
+                System.out.println("cached");
+                }
                 setState(i,j);
                 
                 System.out.println(" # pair " + files[i].getName()+"<->" + files[j].getName() + " = " + getRes(i,j));
@@ -364,6 +373,57 @@ public abstract class Task extends Thread{
             if(r2!=-1 && r1!=-1){break;}
         }
         setRes(r1,r2,val);
+    }
+    
+    public void setExRes(File[] exfiles,float[][] exres)
+    {
+        File[] fichs;
+            int i,j;
+        fichs=files;
+        
+        Map<File,Integer> aInd=new HashMap(); 
+        
+            for(i=0;i<exfiles.length;i++)
+            {
+            aInd.put(exfiles[i],new Integer(i));
+            }
+        
+ 
+            for(i=0;i<fichs.length;i++) {
+             {
+             if(aInd.containsKey(fichs[i])) //old file
+             {
+                     for(j=i;j<fichs.length;j++) { //pas besoin de repasser avant
+                     if(aInd.containsKey(fichs[j])) //old file
+                      {
+                      int ii,jj;
+                      ii=aInd.get(fichs[i]);
+                      jj=aInd.get(fichs[j]);
+                     if(jj>ii)
+                     {
+                     int t;
+                     t=ii;
+                     ii=jj;
+                     jj=t;
+                          
+                     }
+                      
+                       setRes(i,j,exres[ii][jj]);  
+                        }
+             }
+             
+             }
+              }
+            }
+           
+            
+        
+    }
+    
+    
+    public float[][] getResults()
+    {
+    return res;
     }
     
     public float getRes(File f1,File f2) {

@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.zip.GZIPOutputStream;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 /**
  *
@@ -499,5 +501,9 @@ public abstract class Task extends Thread implements Savable{
         
     }
     
+    public void fromDom(NodeList nodes)
+    {
+    return;
+    }
     
 }

@@ -16,6 +16,7 @@ import java.io.File;
 public class Extension {
     
     public final static String baldr = "baldr";
+     public final static String baldrx = "baldrx";
     
     /*
      * Get the extension of a file.

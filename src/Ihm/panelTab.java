@@ -24,6 +24,8 @@ import Noyau.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 /**
  * @author  Baldr Team
  */
@@ -786,6 +788,9 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         }
         str.append("</onglet>\n");
         return str;
+    }
+
+    public void fromDom(NodeList nodes) {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ajouter;

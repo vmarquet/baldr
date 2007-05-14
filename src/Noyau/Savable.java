@@ -9,11 +9,14 @@
 
 package Noyau;
 
+import org.w3c.dom.NodeList;
+
 /**
  *
  * @author zeta
  */
 public interface Savable {
     public StringBuffer toXml();
+    public void fromDom(NodeList nodes);
     
 }

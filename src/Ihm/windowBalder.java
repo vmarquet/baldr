@@ -8,11 +8,13 @@
 package Ihm;
 import Main.*;
 import Noyau.*;
-import java.io.IOException;
 import javax.swing.UIManager;
 import javax.swing.JFileChooser;
 import java.awt.*;
 import java.io.File;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 /**
  *
  * @author  Baldr Team
@@ -184,17 +186,11 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                  File f=chooser.getSelectedFile();
                  if(Utils.Extension.getExtension(f)==null)
                  {
-                 try{
-                 f=new File(f.getCanonicalPath()+"."+Utils.Extension.baldr);
+                 f=new File(f.getAbsolutePath()+"."+Utils.Extension.baldr);
                 
-                 }catch(IOException e)
-                 {
-                 //TODO Add error treatment
-                     e.printStackTrace();
-                 }
-                 }
+                      }
                  
-                 sav.write(f,SaveAndRestore.BALDR);
+                 sav.save(f,SaveAndRestore.BALDR);
                 //TODO New SaveAndRestore
                 break;
             case JFileChooser.CANCEL_OPTION:
@@ -216,22 +212,22 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
             ajouteOnglet();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
             private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-                /* Migré dans le panelTab*/
-        /*       JFileChooser chooser = new JFileChooser();
+                JFileChooser chooser = new JFileChooser();
         chooser.setMultiSelectionEnabled(true);
          
         int res = chooser.showOpenDialog(this);
         switch(res) {
             case JFileChooser.APPROVE_OPTION:
-                for(int i=0;i < chooser.getSelectedFiles().length;i++){
-                    System.out.println(chooser.getSelectedFiles()[i]);
-                }
+                File f=chooser.getSelectedFile();
+                SaveAndRestore sav=new SaveAndRestore(this);
+                
+            sav.restore(f);
                 break;
             case JFileChooser.CANCEL_OPTION:
                 break;
             case JFileChooser.ERROR_OPTION:
                 break;
-        }*/
+        }
     }//GEN-LAST:event_openMenuItemActionPerformed
     private void Prefev(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Prefev
         prefwin test = new prefwin();
@@ -272,6 +268,13 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
            
        str.append("</save>\n");
        return str;
+    }
+
+    public void fromDom(NodeList nodes) {
+        for(int i=0;i<nodes.getLength();i++){
+        
+        System.out.println(nodes.item(i));
+        }
     }
         
         

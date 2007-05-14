@@ -7,13 +7,21 @@
 
 package Noyau;
 
-import java.io.File;
+import com.sun.org.apache.xerces.internal.parsers.DOMParser;
+import java.io.*;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -22,23 +30,61 @@ import java.util.zip.GZIPOutputStream;
 public class SaveAndRestore {
     public static final int BALDR=1;
     public static final int BALDRX=2;
+    private Savable obj ;
     
-    
-    StringBuffer str;
     /**
      * Creates a new instance of SaveAndRestore
      */
-    public SaveAndRestore(Savable obj) {
-        str=new StringBuffer();
-        str.append("<?xml version=\"1.0\" ?>\n");
-        str.append(obj.toXml());
+    public SaveAndRestore(Savable object) {
+        obj=object;
+    }
+    
+    public void restore(File f,int format) {
         
+        try {
+            FileInputStream file=new FileInputStream(f);
+            InputStream st=file;
+            if(format==BALDRX) {
+                
+                st=new GZIPInputStream(st);
+                
+            }
+            //TODO gerer charset
+            BufferedReader in=new BufferedReader(new InputStreamReader(st));
+            DOMParser parser=new DOMParser();
+            
+            parser.parse(new InputSource(in));
+            Document doc=parser.getDocument();
+            obj.fromDom(doc.getChildNodes());
+        } catch (FileNotFoundException ex) {
+            //TODO lever d'erreur
+            ex.printStackTrace();
+        }   catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (SAXException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    
+    
+    public void restore(File f) {
+        if(Utils.Extension.getExtension(f)==Utils.Extension.baldrx) {
+            restore(f,BALDRX);
+        }else{
+            restore(f,BALDR);
+        }
         
         
     }
     
     
-    public void write(File f,int format) {
+    public void save(File f,int format) {
+        StringBuffer str;
+        
+        str=new StringBuffer();
+        str.append("<?xml version=\"1.0\" ?>\n");
+        str.append(obj.toXml());
         try {
             FileOutputStream file=new FileOutputStream(f);
             OutputStream st=file;
@@ -48,7 +94,7 @@ public class SaveAndRestore {
                 
             }
             //TODO gerer charset
-            OutputStreamWriter out=new OutputStreamWriter(st);
+            BufferedWriter out=new BufferedWriter(new OutputStreamWriter(st));
             
             out.write(str.toString());
             out.close();
@@ -61,6 +107,6 @@ public class SaveAndRestore {
         }
         
         
-      
+        
     }
 }

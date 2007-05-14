@@ -7,6 +7,7 @@
 
 package Ihm;
 import Noyau.Task;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 /**
  *
@@ -54,6 +55,7 @@ public class JTask extends Task {
     protected void finalState() {
         this.printState();
     recall.DispatchResult();
+
     }
 
 

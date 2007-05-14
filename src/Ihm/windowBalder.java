@@ -20,12 +20,13 @@ import org.w3c.dom.NodeList;
  * @author  Baldr Team
  */
 public class windowBalder extends javax.swing.JFrame implements Savable {
-    int i=0;
+   // int i=0;
     static java.awt.event.ActionEvent event;
    panelTab[] listeOnglets=new panelTab[Main.MAXONGLET];
     
     aPropos aProposBaldr;
     public windowBalder() {
+        int i;
         /** Look n feel du system*/
         try {
             UIManager.setLookAndFeel(
@@ -240,17 +241,20 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
             jTabbedPane1.remove(pt);
             listeOnglets[numTab]=null;
         }
-        public void ajouteOnglet(){
+        public panelTab ajouteOnglet(){
+        int i;
             for(i=0;i<Main.MAXONGLET && listeOnglets[i]!=null;i++); //détermine le 1er onglet non utilisé
-            if (i==Main.MAXONGLET)
+            if (i==Main.MAXONGLET){
                 Utils.Errors.Error.tropOnglets();
-            else {
+            return null;
+            }else {
                 int numeroDuTabLibre=i;
                 int numOnglet=i+1;
                 final panelTab newtab=new panelTab(numeroDuTabLibre);
                 listeOnglets[numeroDuTabLibre]=newtab;
                 jTabbedPane1.addTab("Onglet "+numOnglet ,newtab);
                 jTabbedPane1.setSelectedComponent(newtab);
+                return newtab;
             }
         }
 
@@ -270,11 +274,22 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
        return str;
     }
 
-    public void fromDom(NodeList nodes) {
-        for(int i=0;i<nodes.getLength();i++){
-        
-        System.out.println(nodes.item(i));
-        }
+    public void fromDom(Node n) {
+        int i;
+             if(n.getNodeName()=="save")
+            {
+                 
+            for(i=0;i<n.getChildNodes().getLength();i++)
+            {
+                if(n.getChildNodes().item(i).getNodeName()!="#text"){
+            panelTab tab= ajouteOnglet();
+                tab.fromDom(n.getChildNodes().item(i));
+                System.out.println(n.getChildNodes().item(i).getNodeName());
+                }
+            }
+                 
+                 
+            }                  
     }
         
         

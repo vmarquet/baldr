@@ -14,12 +14,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.zip.GZIPOutputStream;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 /**
  *
@@ -484,13 +484,15 @@ public abstract class Task extends Thread implements Savable{
         str.append("<res len=\"").append(res.length).append("\">\n");
         int i=0;
         for(float [] t : res) {
-            str.append("<l len=\"").append(t.length).append("\">\n");
+            str.append("<li len=\"").append(t.length).append("\">\n");
             int j=0;
             for(float f:t) {
                 str.append("<l i=\"").append(i).append("\" j=\"").append(j).append("\">").append(f).append("</l>\n");
-                System.out.println(i+" "+j);
+            //    System.out.println(i+" "+j);
                 j++;
             }
+              str.append("</li>\n");
+          
             i++;
         }
         str.append("</res>\n");
@@ -501,9 +503,76 @@ public abstract class Task extends Thread implements Savable{
         
     }
     
-    public void fromDom(NodeList nodes)
+    public void fromDom(Node node)
     {
-    return;
+        int k;
+        int i,j;
+           File [] filelist=null;
+           float[][] resmat=null;  
+      
+            if(node.getNodeName()=="analys")
+            {
+               NodeList ana=node.getChildNodes();
+               for(j=0;j<ana.getLength();j++)
+               {
+                   if(ana.item(j).getNodeName()=="fichs")
+                   {
+                       NodeList fichml=ana.item(j).getChildNodes();
+                  ArrayList<File> list=new ArrayList<File>();
+                   for(k=0;k<fichml.getLength();k++)
+                   {
+                   if(fichml.item(k).getNodeName()=="file")
+                   {
+                   File f=new File(fichml.item(k).getTextContent().trim());
+                   if(f!=null)
+                  list.add(f);
+                   }
+                   }
+                  filelist=new File[1];
+                  filelist= (File[]) list.toArray(filelist);
+                       
+                   }else if(ana.item(j).getNodeName()=="res")
+                   {
+                   resmat=getMat(Integer.parseInt(ana.item(j).getAttributes().getNamedItem("len").getTextContent()),ana.item(j).getChildNodes()) ;
+                   }
+               }
+                
+                
+                setExRes(filelist,resmat);
+            
+            }
+        
+        
+    }
+
+    private float[][] getMat(int i, NodeList l) {
+        int j;
+        int b;
+        int a;
+        float[][] mat= new float[i][];
+        a=0;
+        for(i=0;i<l.getLength();i++)
+        {
+        if(l.item(i).getNodeName()=="li")
+        {
+            NodeList m=l.item(i).getChildNodes();
+            b=0;
+            mat[a]=new float[Integer.parseInt(l.item(i).getAttributes().getNamedItem("len").getTextContent())];
+        for(j=0;j<m.getLength();j++)
+        {
+                
+        if(m.item(j).getNodeName()=="l")
+        {
+            mat[a][b]=Float.parseFloat(m.item(j).getTextContent());
+            
+        b++;
+        }
+        }    
+        
+        a++;
+        }
+        }
+        return mat;
     }
     
 }

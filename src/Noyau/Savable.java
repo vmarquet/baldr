@@ -9,7 +9,7 @@
 
 package Noyau;
 
-import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -17,6 +17,6 @@ import org.w3c.dom.NodeList;
  */
 public interface Savable {
     public StringBuffer toXml();
-    public void fromDom(NodeList nodes);
+    public void fromDom(Node node);
     
 }

@@ -40,6 +40,7 @@ public class SaveAndRestore {
     }
     
     public void restore(File f,int format) {
+        int i;
         
         try {
             FileInputStream file=new FileInputStream(f);
@@ -55,7 +56,9 @@ public class SaveAndRestore {
             
             parser.parse(new InputSource(in));
             Document doc=parser.getDocument();
-            obj.fromDom(doc.getChildNodes());
+            for(i=0;i<doc.getChildNodes().getLength();i++){
+            obj.fromDom(doc.getChildNodes().item(i));
+            }
         } catch (FileNotFoundException ex) {
             //TODO lever d'erreur
             ex.printStackTrace();

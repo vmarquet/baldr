@@ -16,6 +16,7 @@ import java.math.MathContext;
 import java.util.Arrays;
 import java.util.Enumeration;
 import javax.swing.JFileChooser;
+import javax.swing.event.TreeModelListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.tree.*;
@@ -25,6 +26,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 /**
  * @author  Baldr Team
@@ -576,9 +578,9 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     private void updateMat(File [] fichs,int nb,double [] val) {
         int j;  int i;
         TableModel mat;
-           
-             jTable1.setColumnSelectionAllowed(true);
-             jTable1.setRowSelectionAllowed(true);
+        
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.setRowSelectionAllowed(true);
         String[] heading=new String[fichs.length+1];
         for(i=1;i<=fichs.length;i++) {
             heading[i]=fichs[i-1].getName();
@@ -604,7 +606,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 tc.setMinWidth(heading[0].length()*5);
                 tc.setCellRenderer(tr);
             }else{
-            tc.setCellRenderer(td);
+                tc.setCellRenderer(td);
             }
             for(j=0;j<fichs.length;j++){
                 if(i==0) {
@@ -619,7 +621,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     }
     
     private void updateDefilZone(File [] fichs) {
-     
+        
         Object[] obj=new Object[fichs.length+1];
         obj[0]="Tout";
         int i=1;
@@ -674,7 +676,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             //TODO : Ouvrir le splitPane à la bonne taille
             jSplitPane2.setDividerLocation(this.getSize().width*1/2);
             
-            JOptionPane p=new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane p=new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
             p.showMessageDialog(this,"Analyse Terminée");
         }
     }
@@ -692,15 +694,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 wait(2); //for test
             }catch(Exception e){};
             if(analys==null){
-            analys=Main.noyau.newGUITask(monNumero,files,this.jProgressBar1,this);
+                analys=Main.noyau.newGUITask(monNumero,files,this.jProgressBar1,this);
             }else{
                 File[] exfiles = analys.getFiles();
                 float [][] exRes= analys.getResults();
                 //on peux pas faire repartir un thread donc faut en faire un autre
-             analys=Main.noyau.newGUITask(monNumero,files,this.jProgressBar1,this);
-             analys.setExRes(exfiles,exRes);
-    
-            //analys.setFiles(files);
+                analys=Main.noyau.newGUITask(monNumero,files,this.jProgressBar1,this);
+                analys.setExRes(exfiles,exRes);
+                
+                //analys.setFiles(files);
             }
             if(analys!=null) {
                 
@@ -757,7 +759,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             private void itemFin() {
                 jComboBox1.setSelectedIndex(jComboBox1.getItemCount()-1);
             }
-
+            
             private StringBuffer recursXmlFile(MutableTreeNode tree) {
                 StringBuffer str=new StringBuffer();
                 if(tree.isLeaf()) {
@@ -775,23 +777,79 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 return str;
             }
             
-    public StringBuffer toXml() {
-        StringBuffer str=new StringBuffer();
-        str.append("<onglet>\n");
-        
-        str.append("<filelist>\n").append(recursXmlFile(fileList)).append("</filelist>\n");
-        
-        str.append("<rapport>").append(jReport.getText()).append("</rapport>\n");
-        if(analys!=null)
-        {
-        str.append(analys.toXml());
-        }
-        str.append("</onglet>\n");
-        return str;
-    }
-
-    public void fromDom(NodeList nodes) {
-    }
+            public StringBuffer toXml() {
+                StringBuffer str=new StringBuffer();
+                str.append("<onglet>\n");
+                
+                str.append("<filelist>\n").append(recursXmlFile(fileList)).append("</filelist>\n");
+                
+                str.append("<rapport>").append(jReport.getText()).append("</rapport>\n");
+                if(analys!=null) {
+                    str.append(analys.toXml());
+                }
+                str.append("</onglet>\n");
+                return str;
+            }
+            
+            private DefaultMutableTreeNode recursDomTree(Node n) {
+                int i;
+                File f;
+                System.out.println(n.getNodeName());
+                if(n!=null) {
+                    if(n.getNodeName()=="dir") {
+                        DefaultMutableTreeNode t;
+                        String nom=n.getAttributes().getNamedItem("name").getTextContent().trim();
+                        f=new File(nom);
+                        if(f.exists()) {
+                            t=new DefaultMutableTreeNode(f);
+                        }else{
+                            t=new DefaultMutableTreeNode(nom);
+                        }
+                        for(i=0;i<n.getChildNodes().getLength();i++) {
+                            DefaultMutableTreeNode u=recursDomTree(n.getChildNodes().item(i));
+                            if(u!=null){
+                                t.add(u);
+                            }
+                        }
+                        return t;
+                    }else if(n.getNodeName()=="file") {
+                        
+                        f=new File(n.getTextContent().trim());
+                        if(f.exists()) {
+                            return new DefaultMutableTreeNode(f);
+                        }else{
+                            return new DefaultMutableTreeNode(n.getTextContent().trim());
+                        }
+                    }
+                }
+                return null;
+            }
+            
+            public void fromDom(Node node) {
+                int j;
+                int i;
+                NodeList l=node.getChildNodes();
+                for(i=0;i<l.getLength();i++) {
+                    if(l.item(i).getNodeName()=="filelist") {
+                        for(j=0;j<l.item(i).getChildNodes().getLength();j++){
+                            if(l.item(i).getChildNodes().item(j).getNodeName()=="dir" ){
+                                fileList=recursDomTree(l.item(i).getChildNodes().item(j));
+                                jTree1.setModel(new DefaultTreeModel(fileList));
+                                break;
+                            }
+                        }
+                    }else if(l.item(i).getNodeName()=="rapport") {
+                        jReport.setText(l.item(i).getTextContent());
+                    }else if(l.item(i).getNodeName()!="#text") {
+                        File[] files=getFileTab();
+                        analys=Main.noyau.newGUITask(monNumero,files,this.jProgressBar1,this);
+                        analys.fromDom(l.item(i));
+                       
+                    }
+                }
+                
+                
+            }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ajouter;
     private javax.swing.JButton jButton1;

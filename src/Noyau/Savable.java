@@ -14,6 +14,6 @@ package Noyau;
  * @author zeta
  */
 public interface Savable {
-    public String toXml();
+    public StringBuffer toXml();
     
 }

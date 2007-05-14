@@ -20,7 +20,7 @@ import java.io.File;
 public class windowBalder extends javax.swing.JFrame implements Savable {
     int i=0;
     static java.awt.event.ActionEvent event;
-    boolean[] listeOnglets=new boolean[Main.MAXONGLET];
+   panelTab[] listeOnglets=new panelTab[Main.MAXONGLET];
     
     aPropos aProposBaldr;
     public windowBalder() {
@@ -40,7 +40,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         java.awt.Image iconBaldr = java.awt.Toolkit.getDefaultToolkit().getImage("Images/baldr.gif");
         setIconImage(iconBaldr);
         
-        for(i=0;i<Main.MAXONGLET;i++) listeOnglets[i]=false;
+        for(i=0;i<Main.MAXONGLET;i++) listeOnglets[i]=null;
         
         ajouteOnglet();
         setExtendedState(MAXIMIZED_BOTH);
@@ -180,20 +180,22 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                 int res = chooser.showSaveDialog(this);
         switch(res) {
             case JFileChooser.APPROVE_OPTION:
-                 Save sav=new Save(this);
+                 SaveAndRestore sav=new SaveAndRestore(this);
                  File f=chooser.getSelectedFile();
                  if(Utils.Extension.getExtension(f)==null)
                  {
                  try{
                  f=new File(f.getCanonicalPath()+"."+Utils.Extension.baldr);
+                
                  }catch(IOException e)
                  {
                  //TODO Add error treatment
+                     e.printStackTrace();
                  }
                  }
                  
-                 sav.write(f);
-                //TODO New Save
+                 sav.write(f,SaveAndRestore.BALDR);
+                //TODO New SaveAndRestore
                 break;
             case JFileChooser.CANCEL_OPTION:
                 break;
@@ -240,24 +242,36 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
     }//GEN-LAST:event_exitMenuItemActionPerformed
         public void fermerTab(panelTab pt,int numTab) {
             jTabbedPane1.remove(pt);
-            listeOnglets[numTab]=false;
+            listeOnglets[numTab]=null;
         }
         public void ajouteOnglet(){
-            for(i=0;i<Main.MAXONGLET && listeOnglets[i]==true;i++); //détermine le 1er onglet non utilisé
+            for(i=0;i<Main.MAXONGLET && listeOnglets[i]!=null;i++); //détermine le 1er onglet non utilisé
             if (i==Main.MAXONGLET)
                 Utils.Errors.Error.tropOnglets();
             else {
                 int numeroDuTabLibre=i;
                 int numOnglet=i+1;
-                listeOnglets[numeroDuTabLibre]=true;
                 final panelTab newtab=new panelTab(numeroDuTabLibre);
+                listeOnglets[numeroDuTabLibre]=newtab;
                 jTabbedPane1.addTab("Onglet "+numOnglet ,newtab);
                 jTabbedPane1.setSelectedComponent(newtab);
             }
         }
 
-    public String toXml() {
-        return "";
+    public StringBuffer toXml() {
+        StringBuffer str=new StringBuffer();
+        int i;
+       str.append("<save>\n"); 
+       for(i=0;i<listeOnglets.length;i++)
+       {
+            if(listeOnglets[i]!=null){
+           str.append(listeOnglets[i].toXml());
+       }
+           
+       }
+           
+       str.append("</save>\n");
+       return str;
     }
         
         

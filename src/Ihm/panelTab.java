@@ -23,7 +23,7 @@ import javax.swing.table.TableModel;
 /**
  * @author  Baldr Team
  */
-public class panelTab extends javax.swing.JPanel implements ResDispatcher{
+public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savable{
     private int monNumero;
     private DefaultMutableTreeNode fileList;
     private Task analys=null;
@@ -751,6 +751,38 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher{
             private void itemFin() {
                 jComboBox1.setSelectedIndex(jComboBox1.getItemCount()-1);
             }
+
+            private StringBuffer recursXmlFile(MutableTreeNode tree) {
+                StringBuffer str=new StringBuffer();
+                if(tree.isLeaf()) {
+                    str.append("<file>").append(tree.toString()).append("</file>\n");
+                }else{
+                    str.append("<dir name=\"").append(tree.toString()).append("\" >\n");
+                    Enumeration ch=tree.children();
+                    while(ch.hasMoreElements()) {
+                        MutableTreeNode t=(MutableTreeNode)ch.nextElement();
+                        str.append(recursXmlFile(t));
+                    }
+                    str.append("</dir>\n");
+                }
+                
+                return str;
+            }
+            
+    public StringBuffer toXml() {
+        StringBuffer str=new StringBuffer();
+        str.append("<onglet>\n");
+        
+        str.append("<filelist>\n").append(recursXmlFile(fileList)).append("</filelist>\n");
+        
+        str.append("<rapport>").append(jReport.getText()).append("</rapport>\n");
+        if(analys!=null)
+        {
+        str.append(analys.toXml());
+        }
+        str.append("</onglet>\n");
+        return str;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ajouter;
     private javax.swing.JButton jButton1;

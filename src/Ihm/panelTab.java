@@ -7,6 +7,10 @@
 
 package Ihm;
 
+import Ihm.renderers.ComboCellCustomRenderer;
+import Ihm.renderers.TableCellCustomRenderer;
+import Ihm.renderers.TableHeaderCellCustomRenderer;
+import Ihm.renderers.TreeCellCustomRenderer;
 import java.io.File;
 import java.math.MathContext;
 import java.util.Arrays;

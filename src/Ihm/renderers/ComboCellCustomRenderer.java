@@ -5,7 +5,7 @@
  *$Id$
  */
 
-package Ihm;
+package Ihm.renderers;
 
 import java.awt.Component;
 import java.io.File;

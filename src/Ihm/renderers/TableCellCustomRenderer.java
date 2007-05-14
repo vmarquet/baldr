@@ -5,7 +5,7 @@
  *$Id$
  */
 
-package Ihm;
+package Ihm.renderers;
 
 import java.awt.Color;
 import java.awt.Component;

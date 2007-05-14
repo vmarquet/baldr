@@ -5,10 +5,12 @@
  *$Id$
  */
 
-package Ihm;
+package Ihm.renderers;
 
 
 
+import Ihm.*;
+import Ihm.renderers.utils.VTextIcon;
 import java.awt.Component;
 import javax.swing.Icon;
 import javax.swing.JTable;

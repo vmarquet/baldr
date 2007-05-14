@@ -4,7 +4,7 @@
  * Created on 12 mai 2007, 15:02
  *$Id$
  */
-package Ihm;
+package Ihm.renderers.utils;
 
 import java.awt.*;
 import java.lang.*;

@@ -14,13 +14,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 import java.util.zip.GZIPOutputStream;
-import java.util.zip.ZipOutputStream;
 
 /**
  *
@@ -381,7 +378,7 @@ public abstract class Task extends Thread{
             int i,j;
         fichs=files;
         
-        Map<File,Integer> aInd=new HashMap(); 
+        Map<File,Integer> aInd=new HashMap<java.io.File,java.lang.Integer>(); 
         
             for(i=0;i<exfiles.length;i++)
             {

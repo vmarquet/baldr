@@ -7,16 +7,17 @@
 
 package Ihm;
 import Main.*;
-import javax.swing.JComponent;
+import Noyau.*;
+import java.io.IOException;
 import javax.swing.UIManager;
 import javax.swing.JFileChooser;
 import java.awt.*;
-import Utils.Errors.*;
+import java.io.File;
 /**
  *
  * @author  Baldr Team
  */
-public class windowBalder extends javax.swing.JFrame {
+public class windowBalder extends javax.swing.JFrame implements Savable {
     int i=0;
     static java.awt.event.ActionEvent event;
     boolean[] listeOnglets=new boolean[Main.MAXONGLET];
@@ -94,6 +95,12 @@ public class windowBalder extends javax.swing.JFrame {
         fileMenu.add(openMenuItem);
 
         saveMenuItem.setText("Enregistrer");
+        saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveMenuItemActionPerformed(evt);
+            }
+        });
+
         fileMenu.add(saveMenuItem);
 
         exitMenuItem.setText("Quitter");
@@ -160,6 +167,45 @@ public class windowBalder extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
+      JFileChooser chooser = new JFileChooser(); 
+        chooser.setMultiSelectionEnabled(false); 
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY); 
+        // TODO : Ajouter un filefilter des fichier.baldr
+           String lastdir = Noyau.opts.readPref("LAST_DIR");
+        if(lastdir != null){
+            chooser.setCurrentDirectory(new File(lastdir));
+        }
+                int res = chooser.showSaveDialog(this);
+        switch(res) {
+            case JFileChooser.APPROVE_OPTION:
+                 Save sav=new Save(this);
+                 File f=chooser.getSelectedFile();
+                 if(Utils.Extension.getExtension(f)==null)
+                 {
+                 try{
+                 f=new File(f.getCanonicalPath()+"."+Utils.Extension.baldr);
+                 }catch(IOException e)
+                 {
+                 //TODO Add error treatment
+                 }
+                 }
+                 
+                 sav.write(f);
+                //TODO New Save
+                break;
+            case JFileChooser.CANCEL_OPTION:
+                break;
+            case JFileChooser.ERROR_OPTION:
+                break;
+        }
+        String curdir = chooser.getCurrentDirectory().toString();
+        
+        if(lastdir == null || lastdir.compareTo(curdir) != 0){
+            Noyau.opts.writePref("LAST_DIR",curdir);
+        }
+    }//GEN-LAST:event_saveMenuItemActionPerformed
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         aProposBaldr.setLocationRelativeTo(this);
         aProposBaldr.setVisible(true);
@@ -209,6 +255,10 @@ public class windowBalder extends javax.swing.JFrame {
                 jTabbedPane1.setSelectedComponent(newtab);
             }
         }
+
+    public String toXml() {
+        return "";
+    }
         
         
     // Variables declaration - do not modify//GEN-BEGIN:variables

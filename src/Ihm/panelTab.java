@@ -44,7 +44,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jComboBox1.setSelectedIndex(0);
         jLabel3.setText("sur "+Integer.toString(jComboBox1.getItemCount()));
         // TODO: Comprendre pourquoi les getWidth retournent 0 ici
-        jSplitPane2.setDividerLocation(this.getPreferredSize().width*2/3);
+        //jSplitPane2.setDividerLocation(this.getPreferredSize().width*2/3);
         plot2DPanel1.plotToolBar.remove(3); // On dégage les entrées du menu de la toolbar qui servent à rien
         plot2DPanel1.plotToolBar.remove(4);
     }
@@ -495,6 +495,9 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         }
         
         int res = chooser.showOpenDialog(this);
+        
+        String curdir = chooser.getCurrentDirectory().toString();
+        
         switch(res) {
             case JFileChooser.APPROVE_OPTION:
                 //  for(int i=0;i < chooser.getSelectedFiles().length;i++){
@@ -505,11 +508,11 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 // jTree1.setModel(new DefaultTreeModel(fileList));
                 break;
             case JFileChooser.CANCEL_OPTION:
+                lastdir=curdir;
                 break;
             case JFileChooser.ERROR_OPTION:
                 break;
         }
-        String curdir = chooser.getCurrentDirectory().toString();
         
         if(lastdir == null || lastdir.compareTo(curdir) != 0){
             Noyau.opts.writePref("LAST_DIR",curdir);

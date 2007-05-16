@@ -180,7 +180,10 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         if(lastdir != null){
             chooser.setCurrentDirectory(new File(lastdir));
         }
-                int res = chooser.showSaveDialog(this);
+        int res = chooser.showSaveDialog(this);
+        
+        String curdir = chooser.getCurrentDirectory().toString();
+        
         switch(res) {
             case JFileChooser.APPROVE_OPTION:
                  SaveAndRestore sav=new SaveAndRestore(this);
@@ -195,11 +198,12 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                 //TODO New SaveAndRestore
                 break;
             case JFileChooser.CANCEL_OPTION:
+                lastdir=curdir;
                 break;
             case JFileChooser.ERROR_OPTION:
                 break;
         }
-        String curdir = chooser.getCurrentDirectory().toString();
+        
         
         if(lastdir == null || lastdir.compareTo(curdir) != 0){
             Noyau.opts.writePref("LAST_DIR",curdir);
@@ -216,18 +220,31 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                 JFileChooser chooser = new JFileChooser();
         chooser.setMultiSelectionEnabled(true);
          
+        String lastdir = Noyau.opts.readPref("LAST_DIR");
+        if(lastdir != null){
+            chooser.setCurrentDirectory(new File(lastdir));
+        }
+        
         int res = chooser.showOpenDialog(this);
+        
+        String curdir = chooser.getCurrentDirectory().toString();
+        
         switch(res) {
             case JFileChooser.APPROVE_OPTION:
                 File f=chooser.getSelectedFile();
                 SaveAndRestore sav=new SaveAndRestore(this);
                 
-            sav.restore(f);
+                sav.restore(f);
                 break;
             case JFileChooser.CANCEL_OPTION:
+                lastdir=curdir;
                 break;
             case JFileChooser.ERROR_OPTION:
                 break;
+        }
+        
+        if(lastdir == null || lastdir.compareTo(curdir) != 0){
+            Noyau.opts.writePref("LAST_DIR",curdir);
         }
     }//GEN-LAST:event_openMenuItemActionPerformed
     private void Prefev(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Prefev

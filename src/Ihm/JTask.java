@@ -17,6 +17,7 @@ public class JTask extends Task {
     
     private JProgressBar bar;
     private ResDispatcher recall;
+    private conv3d g3d;
     
     /** Creates a new instance of Jtask */
     public JTask() {
@@ -54,17 +55,18 @@ public class JTask extends Task {
 
     protected void finalState() {
         this.printState();
-    recall.DispatchResult();
-
+        this.g3d = new conv3d(this.getResults(),this.bar);
+        g3d.start(); // lance le calcul de la 3D
+        recall.DispatchResult();
     }
 
 
     public void setRecall(ResDispatcher recall) {
         this.recall = recall;
     }
-    
-    
+
+    public conv3d getG3d() {
+        return g3d;
+    }
    
-    
-    
 }

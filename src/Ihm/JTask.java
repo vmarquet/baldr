@@ -7,7 +7,7 @@
 
 package Ihm;
 import Noyau.Task;
-import javax.swing.JOptionPane;
+import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 /**
  *
@@ -16,6 +16,7 @@ import javax.swing.JProgressBar;
 public class JTask extends Task {
     
     private JProgressBar bar;
+    private JLabel statusbar;
     private ResDispatcher recall;
     private conv3d g3d;
     
@@ -30,6 +31,13 @@ public class JTask extends Task {
     setBar(bar);
     }
     
+    public JTask(JProgressBar bar, JLabel statusbar)
+    {
+    super();
+    setBar(bar);
+    this.statusbar = statusbar;
+    }
+    
     protected void printState() {
         float a=this.getStateCount();
         int m;
@@ -41,8 +49,7 @@ public class JTask extends Task {
         {
         System.out.println("exp");
         }
-     
-        
+        statusbar.setText(stateMessage);
     }
 
     public JProgressBar getBar() {
@@ -55,7 +62,7 @@ public class JTask extends Task {
 
     protected void finalState() {
         this.printState();
-        this.g3d = new conv3d(this.getResults(),this.bar);
+        this.g3d = new conv3d(this.getResults(),this.bar,statusbar);
         g3d.start(); // lance le calcul de la 3D
         recall.DispatchResult();
     }

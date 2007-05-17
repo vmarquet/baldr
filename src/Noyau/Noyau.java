@@ -10,6 +10,7 @@ import Ihm.JTask;
 import Ihm.ResDispatcher;
 import Main.*;
 import java.io.File;
+import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
 /**
@@ -68,10 +69,10 @@ public class Noyau {
         return task;
     }
     
-       public Task newGUITask(int i,JProgressBar bar,ResDispatcher ret) {
+       public Task newGUITask(int i,JLabel statusbar,JProgressBar bar,ResDispatcher ret) {
         if(i<Main.MAXONGLET) {
-            tasks[i]=new Ihm.JTask();
-            ((JTask) tasks[i]).setBar(bar);
+            tasks[i]=new Ihm.JTask(bar,statusbar);
+            //((JTask) tasks[i]).setBar(bar);
             ((JTask) tasks[i]).setRecall(ret);
             return tasks[i];
         }else{
@@ -80,8 +81,8 @@ public class Noyau {
         return null;
     }
     
-        public Task newGUITask(int i,File[] files,JProgressBar bar,ResDispatcher ret) {
-        Task task=newGUITask(i,bar,ret);
+        public Task newGUITask(int i,File[] files,JLabel statusbar,JProgressBar bar,ResDispatcher ret) {
+        Task task=newGUITask(i,statusbar,bar,ret);
         if(task != null) {
             task.setFiles(files);
         }

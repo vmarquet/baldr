@@ -21,6 +21,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 import org.math.plot.Plot3DPanel;
 import org.math.plot.plotObjects.Plotable;
+import org.math.plot.plots.Plot;
 import org.w3c.dom.*;
 /**
  * @author  Baldr Team
@@ -303,6 +304,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setRenderer(new ComboCellCustomRenderer());
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         jPanel5.add(jComboBox1, new java.awt.GridBagConstraints());
 
         jLabel3.setText("sur N");
@@ -417,17 +424,20 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+           String path = jComboBox1.getSelectedItem().toString();
+           String name ="";
+           if(path.lastIndexOf(File.separator)!=-1){
+               name = path.substring(path.lastIndexOf(File.separator)+1);
+           }
+           plot3Dhlpt(name);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         if(curview == 0){
-            jButton11.setText("2D View");
-            plot2DPanel1.setVisible(false);
-            plot3DPanel1.setVisible(true);
-            curview = 1;
+            set3Dview();
         }else{
-            jButton11.setText("3D View");
-            plot2DPanel1.setVisible(true);
-            plot3DPanel1.setVisible(false);
-            curview = 0;
+            unset3Dview();
         }
     }//GEN-LAST:event_jButton11ActionPerformed
     
@@ -472,6 +482,20 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             menuContextuel.show(evt.getComponent(),evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jTree1MouseClicked
+    
+    public void set3Dview(){
+        jButton11.setText("2D View");
+        plot2DPanel1.setVisible(false);
+        plot3DPanel1.setVisible(true);
+        curview = 1;
+    }
+    
+    public void unset3Dview(){
+        jButton11.setText("3D View");
+        plot2DPanel1.setVisible(true);
+        plot3DPanel1.setVisible(false);
+        curview = 0;
+    }
     
     private DefaultMutableTreeNode recursDir(File fich){
         //System.out.println(chooser.getSelectedFiles()[i]);
@@ -693,10 +717,31 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         
     }
     
+    private void plot3Dhlpt(String name){
+        Color red = new Color(200,0,0);
+        Color blue = new Color(0,0,200);
+        
+        Plot[] plots = plot3DPanel1.getPlots();
+
+        for(int i=0;i<plots.length;i++){
+            plots[i].setColor(blue);
+            if(plots[i].getName().compareTo(name) == 0){
+                plots[i].setColor(red);
+            }
+        }
+        plot3DPanel1.updateUI();
+        
+        if(curview == 0){
+            set3Dview();
+        }
+    }
+    
     public void Dispatch3DResult(float[][] vectors){
-        Color col = new Color(0,0,0);
+        Color black = new Color(0,0,0);
+        Color blue = new Color(0,0,200);
         double[][] vectorsd = new double[vectors.length][vectors[0].length]; 
         double[]labelpos = new double[3];
+        double max;
         File [] fichs;
         fichs = analys.getFiles();
         
@@ -711,14 +756,13 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         for(int i=0;i<labels.length;i++){
             plot3DPanel1.removePlotable(labels[i]);
         }
-        // On plot les vecteurs
-        plot3DPanel1.addScatterPlot("Fichiers",vectorsd);
         
-        // On affiche les labels
+        // On affiche les vecteurs et les labels
         for(int i=0;i<vectorsd.length;i++){
+            plot3DPanel1.addScatterPlot(fichs[i].getName(),blue,vectorsd[i]);
             labelpos = vectorsd[i].clone();
             labelpos[2]-=0.01;
-            plot3DPanel1.addLabel(fichs[i].getName(),col,labelpos);
+            plot3DPanel1.addLabel(fichs[i].getName(),black,labelpos);
         }
        
     }

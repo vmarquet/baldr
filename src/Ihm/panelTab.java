@@ -8,6 +8,7 @@
 package Ihm;
 
 import Ihm.renderers.*;
+import java.awt.Color;
 import java.io.File;
 import java.math.MathContext;
 import java.util.Arrays;
@@ -693,7 +694,11 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     
     public void Dispatch3DResult(float[][] vectors){
         System.out.println("Show 3D Results");
+        Color col = new Color(0,0,0);
         double[][] vectorsd = new double[vectors.length][vectors[0].length]; 
+        double[]labelpos = new double[3];
+        File [] fichs;
+        fichs = analys.getFiles();
         
         for(int i=0;i<vectors.length;i++){
             for(int j=0;j<vectors[i].length;j++){
@@ -701,7 +706,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             }
         }
         
-        plot3DPanel1.addBarPlot("toto",vectorsd);
+        plot3DPanel1.removeAllPlots();
+        plot3DPanel1.addScatterPlot("Fichiers",vectorsd);
+        
+        for(int i=0;i<vectorsd.length;i++){
+            labelpos = vectorsd[i].clone();
+            labelpos[2]-=0.01;
+            plot3DPanel1.addLabel(fichs[i].getName(),col,labelpos);
+        }
+       
     }
     
     private void updatePlot(double[] val, int nb) {

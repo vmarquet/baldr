@@ -72,7 +72,7 @@ public class SaveAndRestore {
     
     
     public void restore(File f) {
-        if(Utils.Extension.getExtension(f)==Utils.Extension.baldrx) {
+        if(Utils.Extension.getExtension(f)!=null && Utils.Extension.getExtension(f).equalsIgnoreCase(Utils.Extension.baldrx)) {
             restore(f,BALDRX);
         }else{
             restore(f,BALDR);

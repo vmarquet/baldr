@@ -175,6 +175,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
     }// </editor-fold>//GEN-END:initComponents
     
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
+        // TODO rendre le filefilter plus propre
         JFileChooser chooser = new JFileChooser();
         chooser.setMultiSelectionEnabled(false);
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -182,7 +183,6 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         chooser.setFileFilter(baldrxfifi);
         FileFilter baldrfifi=new BaldrFileFilter();
         chooser.setFileFilter(baldrfifi);
-        // TODO : Ajouter un filefilter des fichier.baldr
         String lastdir = Noyau.opts.readPref("LAST_DIR");
         if(lastdir != null){
             chooser.setCurrentDirectory(new File(lastdir));
@@ -203,9 +203,9 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                     }
                 }
                 if(chooser.getFileFilter()==baldrxfifi){
-                sav.save(f,SaveAndRestore.BALDRX);
+                    sav.save(f,SaveAndRestore.BALDRX);
                 }else{
-                sav.save(f,SaveAndRestore.BALDR);
+                    sav.save(f,SaveAndRestore.BALDR);
                 }
                 //TODO New SaveAndRestore
                 break;
@@ -221,43 +221,47 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
             Noyau.opts.writePref("LAST_DIR",curdir);
         }
     }//GEN-LAST:event_saveMenuItemActionPerformed
-        private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
-            aProposBaldr.setLocationRelativeTo(this);
-            aProposBaldr.setVisible(true);
+            private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+                aProposBaldr.setLocationRelativeTo(this);
+                aProposBaldr.setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
                 private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
                     ajouteOnglet();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-                            private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-                                JFileChooser chooser = new JFileChooser();
-                                chooser.setMultiSelectionEnabled(true);
-                                
-                                String lastdir = Noyau.opts.readPref("LAST_DIR");
-                                if(lastdir != null){
-                                    chooser.setCurrentDirectory(new File(lastdir));
-                                }
-                                
-                                int res = chooser.showOpenDialog(this);
-                                
-                                String curdir = chooser.getCurrentDirectory().toString();
-                                
-                                switch(res) {
-                                    case JFileChooser.APPROVE_OPTION:
-                                        File f=chooser.getSelectedFile();
-                                        SaveAndRestore sav=new SaveAndRestore(this);
-                                        
-                                        sav.restore(f);
-                                        break;
-                                    case JFileChooser.CANCEL_OPTION:
-                                        lastdir=curdir;
-                                        break;
-                                    case JFileChooser.ERROR_OPTION:
-                                        break;
-                                }
-                                
-                                if(lastdir == null || lastdir.compareTo(curdir) != 0){
-                                    Noyau.opts.writePref("LAST_DIR",curdir);
-                                }
+                                            private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
+                                                JFileChooser chooser = new JFileChooser();
+                                                chooser.setMultiSelectionEnabled(false);
+                                                        FileFilter baldrxfifi=new BaldrxFileFilter();
+        chooser.setFileFilter(baldrxfifi);
+        FileFilter baldrfifi=new BaldrFileFilter();
+        chooser.setFileFilter(baldrfifi);
+                      chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                                                String lastdir = Noyau.opts.readPref("LAST_DIR");
+                                                if(lastdir != null){
+                                                    chooser.setCurrentDirectory(new File(lastdir));
+                                                }
+                                                
+                                                int res = chooser.showOpenDialog(this);
+                                                
+                                                String curdir = chooser.getCurrentDirectory().toString();
+                                                
+                                                switch(res) {
+                                                    case JFileChooser.APPROVE_OPTION:
+                                                        File f=chooser.getSelectedFile();
+                                                        SaveAndRestore sav=new SaveAndRestore(this);
+                                                        
+                                                        sav.restore(f);
+                                                        break;
+                                                    case JFileChooser.CANCEL_OPTION:
+                                                        lastdir=curdir;
+                                                        break;
+                                                    case JFileChooser.ERROR_OPTION:
+                                                        break;
+                                                }
+                                                
+                                                if(lastdir == null || lastdir.compareTo(curdir) != 0){
+                                                    Noyau.opts.writePref("LAST_DIR",curdir);
+                                                }
     }//GEN-LAST:event_openMenuItemActionPerformed
                                 private void Prefev(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Prefev
                                     prefwin test = new prefwin();

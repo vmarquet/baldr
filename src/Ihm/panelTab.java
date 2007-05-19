@@ -51,7 +51,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         plot3DPanel1.setVisible(false);
         
         jSplitPane3.setDividerSize(0);
-        curview = 0;
+        unset3Dview();
     }
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {

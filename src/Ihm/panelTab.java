@@ -20,6 +20,7 @@ import Noyau.*;
 import javax.swing.*;
 import javax.swing.table.*;
 import org.math.plot.Plot3DPanel;
+import org.math.plot.plotObjects.Plotable;
 import org.w3c.dom.*;
 /**
  * @author  Baldr Team
@@ -693,7 +694,6 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     }
     
     public void Dispatch3DResult(float[][] vectors){
-        System.out.println("Show 3D Results");
         Color col = new Color(0,0,0);
         double[][] vectorsd = new double[vectors.length][vectors[0].length]; 
         double[]labelpos = new double[3];
@@ -705,10 +705,16 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 vectorsd[i][j] = (double) vectors[i][j];
             }
         }
-        
+        // On fait le menage
         plot3DPanel1.removeAllPlots();
+        Plotable[] labels = plot3DPanel1.getPlotables();
+        for(int i=0;i<labels.length;i++){
+            plot3DPanel1.removePlotable(labels[i]);
+        }
+        // On plot les vecteurs
         plot3DPanel1.addScatterPlot("Fichiers",vectorsd);
         
+        // On affiche les labels
         for(int i=0;i<vectorsd.length;i++){
             labelpos = vectorsd[i].clone();
             labelpos[2]-=0.01;

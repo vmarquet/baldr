@@ -62,11 +62,10 @@ public class JTask extends Task {
 
     protected void finalState() {
         this.printState();
-        this.g3d = new conv3d(this.getResults(),this.bar,statusbar);
+        this.g3d = new conv3d(this.getResults(),this.bar,statusbar,recall);
         g3d.start(); // lance le calcul de la 3D
         recall.DispatchResult();
     }
-
 
     public void setRecall(ResDispatcher recall) {
         this.recall = recall;

@@ -32,11 +32,14 @@ public class conv3d extends Thread{
     private JProgressBar bar;
     private JLabel statusbar;
     
+    private ResDispatcher recall;
+    
     /** Creates a new instance of conv3d */
-    public conv3d(float [][] res, JProgressBar bar,JLabel statusbar) {
+    public conv3d(float [][] res, JProgressBar bar,JLabel statusbar, ResDispatcher recall) {
         this.res = res;
         this.bar = bar;
         this.statusbar = statusbar;
+        this.recall = recall;
         setPriority(Thread.MIN_PRIORITY);
     }
     
@@ -137,7 +140,7 @@ public class conv3d extends Thread{
         return d;
     }
     
-    public void dist2vect() {
+    private void dist2vect() {
         errorMatrix = new float[size][size];
         
         // allocate "size" vectors of dimension "dim"
@@ -258,6 +261,7 @@ public class conv3d extends Thread{
         dist2vect();
         //filter(1000.00F); // Run only after dist2vect
         statusbar.setText("Analyse terminée");
+        recall.Dispatch3DResult(vectors);
     }
 
     public float getMeanErr() {

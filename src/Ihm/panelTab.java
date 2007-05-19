@@ -690,6 +690,20 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         //   jComboBox1.updateUI();
         
     }
+    
+    public void Dispatch3DResult(float[][] vectors){
+        System.out.println("Show 3D Results");
+        double[][] vectorsd = new double[vectors.length][vectors[0].length]; 
+        
+        for(int i=0;i<vectors.length;i++){
+            for(int j=0;j<vectors[i].length;j++){
+                vectorsd[i][j] = (double) vectors[i][j];
+            }
+        }
+        
+        plot3DPanel1.addBarPlot("toto",vectorsd);
+    }
+    
     private void updatePlot(double[] val, int nb) {
         
         /*double[][] v2 =new double[1][];

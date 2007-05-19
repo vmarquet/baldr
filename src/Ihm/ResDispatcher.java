@@ -16,5 +16,5 @@ package Ihm;
 public interface ResDispatcher {
     
     public void DispatchResult();
-    
+    public void Dispatch3DResult(float[][] vectors);
 }

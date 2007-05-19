@@ -7,27 +7,18 @@
 
 package Ihm;
 
-import Ihm.renderers.ComboCellCustomRenderer;
-import Ihm.renderers.TableCellCustomRenderer;
-import Ihm.renderers.TableHeaderCellCustomRenderer;
-import Ihm.renderers.TreeCellCustomRenderer;
+import Ihm.renderers.*;
 import java.io.File;
 import java.math.MathContext;
 import java.util.Arrays;
 import java.util.Enumeration;
-import javax.swing.JFileChooser;
 import javax.swing.event.TreeModelListener;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 import javax.swing.tree.*;
 import Main.*;
 import Noyau.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import javax.swing.table.*;
+import org.w3c.dom.*;
 /**
  * @author  Baldr Team
  */

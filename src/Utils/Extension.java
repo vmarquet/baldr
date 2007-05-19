@@ -18,8 +18,8 @@ public class Extension {
     public final static String baldr = "baldr";
      public final static String baldrx = "baldrx";
     
-    /*
-     * Get the extension of a file.
+    /**
+     * @return String file extension (after the .)
      */  
     public static String getExtension(File f) {
         String ext = null;

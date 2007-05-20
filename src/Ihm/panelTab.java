@@ -29,14 +29,18 @@ import org.w3c.dom.*;
 public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savable{
     private int monNumero;
     private int curview;
+    private boolean slabels;
     private DefaultMutableTreeNode fileList;
     private Task analys=null;
+    private double[][] vectorsd;
+            
     /** Creates new form panelTab */
     public panelTab(int monNum) {
         fileList = new DefaultMutableTreeNode("Documents");
         initComponents();
         monNumero=monNum;
         jButton10.setVisible(false);
+        jButton11.setVisible(false);
         jComboBox1.setSelectedIndex(0);
         jLabel3.setText("sur "+Integer.toString(jComboBox1.getItemCount()));
         // TODO: Comprendre pourquoi les getWidth retournent 0 ici
@@ -80,6 +84,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jLabel5 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel4.setVisible(false);
         jPanel5 = new javax.swing.JPanel();
@@ -250,10 +255,17 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             }
         });
 
-        jButton11.setText("3D View");
+        jButton11.setText("Vue 3D");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setText("Afficher \u00e9tiquettes");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
             }
         });
 
@@ -267,7 +279,9 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                     .add(jPanel3Layout.createSequentialGroup()
                         .add(jButton10)
                         .add(21, 21, 21)
-                        .add(jButton11))
+                        .add(jButton11)
+                        .add(19, 19, 19)
+                        .add(jButton12))
                     .add(jLabel5)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE))
                 .addContainerGap())
@@ -281,7 +295,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 18, Short.MAX_VALUE)
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jButton10)
-                    .add(jButton11))
+                    .add(jButton11)
+                    .add(jButton12))
                 .addContainerGap())
         );
         jSplitPane2.setLeftComponent(jPanel3);
@@ -430,6 +445,14 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        if(slabels){
+            hidePlotlabels();
+        }else{
+            showPlotlabels();
+        }
+    }//GEN-LAST:event_jButton12ActionPerformed
+
     private void lancerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lancerActionPerformed
     jButton3.doClick();
     }//GEN-LAST:event_lancerActionPerformed
@@ -494,16 +517,18 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     }//GEN-LAST:event_jTree1MouseClicked
     
     public void set3Dview(){
-        jButton11.setText("2D View");
+        jButton11.setText("Vue 2D");
         plot2DPanel1.setVisible(false);
         plot3DPanel1.setVisible(true);
+        jButton12.setVisible(true);
         curview = 1;
     }
     
     public void unset3Dview(){
-        jButton11.setText("3D View");
+        jButton11.setText("Vue 3D");
         plot2DPanel1.setVisible(true);
         plot3DPanel1.setVisible(false);
+        jButton12.setVisible(false);
         curview = 0;
     }
     
@@ -746,12 +771,41 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         }
     }
     
+    private void showPlotlabels(){
+        Color black = new Color(0,0,0);
+        Color blue = new Color(0,0,200);
+        
+        if(analys == null)
+            return;
+        
+        File [] fichs;
+        fichs = analys.getFiles();
+        double[]labelpos = new double[3];
+        
+        for(int i=0;i<vectorsd.length;i++){
+            labelpos = vectorsd[i].clone();
+            labelpos[2]-=0.01;
+            plot3DPanel1.addLabel(fichs[i].getName(),black,labelpos);
+        }
+        
+        slabels = true;
+        jButton12.setText("Masquer les étiquettes");
+    }
+    
+    private void hidePlotlabels(){
+        Plotable[] labels = plot3DPanel1.getPlotables();
+        for(int i=0;i<labels.length;i++){
+            plot3DPanel1.removePlotable(labels[i]);
+        }
+        slabels = false;
+        jButton12.setText("Afficher les étiquettes");
+    }
+    
     public void Dispatch3DResult(float[][] vectors){
         Color black = new Color(0,0,0);
         Color blue = new Color(0,0,200);
-        double[][] vectorsd = new double[vectors.length][vectors[0].length]; 
-        double[]labelpos = new double[3];
-        double max;
+        vectorsd = new double[vectors.length][vectors[0].length]; 
+       
         File [] fichs;
         fichs = analys.getFiles();
         
@@ -762,18 +816,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         }
         // On fait le menage
         plot3DPanel1.removeAllPlots();
-        Plotable[] labels = plot3DPanel1.getPlotables();
-        for(int i=0;i<labels.length;i++){
-            plot3DPanel1.removePlotable(labels[i]);
-        }
+        hidePlotlabels();
         
         // On affiche les vecteurs et les labels
         for(int i=0;i<vectorsd.length;i++){
             plot3DPanel1.addScatterPlot(fichs[i].getName(),blue,vectorsd[i]);
-            labelpos = vectorsd[i].clone();
-            labelpos[2]-=0.01;
-            plot3DPanel1.addLabel(fichs[i].getName(),black,labelpos);
         }
+        showPlotlabels();
+        
+        jButton11.setVisible(true);
        
     }
     
@@ -804,7 +855,6 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         val[a++]=analys.getRes(i,j);}else{break;}
                 }
             }
-            
             
             updateMat(fichs,nb,val);
             updateDefilZone(fichs);
@@ -995,6 +1045,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

@@ -122,6 +122,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         lancer.setText("Lancer l'analyse");
         lancer.setName("Lancer l'analyse");
+        lancer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lancerActionPerformed(evt);
+            }
+        });
+
         menuContextuel.add(lancer);
 
         jSplitPane1.setAutoscrolls(true);
@@ -423,6 +429,10 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                     .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lancerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lancerActionPerformed
+    jButton3.doClick();
+    }//GEN-LAST:event_lancerActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
            String path = jComboBox1.getSelectedItem().toString();

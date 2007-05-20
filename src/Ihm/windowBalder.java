@@ -7,6 +7,7 @@
 
 package Ihm;
 import Ihm.FileFilters.BaldrFileFilter;
+import Ihm.FileFilters.BaldrNBaldrxFileFilter;
 import Ihm.FileFilters.BaldrxFileFilter;
 import Main.*;
 import Noyau.*;
@@ -235,6 +236,8 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         chooser.setFileFilter(baldrxfifi);
         FileFilter baldrfifi=new BaldrFileFilter();
         chooser.setFileFilter(baldrfifi);
+        chooser.setFileFilter(new BaldrNBaldrxFileFilter());
+        
                       chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                                                 String lastdir = Noyau.opts.readPref("LAST_DIR");
                                                 if(lastdir != null){

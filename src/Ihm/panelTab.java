@@ -849,7 +849,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             updateMat(fichs,nb,val);
             updateDefilZone(fichs);
             updatePlot(val,nb);
-            
+            jButton3.setEnabled(true);
             
             jPanel4.setVisible(true);
             //TODO : Ouvrir le splitPane à la bonne taille
@@ -884,7 +884,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 //analys.setFiles(files);
             }
             if(analys!=null) {
-                
+                jButton3.setEnabled(false);
                 analys.start();
                 
             }

@@ -923,8 +923,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             }
             else if(choix==1)
             {
-                Ihm.windowBalder.sauver();
-                System.exit(0);
+                Main.ihm.sauver();
+                Main.ihm.fermerTab(this,monNumero);
             }
             return 0;
                 }

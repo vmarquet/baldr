@@ -11,6 +11,8 @@ import Ihm.FileFilters.BaldrNBaldrxFileFilter;
 import Ihm.FileFilters.BaldrxFileFilter;
 import Main.*;
 import Noyau.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.JFileChooser;
@@ -39,7 +41,8 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         } catch (Exception e) { }
         initComponents();
         
-        /* Centrer la fenêtre */
+        
+         /* Centrer la fenêtre */
         Dimension screen = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         Rectangle frame = getBounds();
         setBounds((screen.width - frame.width)/2,(screen.height - frame.height)/2,frame.width,frame.height);
@@ -54,7 +57,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         setExtendedState(MAXIMIZED_BOTH);
         setVisible(true);
         aProposBaldr = new aPropos(this);
-        
+      
     }
     
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
@@ -80,6 +83,11 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Baldr");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         fileMenu.setText("Fichier");
         jMenuItem1.setText("Nouvel onglet");
@@ -175,7 +183,12 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public static void sauver() {
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+// TODO add your handling code here:
+         ExitAndSave();
+    }//GEN-LAST:event_formWindowClosing
+    public void sauver() {
         // TODO rendre le filefilter plus propre
         JFileChooser chooser = new JFileChooser();
         chooser.setMultiSelectionEnabled(false);
@@ -335,7 +348,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
             }
             else if(choix==1)
             {
-                Ihm.windowBalder.sauver();
+                Main.ihm.sauver();
                 System.exit(0);
             }
             return 0;

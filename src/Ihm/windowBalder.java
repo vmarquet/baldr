@@ -195,7 +195,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
               System.exit(0);
           }
     }//GEN-LAST:event_formWindowClosing
-    public void sauver() {
+    public File sauver() {
         // TODO rendre le filefilter plus propre
         JFileChooser chooser = new JFileChooser();
         chooser.setMultiSelectionEnabled(false);
@@ -211,7 +211,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         int res = chooser.showSaveDialog(null);
         
         String curdir = chooser.getCurrentDirectory().toString();
-        
+        File ret=null;
         switch(res) {
             case JFileChooser.APPROVE_OPTION:
                 SaveAndRestore sav=new SaveAndRestore(null);
@@ -228,6 +228,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                 }else{
                     sav.save(f,SaveAndRestore.BALDR);
                 }
+                ret=f;
                 //TODO New SaveAndRestore
                 break;
             case JFileChooser.CANCEL_OPTION:
@@ -241,6 +242,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         if(lastdir == null || lastdir.compareTo(curdir) != 0){
             Noyau.opts.writePref("LAST_DIR",curdir);
         } 
+        return ret;
     } 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
         Main.modifie=false;

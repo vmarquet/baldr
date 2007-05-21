@@ -965,14 +965,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
                 public int ExitAndSaveOnglet(){
             int choix = JOptionPane.showConfirmDialog(null,"Quitter sans enregistrer ?" );
-            if(choix==0)
+            if(choix==JOptionPane.OK_OPTION)
             {
                 Main.ihm.fermerTab(this,monNumero);
             }
-            else if(choix==1)
+            else if(choix==JOptionPane.NO_OPTION)
             {
-                Main.ihm.sauver();
+                if(Main.ihm.sauver()!=null){
                 Main.ihm.fermerTab(this,monNumero);
+                }
             }
             return 0;
                 }

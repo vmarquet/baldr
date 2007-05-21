@@ -17,6 +17,7 @@ public class Main {
     public static windowBalder ihm;
     public static Noyau noyau;
     public static final int MAXONGLET=10;
+    public static boolean modifie=false;
     
     /** Creates a new instance of Main */
     public Main() {

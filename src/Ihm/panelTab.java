@@ -975,12 +975,21 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 }
                
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Main.modifie=true;
         retirerFichiers();
     }//GEN-LAST:event_jButton2ActionPerformed
         private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-            ExitAndSaveOnglet();
+            if(Main.modifie)
+            {
+                ExitAndSaveOnglet();
+            }
+            else
+            {
+                Main.ihm.fermerTab(this,monNumero);
+            }
     }//GEN-LAST:event_jButton8ActionPerformed
             private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                Main.modifie=true;
                 ajouterFichiers();
     }//GEN-LAST:event_jButton1ActionPerformed
             

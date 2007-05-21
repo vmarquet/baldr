@@ -186,7 +186,14 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 // TODO add your handling code here:
-         ExitAndSave();
+          if(Main.modifie)
+            {
+                ExitAndSave();
+            }
+          else
+          {
+              System.exit(0);
+          }
     }//GEN-LAST:event_formWindowClosing
     public void sauver() {
         // TODO rendre le filefilter plus propre
@@ -236,7 +243,8 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         } 
     } 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
-       
+        Main.modifie=false;
+        Main.ihm.sauver();
     }//GEN-LAST:event_saveMenuItemActionPerformed
             private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
                 aProposBaldr.setLocationRelativeTo(this);

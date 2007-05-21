@@ -62,6 +62,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         menuContextuel = new javax.swing.JPopupMenu();
         NouveauDossier = new javax.swing.JMenuItem();
         ajouter = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JSeparator();
         supprimer = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JSeparator();
         lancer = new javax.swing.JMenuItem();
@@ -122,6 +123,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         });
 
         menuContextuel.add(ajouter);
+
+        menuContextuel.add(jSeparator2);
 
         supprimer.setText("Supprimer");
         supprimer.setName("Supprimer");
@@ -1133,6 +1136,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JSplitPane jSplitPane3;

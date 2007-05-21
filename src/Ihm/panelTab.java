@@ -133,7 +133,9 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         menuContextuel.add(lancer);
 
+        jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(7);
+        jSplitPane1.setToolTipText("");
         jSplitPane1.setAutoscrolls(true);
         jSplitPane1.setOneTouchExpandable(true);
         jTree1.setCellRenderer(new TreeCellCustomRenderer());
@@ -228,10 +230,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jSplitPane1.setLeftComponent(jPanel1);
 
+        jSplitPane2.setDividerSize(7);
+        jSplitPane2.setOneTouchExpandable(true);
         jSplitPane3.setLeftComponent(plot3DPanel1);
 
         jSplitPane3.setRightComponent(plot2DPanel1);
@@ -274,7 +278,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 .add(jLabel5)
                 .add(12, 12, 12)
                 .add(jSplitPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 470, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 24, Short.MAX_VALUE)
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jButton11)
                     .add(jButton12))
@@ -389,7 +393,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(73, 73, 73))
+                .add(75, 75, 75))
         );
         jSplitPane2.setRightComponent(jPanel4);
 

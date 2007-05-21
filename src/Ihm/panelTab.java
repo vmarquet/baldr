@@ -914,12 +914,26 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
      
         }
       }     */
-    
+
+                public int ExitAndSaveOnglet(){
+            int choix = JOptionPane.showConfirmDialog(null,"Quitter sans enregistrer ?" );
+            if(choix==0)
+            {
+                Main.ihm.fermerTab(this,monNumero);
+            }
+            else if(choix==1)
+            {
+                Ihm.windowBalder.sauver();
+                System.exit(0);
+            }
+            return 0;
+                }
+               
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         retirerFichiers();
     }//GEN-LAST:event_jButton2ActionPerformed
         private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-            Main.ihm.fermerTab(this,monNumero);
+            ExitAndSaveOnglet();
     }//GEN-LAST:event_jButton8ActionPerformed
             private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                 ajouterFichiers();

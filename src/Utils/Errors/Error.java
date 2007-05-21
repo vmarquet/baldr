@@ -41,6 +41,11 @@ public  class Error {
         displayError( "Aucun fichiers à analyser." );
 
     }
+        public static void noEnoughFiles()
+    {
+        displayError( "Pas assez de fichiers à analyser (3 minimum)." );
+
+    }
     
     
     

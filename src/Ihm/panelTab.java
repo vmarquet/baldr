@@ -863,15 +863,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         File[] files = getFileTab();
-        if(files!=null){
+        if(files!=null && files.length>2){
             //System.out.println(files.length+" fichiers à analyser:");
             
-            for(File file: files){
+    /*        for(File file: files){
                 System.out.println(file.toString());
             }
             try{
                 wait(2); //for test
-            }catch(Exception e){};
+            }catch(Exception e){};*/
             if(analys==null){
                 analys=Main.noyau.newGUITask(monNumero,files,this.jLabel2,this.jProgressBar1,this);
             }else{
@@ -889,7 +889,10 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 
             }
     }//GEN-LAST:event_jButton3ActionPerformed
+        else if(files!=null && files.length<=2){
+           Utils.Errors.Error.noEnoughFiles();
         
+        } 
         else{
             Utils.Errors.Error.noFiles();
         }

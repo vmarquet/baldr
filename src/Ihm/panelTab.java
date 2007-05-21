@@ -60,6 +60,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
         menuContextuel = new javax.swing.JPopupMenu();
+        NouveauDossier = new javax.swing.JMenuItem();
         ajouter = new javax.swing.JMenuItem();
         supprimer = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JSeparator();
@@ -100,6 +101,17 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+
+        NouveauDossier.setText("Nouveau dossier");
+        NouveauDossier.setActionCommand("Nouveau_dossier");
+        NouveauDossier.setName("Ajouter");
+        NouveauDossier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NouveauDossierActionPerformed(evt);
+            }
+        });
+
+        menuContextuel.add(NouveauDossier);
 
         ajouter.setText("Ajouter");
         ajouter.setName("Ajouter");
@@ -435,6 +447,36 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void NouveauDossierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NouveauDossierActionPerformed
+        DefaultMutableTreeNode nouveauRep = new DefaultMutableTreeNode(new File("Nouveau_Dossier"),true);
+        DefaultMutableTreeNode nouveauRep2 = new DefaultMutableTreeNode(new File(""));
+        //jTree1.getSelectionPath().getParentPath()
+        nouveauRep.add(nouveauRep2);
+        DefaultMutableTreeNode lro;
+        TreePath ins=jTree1.getSelectionPath(); /*premier fichier selectionn?*/
+        
+        lro=fileList; /*par def racine*/
+        
+        if(ins!=null)  /*permet de recuperer le noeud selectionné */
+        {
+            
+            Enumeration files = fileList.breadthFirstEnumeration(); /*Tout l'arbre en largeur*/
+            DefaultMutableTreeNode fich;
+            while (files.hasMoreElements()) {
+                fich=(DefaultMutableTreeNode)files.nextElement();
+                if(ins.equals(new TreePath(fich.getPath())) ) { /*Si le selectionn? == le noeud */
+                    lro=fich; /*on ajoute l? */
+                    break;
+                }
+            }
+        }
+    
+ //TODO : a modifier pour créer un repertoire vide et pas remplacer le fichier selectionné        
+        lro.add(nouveauRep);
+        jTree1.updateUI();
+
+    }//GEN-LAST:event_NouveauDossierActionPerformed
+
     private void jComboBox1MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jComboBox1MouseWheelMoved
 // TODO add your handling code here:
         if (evt.getWheelRotation() > 0) {
@@ -502,7 +544,10 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
         if (evt.getButton()==java.awt.event.MouseEvent.BUTTON2||evt.getButton()==java.awt.event.MouseEvent.BUTTON3) {
+            TreePath selPath = jTree1.getPathForLocation(evt.getX(), evt.getY());
+            jTree1.setSelectionPath(selPath);
             menuContextuel.show(evt.getComponent(),evt.getX(), evt.getY());
+            
         }
     }//GEN-LAST:event_jTree1MouseClicked
     
@@ -589,7 +634,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 
             }
             
-            if(lro.isLeaf() && !lro.isRoot()) { /*Si le selectionn? et un fichier on ajoute dans le dossier parent [sauf racine]*/
+            if(lro.isLeaf() && !lro.isRoot()) { /*Si le selectionne est un fichier on ajoute dans le dossier parent [sauf racine]*/
                 lro=(DefaultMutableTreeNode)lro.getParent();
             }
         }
@@ -601,7 +646,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         switch(res) {
             case JFileChooser.APPROVE_OPTION:
                 //  for(int i=0;i < chooser.getSelectedFiles().length;i++){
-                for(File fich:chooser.getSelectedFiles()){
+                for(File fich : chooser.getSelectedFiles()){
                     lro.add(recursDir(fich)); /*Fonction d'ajout r?cursive de fichiers*/
                 }
                 jTree1.updateUI(); /*Demande de redessinage du tree*/
@@ -1048,6 +1093,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             }
             
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem NouveauDossier;
     private javax.swing.JMenuItem ajouter;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;

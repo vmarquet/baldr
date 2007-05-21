@@ -4,6 +4,16 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JPopupMenu" name="menuContextuel">
       <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="NouveauDossier">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nouveau dossier"/>
+            <Property name="actionCommand" type="java.lang.String" value="Nouveau_dossier"/>
+            <Property name="name" type="java.lang.String" value="Ajouter"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NouveauDossierActionPerformed"/>
+          </Events>
+        </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="ajouter">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ajouter"/>

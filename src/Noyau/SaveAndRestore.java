@@ -83,10 +83,17 @@ public class SaveAndRestore {
     
     
     public void save(File f,int format) {
+        if(obj==null)
+        {
+            Utils.Errors.Error.nothingToSave();
+        }
+        else
+        {
         StringBuffer str;
         
         str=new StringBuffer();
         str.append("<?xml version=\"1.0\" ?>\n");
+        
         str.append(obj.toXml());
         try {
             FileOutputStream file=new FileOutputStream(f);
@@ -109,7 +116,7 @@ public class SaveAndRestore {
             ex.printStackTrace();
         }
         
-        
+        } 
         
     }
 }

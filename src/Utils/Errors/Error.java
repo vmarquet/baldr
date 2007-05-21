@@ -46,6 +46,10 @@ public  class Error {
         displayError( "Pas assez de fichiers à analyser (3 minimum)." );
 
     }
+        public static void nothingToSave()
+        {
+            displayError( "Rien à enregistrer !" );
+        }
     
     
     

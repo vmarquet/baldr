@@ -315,6 +315,11 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 jComboBox1ActionPerformed(evt);
             }
         });
+        jComboBox1.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                jComboBox1MouseWheelMoved(evt);
+            }
+        });
 
         jPanel5.add(jComboBox1, new java.awt.GridBagConstraints());
 
@@ -429,6 +434,17 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                     .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox1MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jComboBox1MouseWheelMoved
+// TODO add your handling code here:
+        if (evt.getWheelRotation() > 0) {
+            itemSuivant();
+        }
+        else
+        {
+             itemPrecedent();
+        }
+    }//GEN-LAST:event_jComboBox1MouseWheelMoved
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         if(slabels){

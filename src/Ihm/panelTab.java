@@ -510,7 +510,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                name = path.substring(path.lastIndexOf(File.separator)+1);
            }
            plot3Dhlpt(name);
-           jReport.setText("Fichier "+name);
+        //   jReport.setText("Fichier "+name);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -937,8 +937,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 analys.start();
                 
             }
-    }//GEN-LAST:event_jButton3ActionPerformed
-        else if(files!=null && files.length<=2){
+        }       else if(files!=null && files.length<=2){
            Utils.Errors.Error.noEnoughFiles();
         
         } 
@@ -946,7 +945,9 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             Utils.Errors.Error.noFiles();
         }
         
-    }
+    
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /*    private void RemovePath(TreePath path,DefaultMutableTreeNode tree)
     {
         if(path.equals(new TreePath(tree.getPath())))

@@ -208,13 +208,13 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         if(lastdir != null){
             chooser.setCurrentDirectory(new File(lastdir));
         }
-        int res = chooser.showSaveDialog(null);
+        int res = chooser.showSaveDialog(this);
         
         String curdir = chooser.getCurrentDirectory().toString();
         File ret=null;
         switch(res) {
             case JFileChooser.APPROVE_OPTION:
-                SaveAndRestore sav=new SaveAndRestore(null);
+                SaveAndRestore sav=new SaveAndRestore(this);
                 File f=chooser.getSelectedFile();
                 if(Utils.Extension.getExtension(f)==null  ) {
                     if(chooser.getFileFilter()==baldrfifi){

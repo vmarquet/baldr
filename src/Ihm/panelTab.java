@@ -557,11 +557,13 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     }//GEN-LAST:event_jButton5ActionPerformed
             
     private void supprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerActionPerformed
+  
         retirerFichiers();
     }//GEN-LAST:event_supprimerActionPerformed
     
     private void ajouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterActionPerformed
-        ajouterFichiers();
+                                 
+       ajouterFichiers();
     }//GEN-LAST:event_ajouterActionPerformed
     
     
@@ -674,6 +676,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 }
                 jTree1.updateUI(); /*Demande de redessinage du tree*/
                 // jTree1.setModel(new DefaultTreeModel(fileList));
+                Main.modifie=true;
                 break;
             case JFileChooser.CANCEL_OPTION:
                 lastdir=curdir;
@@ -696,7 +699,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         
         TreePath[] removeList = jTree1.getSelectionPaths();
         // System.out.println("A detruire");
-        
+        Main.modifie=true;
         for(TreePath path: removeList) { /*Pour tous les fichiers ? d?truire*/
             /*Possible bug, il faudrait faire l'enum ici*/
             Enumeration files = fileList.breadthFirstEnumeration(); /*Parcours en largeur*/
@@ -1002,10 +1005,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 }
                
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(!fileList.isLeaf())
-        {
-        Main.modifie=true;
-        }
+
         retirerFichiers();
     }//GEN-LAST:event_jButton2ActionPerformed
         private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1019,7 +1019,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             }
     }//GEN-LAST:event_jButton8ActionPerformed
             private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                Main.modifie=true;
+                
                 ajouterFichiers();
     }//GEN-LAST:event_jButton1ActionPerformed
             

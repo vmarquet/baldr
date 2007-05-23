@@ -90,6 +90,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         });
 
         fileMenu.setText("Fichier");
+        jMenuItem1.setIcon(new javax.swing.ImageIcon("Images\\tab_add.png"));
         jMenuItem1.setText("Nouvel onglet");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +102,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
         fileMenu.add(jSeparator1);
 
+        openMenuItem.setIcon(new javax.swing.ImageIcon("Images\\folder_go.png"));
         openMenuItem.setText("Ouvrir");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +112,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
         fileMenu.add(openMenuItem);
 
+        saveMenuItem.setIcon(new javax.swing.ImageIcon("Images\\disk.png"));
         saveMenuItem.setText("Enregistrer");
         saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,6 +122,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
         fileMenu.add(saveMenuItem);
 
+        exitMenuItem.setIcon(new javax.swing.ImageIcon("Images\\cross.png"));
         exitMenuItem.setText("Quitter");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,7 +159,14 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         menuBar.add(editMenu);
 
         helpMenu.setText("Aide");
+        contentsMenuItem.setIcon(new javax.swing.ImageIcon("Images\\help.png"));
         contentsMenuItem.setText("Rubriques d'aide");
+        contentsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contentsMenuItemActionPerformed(evt);
+            }
+        });
+
         helpMenu.add(contentsMenuItem);
 
         aboutMenuItem.setText("A propos de Baldr ...");
@@ -184,6 +195,10 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentsMenuItemActionPerformed
+// TODO add your handling code here:
+    }//GEN-LAST:event_contentsMenuItemActionPerformed
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 // TODO add your handling code here:
           if(Main.modifie)
@@ -196,7 +211,9 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
           }
     }//GEN-LAST:event_formWindowClosing
     public File sauver() {
+        
         // TODO rendre le filefilter plus propre
+        
         JFileChooser chooser = new JFileChooser();
         chooser.setMultiSelectionEnabled(false);
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -241,7 +258,8 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         
         if(lastdir == null || lastdir.compareTo(curdir) != 0){
             Noyau.opts.writePref("LAST_DIR",curdir);
-        } 
+        }
+        Main.modifie=false;
         return ret;
     } 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
@@ -314,7 +332,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                                                 int numOnglet=i+1;
                                                 final panelTab newtab=new panelTab(numeroDuTabLibre);
                                                 listeOnglets[numeroDuTabLibre]=newtab;
-                                                jTabbedPane1.addTab("Onglet "+numOnglet ,newtab);
+                                                jTabbedPane1.addTab("Analyse "+numOnglet ,newtab);
                                                 jTabbedPane1.setSelectedComponent(newtab);
                                                 return newtab;
                                             }
@@ -351,15 +369,15 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                                             }
                                         }
             public int ExitAndSave() {
-            int choix = JOptionPane.showConfirmDialog(null,"Quitter sans enregistrer ?" );
-            if(choix==0)
+            int choix = JOptionPane.showConfirmDialog(null,"Souhaitez-vous enregistrer les modifications \n apportées avant de quitter ?" );
+            if(choix==JOptionPane.NO_OPTION)
             {
                 System.exit(0);
             }
-            else if(choix==1)
+            else if(choix==JOptionPane.OK_OPTION)
             {
-                Main.ihm.sauver();
-                System.exit(0);
+                if(Main.ihm.sauver()!=null)
+                    System.exit(0);
             }
             return 0;
                 }

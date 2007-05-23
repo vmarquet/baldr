@@ -33,7 +33,7 @@ public  class Error {
     
     public static void tropAnalyse()
     {
-        displayError( "Désolé mais vous ne pouvez pas créer plus d'analyse." );
+        displayError( "Désolé mais vous ne pouvez pas effectuer plus d'analyse." );
 
     }
     public static void noFiles()

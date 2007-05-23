@@ -11,6 +11,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="Images\tab_add.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nouvel onglet"/>
               </Properties>
               <Events>
@@ -21,6 +24,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="openMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="Images\folder_go.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Ouvrir"/>
               </Properties>
               <Events>
@@ -29,6 +35,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="saveMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="Images\disk.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Enregistrer"/>
               </Properties>
               <Events>
@@ -37,6 +46,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="Images\cross.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Quitter"/>
               </Properties>
               <Events>
@@ -90,8 +102,14 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="contentsMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="Images\help.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Rubriques d&apos;aide"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="contentsMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
               <Properties>

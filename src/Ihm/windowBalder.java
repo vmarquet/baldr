@@ -315,7 +315,10 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                                     test.setVisible(true);
     }//GEN-LAST:event_Prefev
                                         private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-                                            ExitAndSave();
+                                            if(Main.modifie)
+                                                ExitAndSave();
+                                            else
+                                                System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
                                         public void fermerTab(panelTab pt,int numTab) {
                                             int j=0;

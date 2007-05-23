@@ -318,8 +318,20 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                                             ExitAndSave();
     }//GEN-LAST:event_exitMenuItemActionPerformed
                                         public void fermerTab(panelTab pt,int numTab) {
+                                            int j=0;
                                             jTabbedPane1.remove(pt);
                                             listeOnglets[numTab]=null;
+                                            for(int i=0;i<Main.MAXONGLET;i++)
+                                            {
+                                            if(listeOnglets[i]==null)
+                                            {
+                                                j++;
+                                            }
+                                            if(j==Main.MAXONGLET)
+                                            {
+                                                Main.modifie=false;
+                                            }
+                                        }
                                         }
                                         public panelTab ajouteOnglet(){
                                             int i;

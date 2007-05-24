@@ -11,6 +11,7 @@ import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import Noyau.Noyau;
+import Main.*;
 
 /**
  *
@@ -29,6 +30,8 @@ public class prefwin extends javax.swing.JFrame {
     public prefwin() {
         initComponents();
         this.setLocationRelativeTo(this.getParent());
+        this.setIconImage(Main.ihm.iconBaldr);
+        this.setResizable(false);
         loadPrefs();
       }
     

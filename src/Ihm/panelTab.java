@@ -171,6 +171,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         jButton1.setIcon(new javax.swing.ImageIcon("Images\\add.png"));
         jButton1.setToolTipText("Ajouter un fichier");
+        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -179,6 +180,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         jButton2.setIcon(new javax.swing.ImageIcon("Images\\delete.png"));
         jButton2.setToolTipText("Supprime le fichier s\u00e9lectionn\u00e9");
+        jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -187,6 +189,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         jButton3.setIcon(new javax.swing.ImageIcon("Images\\arrow_refresh.png"));
         jButton3.setToolTipText("Lancer l'analyse");
+        jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -198,6 +201,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         jButton8.setIcon(new javax.swing.ImageIcon("Images\\tab_delete.png"));
         jButton8.setToolTipText("Fermer l'analyse courante");
+        jButton8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -992,7 +996,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
       }     */
 
                 public int ExitAndSaveOnglet(){
-            int choix = JOptionPane.showConfirmDialog(null,"Souhaitez-vous enregistrer les modifications \n apportées avant de fermer cet onglet ?" );
+            int choix = JOptionPane.showConfirmDialog(this,"Souhaitez-vous enregistrer les modifications \n apportées avant de fermer cet onglet ?","Baldr",1);
             if(choix==JOptionPane.NO_OPTION)
             {
                 Main.ihm.fermerTab(this,monNumero);

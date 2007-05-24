@@ -13,12 +13,18 @@ import Main.*;
 import Noyau.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.HashMap;
+import javax.swing.Action;
+import javax.swing.Icon;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JFileChooser;
 import java.awt.*;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.text.DefaultEditorKit;
+import javax.swing.text.JTextComponent;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -28,10 +34,13 @@ import org.w3c.dom.NodeList;
  */
 public class windowBalder extends javax.swing.JFrame implements Savable {
     // int i=0;
+    private HashMap actions;
     static java.awt.event.ActionEvent event;
     panelTab[] listeOnglets=new panelTab[Main.MAXONGLET];
     
     aPropos aProposBaldr;
+    java.awt.Image iconBaldr = java.awt.Toolkit.getDefaultToolkit().getImage("Images/baldr.gif");
+
     public windowBalder() {
         int i;
         /** Look n feel du system*/
@@ -39,16 +48,17 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
             UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) { }
-        initComponents();
         
-        
+       initComponents();
+          
+       
          /* Centrer la fenêtre */
         Dimension screen = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         Rectangle frame = getBounds();
         setBounds((screen.width - frame.width)/2,(screen.height - frame.height)/2,frame.width,frame.height);
         
         //javax.swing.ImageIcon iconBaldr= new javax.swing.ImageIcon("./ihmbalder/baldr.gif");
-        java.awt.Image iconBaldr = java.awt.Toolkit.getDefaultToolkit().getImage("Images/baldr.gif");
+        
         setIconImage(iconBaldr);
         
         for(i=0;i<Main.MAXONGLET;i++) listeOnglets[i]=null;
@@ -57,7 +67,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         setExtendedState(MAXIMIZED_BOTH);
         setVisible(true);
         aProposBaldr = new aPropos(this);
-      
+   
     }
     
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
@@ -169,6 +179,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
         helpMenu.add(contentsMenuItem);
 
+        aboutMenuItem.setIcon(new javax.swing.ImageIcon("Images\\baldr.gif"));
         aboutMenuItem.setText("A propos de Baldr ...");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -384,7 +395,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                                             }
                                         }
             public int ExitAndSave() {
-            int choix = JOptionPane.showConfirmDialog(null,"Souhaitez-vous enregistrer les modifications \n apportées avant de quitter ?" );
+            int choix = JOptionPane.showConfirmDialog(this,"Souhaitez-vous enregistrer les modifications \n apportées avant de fermer cet onglet ?","Baldr",1);
             if(choix==JOptionPane.NO_OPTION)
             {
                 System.exit(0);

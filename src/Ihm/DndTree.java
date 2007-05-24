@@ -56,40 +56,31 @@ import Ihm.TransferableTreeNode;
  *
  * @author ryco
  */
-public class DndTree extends JTree implements Serializable 
-{
+public class DndTree extends JTree implements Serializable {
     private Insets insets;
     private static DefaultMutableTreeNode noeudDragué;
     private int top = 0, bottom = 0, topRow = 0, bottomRow = 0;
-    
-    public DndTree(DefaultMutableTreeNode racine) {
+    private panelTab currentPanelTab;
+    public DndTree(DefaultMutableTreeNode racine,panelTab PT) {
         super(racine);
+        currentPanelTab =PT;
         DragSource dragSource = DragSource.getDefaultDragSource();
         dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE,new TreeDragGestureListener());
         DropTarget dropTarget = new DropTarget(this,new TreeDropTargetListener());
     }
     
-/*  public DndTree(TreeModel model) {
-    super(model);
-    DragSource dragSource = DragSource.getDefaultDragSource();
-    dragSource.createDefaultDragGestureRecognizer(this,DnDConstants.ACTION_COPY_OR_MOVE,new TreeDragGestureListener());
-    DropTarget dropTarget = new DropTarget(this,new TreeDropTargetListener());
-  }*/
-    
     private Insets getAutoscrollInsets() {
         return insets;
     }
-    
-    private void autoscroll(Point p) {
-        // Only support up/down scrolling
+    private void autoscroll(Point pt) {
         top = Math.abs(getLocation().y) + 10;
         bottom = top + getParent().getHeight() - 20;
         int next;
-        if (p.y < top) {
+        if (pt.y < top) {
             next = topRow--;
             bottomRow++;
             scrollRowToVisible(next);
-        } else if (p.y > bottom) {
+        } else if (pt.y > bottom) {
             next = bottomRow++;
             topRow--;
             scrollRowToVisible(next);
@@ -98,7 +89,6 @@ public class DndTree extends JTree implements Serializable
     
     private class TreeDragGestureListener implements DragGestureListener {
         public void dragGestureRecognized(DragGestureEvent dragGestureEvent) {
-            // Can only drag leafs
             JTree tree = (JTree) dragGestureEvent.getComponent();
             TreePath path = tree.getSelectionPath();
             if (path == null) {
@@ -120,7 +110,6 @@ public class DndTree extends JTree implements Serializable
     }
     
     private class TreeDropTargetListener implements DropTargetListener {
-        
         public void dragEnter(DropTargetDragEvent dropTargetDragEvent) {
             // Setup positioning info for auto-scrolling
             top = Math.abs(getLocation().y);
@@ -129,123 +118,75 @@ public class DndTree extends JTree implements Serializable
             bottomRow = getClosestRowForLocation(0, bottom);
             insets = new Insets(top + 10, 0, bottom - 10, getWidth());
         }
-        
         public void dragExit(DropTargetEvent dropTargetEvent) {
         }
-        
         public void dragOver(DropTargetDragEvent dropTargetDragEvent) {
         }
-        
         public void dropActionChanged(DropTargetDragEvent dropTargetDragEvent) {
         }
-        
         public synchronized void drop(DropTargetDropEvent dropTargetDropEvent) {
             // Only support dropping over nodes that aren't leafs
-            
             Point location = dropTargetDropEvent.getLocation();
             TreePath path = getPathForLocation(location.x, location.y);
+            DefaultMutableTreeNode node;
             if (path==null ) {
-                System.out.println("Can't drop nowhere - beep");
-                java.awt.Toolkit.getDefaultToolkit().beep();
-                dropTargetDropEvent.rejectDrop();
+                node=currentPanelTab.getLastSelectedNode();
             } else {
-                Object node = path.getLastPathComponent();
-                if ((node != null) && (node instanceof TreeNode)
-                && (!((TreeNode) node).isLeaf())) {
-                    try {
-                        Transferable tr = dropTargetDropEvent.getTransferable();
-                        //if (tr.isDataFlavorSupported(TransferableTreeNode.DEFAULT_MUTABLE_TREENODE_FLAVOR))
-                        // {
-                        dropTargetDropEvent.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
-                        Object userObject = tr.getTransferData(TransferableTreeNode.DEFAULT_MUTABLE_TREENODE_FLAVOR);
-                        addElement(path, userObject);
-                        dropTargetDropEvent.dropComplete(true);
-                        //}
-          /*
-           else if (tr.isDataFlavorSupported(DataFlavor.stringFlavor)) {
-            dropTargetDropEvent.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
-            String string = (String) tr.getTransferData(DataFlavor.stringFlavor);
-            addElement(path, string);
-            dropTargetDropEvent.dropComplete(true);
-          } else if (tr.isDataFlavorSupported(DataFlavor.plainTextFlavor)) {
-            dropTargetDropEvent.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
-            Object stream = tr.getTransferData(DataFlavor.plainTextFlavor);
-            if (stream instanceof InputStream)
-                {
-                  InputStreamReader isr = new InputStreamReader((InputStream) stream);
-                  BufferedReader reader = new BufferedReader(isr);
-                  String line;
-                  while ((line = reader.readLine()) != null)
-                  {
-                      addElement(path, line);
-                  }
-                  dropTargetDropEvent.dropComplete(true);
-                }
-            else if (stream instanceof Reader)
-            {
-              BufferedReader reader = new BufferedReader(
-                  (Reader) stream);
-              String line;
-              while ((line = reader.readLine()) != null) {
-                addElement(path, line);
-              }
-              dropTargetDropEvent.dropComplete(true);
-            } else {
-              System.err.println("Unknown type: "
-                  + stream.getClass());
-              dropTargetDropEvent.rejectDrop();
+                node = (DefaultMutableTreeNode) path.getLastPathComponent();
             }
-          } else if (tr.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
-            dropTargetDropEvent.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
-            List fileList = (List) tr.getTransferData(DataFlavor.javaFileListFlavor);
-            Iterator iterator = fileList.iterator();
-            while (iterator.hasNext()) {
-              File file = (File) iterator.next();
-              addElement(path, file.toURL());
+            if(node.isLeaf()&&!node.isRoot()) {
+                node=(DefaultMutableTreeNode)node.getParent();
+                System.out.println("Taking parent of leaf...");
             }
-            dropTargetDropEvent.dropComplete(true);
-          }
-           */
-        /*  else
-          {
-           System.err.println("Rejected");
-           dropTargetDropEvent.rejectDrop();
-          }*/
-                        
-                    } catch (IOException io) {
-                        io.printStackTrace();
-                        dropTargetDropEvent.rejectDrop();
-                    } catch (UnsupportedFlavorException ufe) {
-                        ufe.printStackTrace();
-                        dropTargetDropEvent.rejectDrop();
+            try {
+                Transferable tr = dropTargetDropEvent.getTransferable();
+                if ((tr.getTransferDataFlavors()[0]).equals(TransferableTreeNode.DEFAULT_MUTABLE_TREENODE_FLAVOR)) {
+                    dropTargetDropEvent.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
+                    Object userObject = tr.getTransferData(TransferableTreeNode.DEFAULT_MUTABLE_TREENODE_FLAVOR);
+                    rmvSrcElement();
+                    addElement(node, userObject);
+                    dropTargetDropEvent.dropComplete(true);
+                } else if (tr.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+                    dropTargetDropEvent.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
+                    List ListedeFile=(List)tr.getTransferData(DataFlavor.javaFileListFlavor);
+                    Iterator iterator = ListedeFile.iterator();
+                    File [] fileTab=new File[ListedeFile.size()];
+                    int i=0;
+                    while (iterator.hasNext()) {
+                        fileTab[i++] = (File) iterator.next();
                     }
+                    currentPanelTab.ajouterFichiers(fileTab,node);
+                    dropTargetDropEvent.dropComplete(true);
                 } else {
-                    System.out.println("Can't drop on a leaf");
+                    System.err.println("Rejected");
                     dropTargetDropEvent.rejectDrop();
                 }
+            } catch (IOException io) {
+                io.printStackTrace();
+                dropTargetDropEvent.rejectDrop();
+            } catch (UnsupportedFlavorException ufe) {
+                ufe.printStackTrace();
+                dropTargetDropEvent.rejectDrop();
             }
         }
         
-        private void addElement(TreePath path, Object element) {
-            DefaultMutableTreeNode parent = (DefaultMutableTreeNode) path.getLastPathComponent();
+        private void addElement(DefaultMutableTreeNode parent, Object element) {
+            
             DefaultMutableTreeNode node = new DefaultMutableTreeNode(element);
             System.out.println("Added: " + node + " to " + parent);
             DefaultTreeModel model = (DefaultTreeModel) (DndTree.this.getModel());
             model.insertNodeInto(node, parent, parent.getChildCount());
         }
+        private void rmvSrcElement() {
+            DefaultTreeModel model = (DefaultTreeModel) (DndTree.this.getModel());
+            model.removeNodeFromParent(noeudDragué);
+            System.out.println("MOVE: node removed");
+        }
     }
     
     private class MyDragSourceListener implements DragSourceListener {
         public void dragDropEnd(DragSourceDropEvent dragSourceDropEvent) {
-            if (dragSourceDropEvent.getDropSuccess()) {
-                
-                DefaultTreeModel model = (DefaultTreeModel) (DndTree.this.getModel());
-                model.removeNodeFromParent(noeudDragué);
-                System.out.println("MOVE: node removed");
-            }
         }
-        
-        
         public void dragEnter(DragSourceDragEvent dragSourceDragEvent) {
             DragSourceContext context = dragSourceDragEvent.getDragSourceContext();
             int dropAction = dragSourceDragEvent.getDropAction();
@@ -255,15 +196,11 @@ public class DndTree extends JTree implements Serializable
                 context.setCursor(DragSource.DefaultCopyNoDrop);
             }
         }
-        
         public void dragExit(DragSourceEvent dragSourceEvent) {
         }
-        
         public void dragOver(DragSourceDragEvent dragSourceDragEvent) {
         }
-        
         public void dropActionChanged(DragSourceDragEvent dragSourceDragEvent) {
-            
         }
     }
 }

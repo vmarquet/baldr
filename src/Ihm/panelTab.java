@@ -35,7 +35,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     private DefaultMutableTreeNode fileList;
     private Task analys=null;
     private double[][] vectorsd;
-            
+    
     /** Creates new form panelTab */
     public panelTab(int monNum) {
         fileList = new DefaultMutableTreeNode("Documents");
@@ -72,7 +72,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 =  new DndTree(fileList);
+        jTree1 =  new DndTree(fileList,this);
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -159,6 +159,11 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jSplitPane1.setOneTouchExpandable(true);
         jTree1.setCellRenderer(new TreeCellCustomRenderer());
         jTree1.setModel(new DefaultTreeModel(fileList));
+        jTree1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTree1KeyPressed(evt);
+            }
+        });
         jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTree1MouseClicked(evt);
@@ -476,6 +481,13 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTree1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTree1KeyPressed
+if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE)
+{System.out.println("devrait supprimer...");
+    retirerFichiers();
+}
+    }//GEN-LAST:event_jTree1KeyPressed
+    
     private void NouveauDossierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NouveauDossierActionPerformed
         DefaultMutableTreeNode nouveauRep = new DefaultMutableTreeNode(new File("Nouveau_Dossier"),true);
         DefaultMutableTreeNode nouveauRep2 = new DefaultMutableTreeNode(new File(""));
@@ -499,24 +511,51 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 }
             }
         }
-    
- //TODO : a modifier pour créer un repertoire vide et pas remplacer le fichier selectionné        
+        
+          if(lro.isLeaf() && !lro.isRoot()) { /*Si le selectionne est un fichier on ajoute dans le dossier parent [sauf racine]*/
+                lro=(DefaultMutableTreeNode)lro.getParent();
+            }
         lro.add(nouveauRep);
         jTree1.updateUI();
-
+        
     }//GEN-LAST:event_NouveauDossierActionPerformed
+    public DefaultMutableTreeNode getLastSelectedNode(){
+        if(jTree1.isSelectionEmpty())
+            return fileList;
+        DefaultMutableTreeNode lro;
+        TreePath ins=jTree1.getSelectionPath(); /*premier fichier selectionn?*/
+        
+        lro=fileList; /*par def racine*/
+        
+        if(ins!=null)  /*permet de recuperer le noeud selectionné */
+        {
+            
+            Enumeration files = fileList.breadthFirstEnumeration(); /*Tout l'arbre en largeur*/
+            DefaultMutableTreeNode fich;
+            while (files.hasMoreElements()) {
+                fich=(DefaultMutableTreeNode)files.nextElement();
+                if(ins.equals(new TreePath(fich.getPath())) ) { /*Si le selectionn? == le noeud */
+                    lro=fich; /*on ajoute l? */
+                    break;
+                }
+            }
+        }
+        
+        if(lro.isLeaf() && !lro.isRoot()) { /*Si le selectionne est un fichier on ajoute dans le dossier parent [sauf racine]*/
+            lro=(DefaultMutableTreeNode)lro.getParent();
+        }
+        return lro;
 
+    }
     private void jComboBox1MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jComboBox1MouseWheelMoved
 // TODO add your handling code here:
         if (evt.getWheelRotation() > 0) {
             itemSuivant();
-        }
-        else
-        {
-             itemPrecedent();
+        } else {
+            itemPrecedent();
         }
     }//GEN-LAST:event_jComboBox1MouseWheelMoved
-
+    
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         if(slabels){
             hidePlotlabels();
@@ -524,21 +563,21 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             showPlotlabels();
         }
     }//GEN-LAST:event_jButton12ActionPerformed
-
+    
     private void lancerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lancerActionPerformed
-    jButton3.doClick();
+        jButton3.doClick();
     }//GEN-LAST:event_lancerActionPerformed
-
+    
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-           String path = jComboBox1.getSelectedItem().toString();
-           String name ="";
-           if(path.lastIndexOf(File.separator)!=-1){
-               name = path.substring(path.lastIndexOf(File.separator)+1);
-           }
-           plot3Dhlpt(name);
+        String path = jComboBox1.getSelectedItem().toString();
+        String name ="";
+        if(path.lastIndexOf(File.separator)!=-1){
+            name = path.substring(path.lastIndexOf(File.separator)+1);
+        }
+        plot3Dhlpt(name);
         //   jReport.setText("Fichier "+name);
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
+    
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         if(curview == 0){
             set3Dview();
@@ -562,15 +601,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         itemSuivant();
     }//GEN-LAST:event_jButton5ActionPerformed
-            
+    
     private void supprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerActionPerformed
-  
+        
         retirerFichiers();
     }//GEN-LAST:event_supprimerActionPerformed
     
     private void ajouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterActionPerformed
-                                 
-       ajouterFichiers();
+        
+        ajouterFichiers();
     }//GEN-LAST:event_ajouterActionPerformed
     
     
@@ -639,65 +678,66 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     }
     
     private void ajouterFichiers() {
+        DefaultMutableTreeNode lro;
+        TreePath ins=jTree1.getSelectionPath();
         JFileChooser chooser = new JFileChooser(); /*boite de dialogue fichiers*/
-        DefaultMutableTreeNode lro; /*noeud ou on va add*/
+        
         chooser.setMultiSelectionEnabled(true); /* rend un tab de files */
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES); /*Soit des files soit des dirs */
-        
+        int res = chooser.showOpenDialog(this);
         String lastdir = Noyau.opts.readPref("LAST_DIR");
         if(lastdir != null){
             chooser.setCurrentDirectory(new File(lastdir));
         }
         
-        TreePath ins=jTree1.getSelectionPath(); /*premier fichier selectionn?*/
-        
-        lro=fileList; /*par def racine*/
-        
-        if(ins!=null){
-            
-            Enumeration files = fileList.breadthFirstEnumeration(); /*Tout l'arbre en largeur*/
-            DefaultMutableTreeNode fich;
-            while (files.hasMoreElements()) { /*parcours*/
-                fich=(DefaultMutableTreeNode)files.nextElement();
-                if(ins.equals(new TreePath(fich.getPath())) ) { /*Si le selectionn? == le noeud */
-                    lro=fich; /*on ajoute l? */
-                    break;
-                }
-                
-            }
-            
-            if(lro.isLeaf() && !lro.isRoot()) { /*Si le selectionne est un fichier on ajoute dans le dossier parent [sauf racine]*/
-                lro=(DefaultMutableTreeNode)lro.getParent();
-            }
-        }
-        
-        int res = chooser.showOpenDialog(this);
-        
-        String curdir = chooser.getCurrentDirectory().toString();
-        
         switch(res) {
             case JFileChooser.APPROVE_OPTION:
                 //  for(int i=0;i < chooser.getSelectedFiles().length;i++){
-                for(File fich : chooser.getSelectedFiles()){
-                    lro.add(recursDir(fich)); /*Fonction d'ajout r?cursive de fichiers*/
+                 lro=fileList; /*par def racine*/
+        
+                if(ins!=null){
+                    Enumeration files = fileList.breadthFirstEnumeration(); /*Tout l'arbre en largeur*/
+                    DefaultMutableTreeNode fich;
+                    while (files.hasMoreElements()) { /*parcours*/
+                        fich=(DefaultMutableTreeNode)files.nextElement();
+                        if(ins.equals(new TreePath(fich.getPath())) ) { /*Si le selectionn? == le noeud */
+                            lro=fich; /*on ajoute l? */
+                            break;
+                        }
+                    }
+                    if(lro.isLeaf() && !lro.isRoot()) { /*Si le selectionne est un fichier on ajoute dans le dossier parent [sauf racine]*/
+                        lro=(DefaultMutableTreeNode)lro.getParent();
+                    }
                 }
-                jTree1.updateUI(); /*Demande de redessinage du tree*/
+                ajouterFichiers(chooser.getSelectedFiles(),lro);
+                /*Demande de redessinage du tree*/
                 // jTree1.setModel(new DefaultTreeModel(fileList));
-                Main.modifie=true;
+                
+                String curdir = chooser.getCurrentDirectory().toString();
+                if(lastdir == null || lastdir.compareTo(curdir) != 0){
+                    Noyau.opts.writePref("LAST_DIR",curdir);
+                }
                 break;
             case JFileChooser.CANCEL_OPTION:
-                lastdir=curdir;
                 break;
             case JFileChooser.ERROR_OPTION:
                 break;
         }
         
-        if(lastdir == null || lastdir.compareTo(curdir) != 0){
-            Noyau.opts.writePref("LAST_DIR",curdir);
-        }
     }
-    
-    private void retirerFichiers() {
+    public void ajouterFichiers(File [] listeDeFichiers,DefaultMutableTreeNode noeud){
+        /*noeud ou on va add*/
+         /*premier fichier selectionn?*/
+        DefaultMutableTreeNode lro=noeud;
+        //une fois le noeud selectionné trouvé, on insère les fichiers
+        for(File fich : listeDeFichiers){
+            lro.add(recursDir(fich)); /*Fonction d'ajout r?cursive de fichiers*/
+        }
+        jTree1.updateUI();
+        Main.modifie=true; //on vient d'ajouter des fichiers 
+    }
+
+    public void retirerFichiers() {
         boolean flag;
         if(jTree1.isSelectionEmpty()){ /*Retire que les fichier* selectionnez*/
             return;
@@ -825,7 +865,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         Color blue = new Color(0,0,200);
         
         Plot[] plots = plot3DPanel1.getPlots();
-
+        
         for(int i=0;i<plots.length;i++){
             plots[i].setColor(blue);
             if(plots[i].getName().compareTo(name) == 0){
@@ -872,8 +912,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     public void Dispatch3DResult(float[][] vectors){
         Color black = new Color(0,0,0);
         Color blue = new Color(0,0,200);
-        vectorsd = new double[vectors.length][vectors[0].length]; 
-       
+        vectorsd = new double[vectors.length][vectors[0].length];
+        
         File [] fichs;
         fichs = analys.getFiles();
         
@@ -893,7 +933,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         showPlotlabels();
         
         jButton11.setVisible(true);
-       
+        
     }
     
     private void updatePlot(double[] val, int nb) {
@@ -952,8 +992,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             }catch(Exception e){};*/
             if(analys==null){
                 analys=Main.noyau.newGUITask(monNumero,files,this.jLabel2,this.jProgressBar1,this);
-            }
-            else{
+            } else{
                 File[] exfiles = analys.getFiles();
                 float [][] exRes= analys.getResults();
                 //on peux pas faire repartir un thread donc faut en faire un autre
@@ -968,16 +1007,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 
             }
         }       else if(files!=null && files.length<=2){
-           Utils.Errors.Error.noEnoughFiles();
-        
-        } 
-        else{
+            Utils.Errors.Error.noEnoughFiles();
+            
+        } else{
             Utils.Errors.Error.noFiles();
         }
         
-    
+        
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
     /*    private void RemovePath(TreePath path,DefaultMutableTreeNode tree)
     {
         if(path.equals(new TreePath(tree.getPath())))
@@ -1001,27 +1039,18 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             {
                 Main.ihm.fermerTab(this,monNumero);
             }
-            else if(choix==JOptionPane.OK_OPTION)
-            {
-                
-                if(Main.ihm.sauver()!=null){
-                Main.ihm.fermerTab(this,monNumero);
-                }
-            }
-            return 0;
-                }
-               
+        }
+        return 0;
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        
         retirerFichiers();
     }//GEN-LAST:event_jButton2ActionPerformed
         private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-            if(Main.modifie && !fileList.isLeaf())
-            {
+            if(Main.modifie && !fileList.isLeaf()) {
                 ExitAndSaveOnglet();
-            }
-            else
-            {
+            } else {
                 Main.ihm.fermerTab(this,monNumero);
             }
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -1131,7 +1160,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         File[] files=getFileTab();
                         analys=Main.noyau.newGUITask(monNumero,files,this.jLabel2,this.jProgressBar1,this);
                         analys.fromDom(l.item(i));
-                       
+                        
                     }
                 }
                 

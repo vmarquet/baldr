@@ -23,7 +23,7 @@ public class TransferableTreeNode extends DefaultMutableTreeNode implements Tran
     final public static DataFlavor DEFAULT_MUTABLE_TREENODE_FLAVOR = new DataFlavor(
             DefaultMutableTreeNode.class, "Default Mutable Tree Node");
     
-    static DataFlavor flavors[] = { DEFAULT_MUTABLE_TREENODE_FLAVOR,DataFlavor.stringFlavor, DataFlavor.plainTextFlavor };
+    static DataFlavor flavors[] = { DEFAULT_MUTABLE_TREENODE_FLAVOR,DataFlavor.javaFileListFlavor};
     
     private DefaultMutableTreeNode data;
     
@@ -51,13 +51,13 @@ public class TransferableTreeNode extends DefaultMutableTreeNode implements Tran
     }
     
     public boolean isDataFlavorSupported(DataFlavor flavor) {
-    /*boolean returnValue = false;
+    boolean returnValue = false;
     for (int i = 0, n = flavors.length; i < n; i++) {
       if (flavor.equals(flavors[i])) {
         returnValue = true;
         break;
       }
-    }*/
+    }
         return false;
     }
 }

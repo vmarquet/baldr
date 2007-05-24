@@ -35,7 +35,6 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     private DefaultMutableTreeNode fileList;
     private Task analys=null;
     private double[][] vectorsd;
-    
     /** Creates new form panelTab */
     public panelTab(int monNum) {
         fileList = new DefaultMutableTreeNode("Documents");
@@ -69,6 +68,11 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         supprimer = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JSeparator();
         lancer = new javax.swing.JMenuItem();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        couper = new javax.swing.JMenuItem();
+        copier = new javax.swing.JMenuItem();
+        coller = new javax.swing.JMenuItem();
+        SelectAll = new javax.swing.JMenuItem();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -151,6 +155,42 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         });
 
         menuContextuel.add(lancer);
+
+        couper.setText("Couper");
+        couper.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                couperActionPerformed(evt);
+            }
+        });
+
+        jPopupMenu1.add(couper);
+
+        copier.setText("Copier");
+        copier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copierActionPerformed(evt);
+            }
+        });
+
+        jPopupMenu1.add(copier);
+
+        coller.setText("Coller");
+        coller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                collerActionPerformed(evt);
+            }
+        });
+
+        jPopupMenu1.add(coller);
+
+        SelectAll.setText("S\u00e9lectionner tout");
+        SelectAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectAllActionPerformed(evt);
+            }
+        });
+
+        jPopupMenu1.add(SelectAll);
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(7);
@@ -235,7 +275,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jPanel2Layout.createSequentialGroup()
                                 .add(jLabel8)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 52, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 89, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                             .add(jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -258,15 +298,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
-                .add(jLabel1)
-                .add(99, 99, 99))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
             .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
+            .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel1)
+                .addContainerGap(194, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -276,7 +316,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         jSplitPane1.setLeftComponent(jPanel1);
 
@@ -315,7 +355,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         .add(19, 19, 19)
                         .add(jButton12))
                     .add(jLabel5)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 365, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -324,7 +364,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 .add(jLabel5)
                 .add(12, 12, 12)
                 .add(jSplitPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 470, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 24, Short.MAX_VALUE)
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jButton11)
                     .add(jButton12))
@@ -398,6 +438,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jScrollPane2.setAutoscrolls(true);
         jReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jReport.setAutoscrolls(false);
+        jReport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jReportMouseClicked(evt);
+            }
+        });
+
         jScrollPane2.setViewportView(jReport);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -422,14 +468,14 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel4Layout.createSequentialGroup()
                         .add(10, 10, 10)
                         .add(jLabel6)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 235, Short.MAX_VALUE))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 287, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -437,11 +483,11 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             .add(jPanel4Layout.createSequentialGroup()
                 .add(jLabel6)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel4)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(75, 75, 75))
@@ -466,7 +512,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         .addContainerGap()
                         .add(jLabel7)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE))
+                        .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 986, Short.MAX_VALUE))
                     .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -480,6 +526,34 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                     .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SelectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectAllActionPerformed
+// TODO add your handling code here:
+        jReport.selectAll();
+    }//GEN-LAST:event_SelectAllActionPerformed
+
+    private void collerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_collerActionPerformed
+// TODO add your handling code here:
+        jReport.paste();
+    }//GEN-LAST:event_collerActionPerformed
+
+    private void copierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copierActionPerformed
+// TODO add your handling code here:
+        jReport.copy();
+    }//GEN-LAST:event_copierActionPerformed
+
+    private void couperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_couperActionPerformed
+// TODO add your handling code here:
+    jReport.cut();
+    }//GEN-LAST:event_couperActionPerformed
+
+    private void jReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jReportMouseClicked
+// TODO add your handling code here:
+        if (evt.getButton()==java.awt.event.MouseEvent.BUTTON2||evt.getButton()==java.awt.event.MouseEvent.BUTTON3)
+        {
+            jPopupMenu1.show(evt.getComponent(),evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jReportMouseClicked
     
     private void jTree1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTree1KeyPressed
         if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE) {
@@ -1168,7 +1242,11 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem NouveauDossier;
+    private javax.swing.JMenuItem SelectAll;
     private javax.swing.JMenuItem ajouter;
+    private javax.swing.JMenuItem coller;
+    private javax.swing.JMenuItem copier;
+    private javax.swing.JMenuItem couper;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -1193,6 +1271,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextPane jReport;
     private javax.swing.JScrollPane jScrollPane1;

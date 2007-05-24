@@ -13,6 +13,8 @@ import java.io.File;
 import java.math.MathContext;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.*;
 import Main.*;
@@ -56,6 +58,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         
         jSplitPane3.setDividerSize(0);
         unset3Dview();
+        
     }
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -34,14 +34,17 @@ public abstract class Task extends Thread implements Savable{
     private int numAnalyse; //nbr de fichier
     public float meanErr;
     protected float meanDist;
+    private Map<File,Long> pCalc;
     
     /** Creates a new instance of Task */
     public Task() {
         setPriority(Thread.MIN_PRIORITY);
+        pCalc=new HashMap<java.io.File,java.lang.Long>();
     }
     public Task(File[] fichs) {
         setPriority(Thread.MIN_PRIORITY);
         setFiles(fichs);
+        pCalc=new HashMap<java.io.File,java.lang.Long>();
     }
     
     public void setFiles(File[] fichs) {
@@ -80,10 +83,14 @@ public abstract class Task extends Thread implements Savable{
         return gzos;
     }
     
-    private static long getGZipSize(File file)
+    private long getGZipSize(File file)
     throws IOException, FileNotFoundException {
         long ret = 0;
-        
+
+        if(pCalc.containsKey(file)){
+            return ((Long) pCalc.get(file)).longValue();
+        }
+   
         ByteArrayOutputStream fos = new ByteArrayOutputStream();
         GZIPOutputStream gzos = new GZIPOutputStream(fos);
         
@@ -93,7 +100,8 @@ public abstract class Task extends Thread implements Savable{
         
         ret = fos.size();
         fos.close();
-        
+        pCalc.put(file,new Long(ret));
+
         return ret;
     }
     
@@ -111,7 +119,6 @@ public abstract class Task extends Thread implements Savable{
         
         ret = fos.size();
         fos.close();
-        
         return ret;
     }
     
@@ -137,7 +144,11 @@ public abstract class Task extends Thread implements Savable{
             }
             
             for(j=0;j<i;j++){
-                cj = files[j].length();
+                try {
+                    cj =  getGZipSize(files[j]);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 if(getRes(i,j)==-1){
                     try  {
                         cij = getGZipSize(files[i],files[j]);

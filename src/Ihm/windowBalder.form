@@ -12,7 +12,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="Images\tab_add.png"/>
+                  <Image iconType="2" name="Images/tab_add.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nouvel onglet"/>
               </Properties>
@@ -25,7 +25,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="openMenuItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="Images\folder_go.png"/>
+                  <Image iconType="2" name="Images/folder_go.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ouvrir"/>
               </Properties>
@@ -36,7 +36,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="saveMenuItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="Images\disk.png"/>
+                  <Image iconType="2" name="Images/disk.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Enregistrer"/>
               </Properties>
@@ -47,7 +47,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="Images\cross.png"/>
+                  <Image iconType="2" name="Images/cross.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Quitter"/>
               </Properties>
@@ -103,7 +103,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="contentsMenuItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="Images\help.png"/>
+                  <Image iconType="2" name="Images/help.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Rubriques d&apos;aide"/>
               </Properties>
@@ -114,7 +114,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="Images\baldr.gif"/>
+                  <Image iconType="2" name="Images/baldr.gif"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="A propos de Baldr ..."/>
               </Properties>

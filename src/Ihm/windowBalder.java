@@ -100,7 +100,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         });
 
         fileMenu.setText("Fichier");
-        jMenuItem1.setIcon(new javax.swing.ImageIcon("Images\\tab_add.png"));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon("Images/tab_add.png"));
         jMenuItem1.setText("Nouvel onglet");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +112,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
         fileMenu.add(jSeparator1);
 
-        openMenuItem.setIcon(new javax.swing.ImageIcon("Images\\folder_go.png"));
+        openMenuItem.setIcon(new javax.swing.ImageIcon("Images/folder_go.png"));
         openMenuItem.setText("Ouvrir");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +122,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
         fileMenu.add(openMenuItem);
 
-        saveMenuItem.setIcon(new javax.swing.ImageIcon("Images\\disk.png"));
+        saveMenuItem.setIcon(new javax.swing.ImageIcon("Images/disk.png"));
         saveMenuItem.setText("Enregistrer");
         saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,7 +132,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
         fileMenu.add(saveMenuItem);
 
-        exitMenuItem.setIcon(new javax.swing.ImageIcon("Images\\cross.png"));
+        exitMenuItem.setIcon(new javax.swing.ImageIcon("Images/cross.png"));
         exitMenuItem.setText("Quitter");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +169,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         menuBar.add(editMenu);
 
         helpMenu.setText("Aide");
-        contentsMenuItem.setIcon(new javax.swing.ImageIcon("Images\\help.png"));
+        contentsMenuItem.setIcon(new javax.swing.ImageIcon("Images/help.png"));
         contentsMenuItem.setText("Rubriques d'aide");
         contentsMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +179,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
         helpMenu.add(contentsMenuItem);
 
-        aboutMenuItem.setIcon(new javax.swing.ImageIcon("Images\\baldr.gif"));
+        aboutMenuItem.setIcon(new javax.swing.ImageIcon("Images/baldr.gif"));
         aboutMenuItem.setText("A propos de Baldr ...");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

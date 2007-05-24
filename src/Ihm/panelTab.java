@@ -169,7 +169,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         jLabel1.setText("Ajout de fichiers :");
 
-        jButton1.setIcon(new javax.swing.ImageIcon("Images\\add.png"));
+        jButton1.setIcon(new javax.swing.ImageIcon("Images/add.png"));
         jButton1.setToolTipText("Ajouter un fichier");
         jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +178,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon("Images\\delete.png"));
+        jButton2.setIcon(new javax.swing.ImageIcon("Images/delete.png"));
         jButton2.setToolTipText("Supprime le fichier s\u00e9lectionn\u00e9");
         jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +187,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon("Images\\arrow_refresh.png"));
+        jButton3.setIcon(new javax.swing.ImageIcon("Images/arrow_refresh.png"));
         jButton3.setToolTipText("Lancer l'analyse");
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -199,7 +199,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jProgressBar1.setRequestFocusEnabled(false);
         jProgressBar1.setString("43%");
 
-        jButton8.setIcon(new javax.swing.ImageIcon("Images\\tab_delete.png"));
+        jButton8.setIcon(new javax.swing.ImageIcon("Images/tab_delete.png"));
         jButton8.setToolTipText("Fermer l'analyse courante");
         jButton8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -231,7 +231,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                             .add(jPanel2Layout.createSequentialGroup()
                                 .add(jLabel8)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 52, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))))
+                            .add(jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -254,14 +254,14 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(78, Short.MAX_VALUE)
                 .add(jLabel1)
                 .add(99, 99, 99))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
             .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -271,7 +271,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jSplitPane1.setLeftComponent(jPanel1);
 
@@ -310,7 +310,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         .add(19, 19, 19)
                         .add(jButton12))
                     .add(jLabel5)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -319,7 +319,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 .add(jLabel5)
                 .add(12, 12, 12)
                 .add(jSplitPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 470, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 8, Short.MAX_VALUE)
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jButton11)
                     .add(jButton12))
@@ -417,14 +417,14 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel4Layout.createSequentialGroup()
                         .add(10, 10, 10)
                         .add(jLabel6)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 148, Short.MAX_VALUE))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 235, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -432,11 +432,11 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             .add(jPanel4Layout.createSequentialGroup()
                 .add(jLabel6)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel4)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(75, 75, 75))
@@ -462,7 +462,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         .add(jLabel7)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE))
-                    .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1021, Short.MAX_VALUE))
+                    .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

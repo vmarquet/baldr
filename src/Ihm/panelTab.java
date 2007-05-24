@@ -480,12 +480,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                     .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jTree1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTree1KeyPressed
-if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE)
-{System.out.println("devrait supprimer...");
-    retirerFichiers();
-}
+        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE) {
+            System.out.println("devrait supprimer...");
+            retirerFichiers();
+        }
     }//GEN-LAST:event_jTree1KeyPressed
     
     private void NouveauDossierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NouveauDossierActionPerformed
@@ -512,9 +512,9 @@ if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE)
             }
         }
         
-          if(lro.isLeaf() && !lro.isRoot()) { /*Si le selectionne est un fichier on ajoute dans le dossier parent [sauf racine]*/
-                lro=(DefaultMutableTreeNode)lro.getParent();
-            }
+        if(lro.isLeaf() && !lro.isRoot()) { /*Si le selectionne est un fichier on ajoute dans le dossier parent [sauf racine]*/
+            lro=(DefaultMutableTreeNode)lro.getParent();
+        }
         lro.add(nouveauRep);
         jTree1.updateUI();
         
@@ -545,7 +545,7 @@ if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE)
             lro=(DefaultMutableTreeNode)lro.getParent();
         }
         return lro;
-
+        
     }
     private void jComboBox1MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jComboBox1MouseWheelMoved
 // TODO add your handling code here:
@@ -693,8 +693,8 @@ if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE)
         switch(res) {
             case JFileChooser.APPROVE_OPTION:
                 //  for(int i=0;i < chooser.getSelectedFiles().length;i++){
-                 lro=fileList; /*par def racine*/
-        
+                lro=fileList; /*par def racine*/
+                
                 if(ins!=null){
                     Enumeration files = fileList.breadthFirstEnumeration(); /*Tout l'arbre en largeur*/
                     DefaultMutableTreeNode fich;
@@ -727,16 +727,16 @@ if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE)
     }
     public void ajouterFichiers(File [] listeDeFichiers,DefaultMutableTreeNode noeud){
         /*noeud ou on va add*/
-         /*premier fichier selectionn?*/
+        /*premier fichier selectionn?*/
         DefaultMutableTreeNode lro=noeud;
         //une fois le noeud selectionné trouvé, on insère les fichiers
         for(File fich : listeDeFichiers){
             lro.add(recursDir(fich)); /*Fonction d'ajout r?cursive de fichiers*/
         }
         jTree1.updateUI();
-        Main.modifie=true; //on vient d'ajouter des fichiers 
+        Main.modifie=true; //on vient d'ajouter des fichiers
     }
-
+    
     public void retirerFichiers() {
         boolean flag;
         if(jTree1.isSelectionEmpty()){ /*Retire que les fichier* selectionnez*/
@@ -1032,141 +1032,140 @@ if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE)
      
         }
       }     */
-
-                public int ExitAndSaveOnglet(){
-            int choix = JOptionPane.showConfirmDialog(this,"Souhaitez-vous enregistrer les modifications \n apportées avant de fermer cet onglet ?","Baldr",1);
-            if(choix==JOptionPane.NO_OPTION)
-            {
-                Main.ihm.fermerTab(this,monNumero);
-            }
-        }
-        return 0;
-    }
     
+    public int ExitAndSaveOnglet(){
+        int choix = JOptionPane.showConfirmDialog(this,"Souhaitez-vous enregistrer les modifications \n apportées avant de fermer cet onglet ?","Baldr",1);
+        if(choix==JOptionPane.NO_OPTION) {
+            Main.ihm.fermerTab(this,monNumero);
+        }
+    
+    return 0;
+}
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         retirerFichiers();
     }//GEN-LAST:event_jButton2ActionPerformed
-        private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-            if(Main.modifie && !fileList.isLeaf()) {
-                ExitAndSaveOnglet();
-            } else {
-                Main.ihm.fermerTab(this,monNumero);
-            }
+            private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+                if(Main.modifie && !fileList.isLeaf()) {
+                    ExitAndSaveOnglet();
+                } else {
+                    Main.ihm.fermerTab(this,monNumero);
+                }
     }//GEN-LAST:event_jButton8ActionPerformed
-            private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                
-                ajouterFichiers();
+                        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                            
+                            ajouterFichiers();
     }//GEN-LAST:event_jButton1ActionPerformed
-            
-            private void itemSuivant() {
-                int suivant = jComboBox1.getSelectedIndex()+1;
-                if(suivant<=jComboBox1.getItemCount()-1)
-                    jComboBox1.setSelectedIndex(suivant);
-            }
-            private void itemPrecedent() {
-                int prec = jComboBox1.getSelectedIndex()-1;
-                if(prec!=-1)
-                    jComboBox1.setSelectedIndex(prec);
-            }
-            private void itemDebut() {
-                jComboBox1.setSelectedIndex(0);
-            }
-            private void itemFin() {
-                jComboBox1.setSelectedIndex(jComboBox1.getItemCount()-1);
-            }
-            
-            private StringBuffer recursXmlFile(MutableTreeNode tree) {
-                StringBuffer str=new StringBuffer();
-                if(tree.isLeaf()) {
-                    str.append("<file>").append(tree.toString()).append("</file>\n");
-                }else{
-                    str.append("<dir name=\"").append(tree.toString()).append("\" >\n");
-                    Enumeration ch=tree.children();
-                    while(ch.hasMoreElements()) {
-                        MutableTreeNode t=(MutableTreeNode)ch.nextElement();
-                        str.append(recursXmlFile(t));
-                    }
-                    str.append("</dir>\n");
-                }
-                
-                return str;
-            }
-            
-            public StringBuffer toXml() {
-                StringBuffer str=new StringBuffer();
-                str.append("<onglet>\n");
-                
-                str.append("<filelist>\n").append(recursXmlFile(fileList)).append("</filelist>\n");
-                
-                str.append("<rapport>").append(jReport.getText()).append("</rapport>\n");
-                if(analys!=null) {
-                    str.append(analys.toXml());
-                }
-                str.append("</onglet>\n");
-                return str;
-            }
-            
-            private DefaultMutableTreeNode recursDomTree(Node n) {
-                int i;
-                File f;
-                System.out.println(n.getNodeName());
-                if(n!=null) {
-                    if(n.getNodeName()=="dir") {
-                        DefaultMutableTreeNode t;
-                        String nom=n.getAttributes().getNamedItem("name").getTextContent().trim();
-                        f=new File(nom);
-                        if(f.exists()) {
-                            t=new DefaultMutableTreeNode(f);
-                        }else{
-                            t=new DefaultMutableTreeNode(nom);
-                        }
-                        for(i=0;i<n.getChildNodes().getLength();i++) {
-                            DefaultMutableTreeNode u=recursDomTree(n.getChildNodes().item(i));
-                            if(u!=null){
-                                t.add(u);
-                            }
-                        }
-                        return t;
-                    }else if(n.getNodeName()=="file") {
                         
-                        f=new File(n.getTextContent().trim());
-                        if(f.exists()) {
-                            return new DefaultMutableTreeNode(f);
-                        }else{
-                            return new DefaultMutableTreeNode(n.getTextContent().trim());
+                        private void itemSuivant() {
+                            int suivant = jComboBox1.getSelectedIndex()+1;
+                            if(suivant<=jComboBox1.getItemCount()-1)
+                                jComboBox1.setSelectedIndex(suivant);
                         }
-                    }
-                }
-                return null;
-            }
-            
-            public void fromDom(Node node) {
-                int j;
-                int i;
-                NodeList l=node.getChildNodes();
-                for(i=0;i<l.getLength();i++) {
-                    if(l.item(i).getNodeName()=="filelist") {
-                        for(j=0;j<l.item(i).getChildNodes().getLength();j++){
-                            if(l.item(i).getChildNodes().item(j).getNodeName()=="dir" ){
-                                fileList=recursDomTree(l.item(i).getChildNodes().item(j));
-                                jTree1.setModel(new DefaultTreeModel(fileList));
-                                break;
-                            }
+                        private void itemPrecedent() {
+                            int prec = jComboBox1.getSelectedIndex()-1;
+                            if(prec!=-1)
+                                jComboBox1.setSelectedIndex(prec);
                         }
-                    }else if(l.item(i).getNodeName()=="rapport") {
-                        jReport.setText(l.item(i).getTextContent());
-                    }else if(l.item(i).getNodeName()!="#text") {
-                        File[] files=getFileTab();
-                        analys=Main.noyau.newGUITask(monNumero,files,this.jLabel2,this.jProgressBar1,this);
-                        analys.fromDom(l.item(i));
+                        private void itemDebut() {
+                            jComboBox1.setSelectedIndex(0);
+                        }
+                        private void itemFin() {
+                            jComboBox1.setSelectedIndex(jComboBox1.getItemCount()-1);
+                        }
                         
-                    }
-                }
-                
-                
-            }
-            
+                        private StringBuffer recursXmlFile(MutableTreeNode tree) {
+                            StringBuffer str=new StringBuffer();
+                            if(tree.isLeaf()) {
+                                str.append("<file>").append(tree.toString()).append("</file>\n");
+                            }else{
+                                str.append("<dir name=\"").append(tree.toString()).append("\" >\n");
+                                Enumeration ch=tree.children();
+                                while(ch.hasMoreElements()) {
+                                    MutableTreeNode t=(MutableTreeNode)ch.nextElement();
+                                    str.append(recursXmlFile(t));
+                                }
+                                str.append("</dir>\n");
+                            }
+                            
+                            return str;
+                        }
+                        
+                        public StringBuffer toXml() {
+                            StringBuffer str=new StringBuffer();
+                            str.append("<onglet>\n");
+                            
+                            str.append("<filelist>\n").append(recursXmlFile(fileList)).append("</filelist>\n");
+                            
+                            str.append("<rapport>").append(jReport.getText()).append("</rapport>\n");
+                            if(analys!=null) {
+                                str.append(analys.toXml());
+                            }
+                            str.append("</onglet>\n");
+                            return str;
+                        }
+                        
+                        private DefaultMutableTreeNode recursDomTree(Node n) {
+                            int i;
+                            File f;
+                            System.out.println(n.getNodeName());
+                            if(n!=null) {
+                                if(n.getNodeName()=="dir") {
+                                    DefaultMutableTreeNode t;
+                                    String nom=n.getAttributes().getNamedItem("name").getTextContent().trim();
+                                    f=new File(nom);
+                                    if(f.exists()) {
+                                        t=new DefaultMutableTreeNode(f);
+                                    }else{
+                                        t=new DefaultMutableTreeNode(nom);
+                                    }
+                                    for(i=0;i<n.getChildNodes().getLength();i++) {
+                                        DefaultMutableTreeNode u=recursDomTree(n.getChildNodes().item(i));
+                                        if(u!=null){
+                                            t.add(u);
+                                        }
+                                    }
+                                    return t;
+                                }else if(n.getNodeName()=="file") {
+                                    
+                                    f=new File(n.getTextContent().trim());
+                                    if(f.exists()) {
+                                        return new DefaultMutableTreeNode(f);
+                                    }else{
+                                        return new DefaultMutableTreeNode(n.getTextContent().trim());
+                                    }
+                                }
+                            }
+                            return null;
+                        }
+                        
+                        public void fromDom(Node node) {
+                            int j;
+                            int i;
+                            NodeList l=node.getChildNodes();
+                            for(i=0;i<l.getLength();i++) {
+                                if(l.item(i).getNodeName()=="filelist") {
+                                    for(j=0;j<l.item(i).getChildNodes().getLength();j++){
+                                        if(l.item(i).getChildNodes().item(j).getNodeName()=="dir" ){
+                                            fileList=recursDomTree(l.item(i).getChildNodes().item(j));
+                                            jTree1.setModel(new DefaultTreeModel(fileList));
+                                            break;
+                                        }
+                                    }
+                                }else if(l.item(i).getNodeName()=="rapport") {
+                                    jReport.setText(l.item(i).getTextContent());
+                                }else if(l.item(i).getNodeName()!="#text") {
+                                    File[] files=getFileTab();
+                                    analys=Main.noyau.newGUITask(monNumero,files,this.jLabel2,this.jProgressBar1,this);
+                                    analys.fromDom(l.item(i));
+                                    
+                                }
+                            }
+                            
+                            
+                        }
+                        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem NouveauDossier;
     private javax.swing.JMenuItem ajouter;

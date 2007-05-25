@@ -81,10 +81,6 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         saveMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
         Preferences = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentsMenuItem = new javax.swing.JMenuItem();
@@ -144,20 +140,8 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
         menuBar.add(fileMenu);
 
-        editMenu.setText("Edition");
-        cutMenuItem.setText("Couper");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setText("Copier");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setText("Coller");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setText("Supprimer");
-        editMenu.add(deleteMenuItem);
-
-        Preferences.setText("Pr\u00e9f\u00e9rences");
+        editMenu.setText("Options");
+        Preferences.setText("Pr\u00e9f\u00e9rences ...");
         Preferences.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Prefev(evt);
@@ -430,9 +414,6 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
     public javax.swing.JMenuItem Preferences;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
@@ -442,7 +423,6 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
     

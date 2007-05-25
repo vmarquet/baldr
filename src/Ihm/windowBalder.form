@@ -59,32 +59,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="editMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Edition"/>
+            <Property name="text" type="java.lang.String" value="Options"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="cutMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Couper"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="copyMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Copier"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="pasteMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Coller"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="deleteMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Supprimer"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Preferences">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pr&#xe9;f&#xe9;rences"/>
+                <Property name="text" type="java.lang.String" value="Pr&#xe9;f&#xe9;rences ..."/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Prefev"/>

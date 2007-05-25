@@ -331,10 +331,10 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                                             else
                                                 System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
-                                        public void fermerTab(panelTab pt,int numTab) {
+                                        public void fermerTab(panelTab pt) {
                                             int j=0;
                                             jTabbedPane1.remove(pt);
-                                            listeOnglets[numTab]=null;
+                                            listeOnglets[pt.getTabNumber()]=null;
                                             for(int i=0;i<Main.MAXONGLET;i++)
                                             {
                                             if(listeOnglets[i]==null)
@@ -347,6 +347,10 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                                             }
                                         }
                                         }
+                                        /**
+                                         *Add a tab in the application and give the focus to him
+                                         *@see panelTab
+                                         */
                                         public panelTab ajouteOnglet(){
                                             int i;
                                             for(i=0;i<Main.MAXONGLET && listeOnglets[i]!=null;i++); //détermine le 1er onglet non utilisé
@@ -394,7 +398,12 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                                                 
                                             }
                                         }
-            public int ExitAndSave() {
+     /**
+     * Called on closing request to ask for saving.
+     * and quit
+     *
+     */                           
+            public void ExitAndSave() {
             int choix = JOptionPane.showConfirmDialog(this,"Souhaitez-vous enregistrer les modifications \n apportées avant de fermer cet onglet ?","Baldr",1);
             if(choix==JOptionPane.NO_OPTION)
             {
@@ -405,7 +414,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                 if(Main.ihm.sauver()!=null)
                     System.exit(0);
             }
-            return 0;
+        
                 }
                                         
                                         

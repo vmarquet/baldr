@@ -31,7 +31,7 @@ import org.w3c.dom.*;
  */
 public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savable{
     /** id number of the tab*/
-    private int monNumero;
+    private int tabNumber;
     /** which graph is in use 0: 2D 1:3D*/
     private int curview;
     /** Does the label be visible on the 3D graph */
@@ -50,7 +50,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     public panelTab(int monNum) {
         fileList = new DefaultMutableTreeNode("Documents");
         initComponents();
-        monNumero=monNum;
+        tabNumber=monNum;
         //jButton10.setVisible(false);
         jButton11.setVisible(false);
         jComboBox1.setSelectedIndex(0);
@@ -1087,12 +1087,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         File[] files = getFileTab();
         if(files!=null && files.length>2){
             if(analys==null){
-                analys=Main.noyau.newGUITask(monNumero,files,this.jLabel2,this.jProgressBar1,this);
+                analys=Main.noyau.newGUITask(tabNumber,files,this.jLabel2,this.jProgressBar1,this);
             } else{
                 File[] exfiles = analys.getFiles();
                 float [][] exRes= analys.getResults();
                 //A thread cannot be repalyed so we have to create a new
-                analys=Main.noyau.newGUITask(monNumero,files,this.jLabel2,this.jProgressBar1,this);
+                analys=Main.noyau.newGUITask(tabNumber,files,this.jLabel2,this.jProgressBar1,this);
                 analys.setExRes(exfiles,exRes);
                 
             }
@@ -1120,7 +1120,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     public void ExitAndSaveOnglet(){
         int choix = JOptionPane.showConfirmDialog(this,"Souhaitez-vous enregistrer les modifications \n apportées avant de fermer cet onglet ?","Baldr",1);
         if(choix==JOptionPane.NO_OPTION) {
-            Main.ihm.fermerTab(this,monNumero);
+            Main.ihm.fermerTab(this);
         }
         
         
@@ -1134,7 +1134,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                     if(Main.modifie && !fileList.isLeaf()) {
                         ExitAndSaveOnglet();
                     } else {
-                        Main.ihm.fermerTab(this,monNumero);
+                        Main.ihm.fermerTab(this);
                     }
     }//GEN-LAST:event_jButton8ActionPerformed
                                         private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1179,6 +1179,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                                         /**
                                          * Return a stringBuffer containing an XML representation of the tab which can be thereafter saved
                                          * @return a StringBuffer containing XML and reprensenting the tab and its "child objects"
+                                         *@see Savable
                                          */
                                         
                                         
@@ -1233,6 +1234,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                                         /**
                                          *Function that reinstate the tab from a DOM object (coming from save)
                                          *@param node A dom element wich coresponds to the tab
+                                         *@see Savable
                                          */
                                         
                                         public void fromDom(Node node) {
@@ -1252,7 +1254,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                                                     jReport.setText(l.item(i).getTextContent());
                                                 }else if(l.item(i).getNodeName()!="#text") {
                                                     File[] files=getFileTab();
-                                                    analys=Main.noyau.newGUITask(monNumero,files,this.jLabel2,this.jProgressBar1,this);
+                                                    analys=Main.noyau.newGUITask(tabNumber,files,this.jLabel2,this.jProgressBar1,this);
                                                     analys.fromDom(l.item(i));
                                                     
                                                 }
@@ -1260,6 +1262,14 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                                             
                                             
                                         }
+/**
+ * getter for tabNumber field
+ *@return the id number of the tab
+ *
+ */
+    public int getTabNumber() {
+        return tabNumber;
+    }
                                         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem NouveauDossier;

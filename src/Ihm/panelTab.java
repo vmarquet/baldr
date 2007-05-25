@@ -717,6 +717,9 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             
         }
     }//GEN-LAST:event_jTree1MouseClicked
+    /**
+     *Set the view in use to 3D
+     */
     
     public void set3Dview(){
         jButton11.setText("Vue 2D");
@@ -725,7 +728,9 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jButton12.setVisible(true);
         curview = 1;
     }
-    
+       /**
+     *Set the view in use to 2D
+     */
     public void unset3Dview(){
         jButton11.setText("Vue 3D");
         plot2DPanel1.setVisible(true);
@@ -775,7 +780,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     
     /**
      * Function that display a file chooser to add files or directories to the analysis
-     * @param void
+     * 
      */
     private void ajouterFichiers() {
         DefaultMutableTreeNode lro;
@@ -825,6 +830,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         }
         
     }
+    /**
+     *Function that perform the real work to insert a files in the jTree
+     *@param listeDeFichiers Files to add
+     *@param noeud node where the files will be added
+     */
+    
     public void ajouterFichiers(File [] listeDeFichiers,DefaultMutableTreeNode noeud){
         /*noeud ou on va add*/
         /*premier fichier selectionn?*/
@@ -837,6 +848,9 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         Main.modifie=true; //on vient d'ajouter des fichiers
     }
     
+    /**
+     *Destroy the node and their children which are selected in the jTree
+     */    
     public void retirerFichiers() {
         boolean flag;
         if(jTree1.isSelectionEmpty()){ /*Retire que les fichier* selectionnez*/
@@ -1019,6 +1033,7 @@ SwingUtilities.invokeLater(new Runnable() {
      * Deals with the results of the projection from N-dimension to 3D
      * save them in fields in the class and display them on the graph
      *@param vectors array of points to plot
+     *@see ResDispatcher
     */
     public void Dispatch3DResult(float[][] vectors){
         Color black = new Color(0,0,0);
@@ -1056,7 +1071,10 @@ SwingUtilities.invokeLater(new Runnable() {
         plot2DPanel1.addHistogramPlot("Histogramme des valeurs",val,nb);
         
     }
-    
+    /**
+     *Handle the results of the anlysis which corresponds to the true analysis of the task
+     *@see ResDispatcher
+     */
     public void DispatchResult() {
         // TODO positionner analys ? null quand rajout de fichier
         if(analys!=null) {
@@ -1146,16 +1164,16 @@ SwingUtilities.invokeLater(new Runnable() {
     
     /**
      *Called on closing request to ask for saving.
-     *@param void
+     *
      */
     
-    public int ExitAndSaveOnglet(){
+    public void ExitAndSaveOnglet(){
         int choix = JOptionPane.showConfirmDialog(this,"Souhaitez-vous enregistrer les modifications \n apportées avant de fermer cet onglet ?","Baldr",1);
         if(choix==JOptionPane.NO_OPTION) {
             Main.ihm.fermerTab(this,monNumero);
         }
     
-    return 0;
+    
 }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1207,6 +1225,12 @@ SwingUtilities.invokeLater(new Runnable() {
                             
                             return str;
                         }
+                        
+                        /**
+                         * Return a stringBuffer containing an XML representation of the tab which can be thereafter saved
+                         * @return a StringBuffer containing XML and reprensenting the tab and its "child objects"
+                         */
+                        
                         
                         public StringBuffer toXml() {
                             StringBuffer str=new StringBuffer();

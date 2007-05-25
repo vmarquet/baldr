@@ -221,6 +221,10 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
               System.exit(0);
           }
     }//GEN-LAST:event_formWindowClosing
+    /**
+     *Funcion which display a filechooser to save the application state
+     *@return the file chosen or null
+     */
     public File sauver() {
         
         // TODO rendre le filefilter plus propre
@@ -331,6 +335,10 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                                             else
                                                 System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
+                                        /**
+                                         *Close the Tab 
+                                         *@param pt tab to close
+                                         */
                                         public void fermerTab(panelTab pt) {
                                             int j=0;
                                             jTabbedPane1.remove(pt);
@@ -417,7 +425,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         
                 }
                                         
-                                        
+    /** @var Preferences Preference of the appliaction*/                                    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenuItem Preferences;
     private javax.swing.JMenuItem aboutMenuItem;

@@ -10,16 +10,19 @@ package Utils;
 import java.io.File;
 
 /**
- *
+ * Class handling the extensions of the files
  * @author zeta
  */
 public class Extension {
-    
+    /** Constant for the uncompressed baldr format extension name*/
     public final static String baldr = "baldr";
-     public final static String baldrx = "baldrx";
+    /** Constant for the compressed baldr format extension name*/
+    public final static String baldrx = "baldrx";
     
     /**
-     * @return String file extension (after the .)
+     * Give the extension of a file
+     * @param f file whose extension is requested
+     * @return String file extension (after the .) or null
      */  
     public static String getExtension(File f) {
         String ext = null;

@@ -81,6 +81,12 @@ public class SaveAndRestore {
         
     }
     
+    public static String escape(String str)
+    {
+    return str.replace("&","&amp;").replace("<","&lt;");
+        
+    }
+    
     
     public void save(File f,int format) {
         if(obj==null)

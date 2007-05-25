@@ -355,7 +355,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         .add(19, 19, 19)
                         .add(jButton12))
                     .add(jLabel5)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 365, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -457,6 +457,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane4.setViewportView(jTable1);
 
         jLabel4.setText("R\u00e9sultats :");
@@ -513,7 +514,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         .add(jLabel7)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 986, Short.MAX_VALUE))
-                    .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE))
+                    .add(jSplitPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 1042, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1152,10 +1153,10 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         private StringBuffer recursXmlFile(MutableTreeNode tree) {
                             StringBuffer str=new StringBuffer();
                             if(tree.isLeaf()) {
-                                str.append("<file>").append(tree.toString()).append("</file>\n");
+                                str.append("<file>").append(SaveAndRestore.escape(tree.toString())).append("</file>\n");
                             }else{
-                                str.append("<dir name=\"").append(tree.toString()).append("\" >\n");
-                                Enumeration ch=tree.children();
+                                str.append("<dir name=\"").append(SaveAndRestore.escape(tree.toString())).append("\" >\n");
+                                 Enumeration ch=tree.children();
                                 while(ch.hasMoreElements()) {
                                     MutableTreeNode t=(MutableTreeNode)ch.nextElement();
                                     str.append(recursXmlFile(t));

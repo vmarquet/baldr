@@ -302,7 +302,7 @@ public abstract class Task extends Thread implements Savable{
         
         str.append("<fichs>\n");
         for(File f:files) {
-            str.append("<file>").append(f.getAbsolutePath()).append("</file>\n");
+            str.append("<file>").append(SaveAndRestore.escape(f.getAbsolutePath())).append("</file>\n");
         }
         str.append("</fichs>\n");
         str.append("<res len=\"").append(res.length).append("\">\n");

@@ -450,7 +450,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jLabel3.setText("sur N");
         jPanel5.add(jLabel3, new java.awt.GridBagConstraints());
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Documents and Settings\\Laurent\\Bureau\\java\\trunk\\E\\Baldr\\Images\\arrow_right.png"));
+        jButton5.setIcon(new javax.swing.ImageIcon("Images/arrow_right.png"));
         jButton5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

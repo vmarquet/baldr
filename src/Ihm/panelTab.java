@@ -558,7 +558,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     
     private void jTree1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTree1KeyPressed
         if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE) {
-            System.out.println("devrait supprimer...");
+           // System.out.println("devrait supprimer...");
             retirerFichiers();
         }
     }//GEN-LAST:event_jTree1KeyPressed
@@ -817,8 +817,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         if(jTree1.isSelectionEmpty()){ /*Retire que les fichier* selectionnez*/
             return;
         }
-        //     Enumeration files = fileList.breadthFirstEnumeration();
-        
+    
         TreePath[] removeList = jTree1.getSelectionPaths();
         // System.out.println("A detruire");
         Main.modifie=true;
@@ -853,8 +852,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         }
         //          jTree1.setModel(new DefaultTreeModel(fileList));
         
-        jTree1.updateUI();
-       /* int[] removelist = jTree1.getSelectionRows();
+        //! Work Around from http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4264002
+        
+SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            jTree1.updateUI();
+                        }
+} );      
+        
+        /* int[] removelist = jTree1.getSelectionRows();
         int nbr=0;
         
         for(int i=0;i<removelist.length;i++){
@@ -869,6 +875,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         }else{
             jTree1.setModel(new DefaultTreeModel(fileList));
         }*/
+      
     }
     
     private void updateMat(File [] fichs,int nb,double [] val) {

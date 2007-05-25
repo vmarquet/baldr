@@ -10,32 +10,43 @@ package Ihm;
 import Ihm.renderers.*;
 import java.awt.Color;
 import java.io.File;
-import java.math.MathContext;
 import java.util.Arrays;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.event.TreeModelListener;
 import javax.swing.tree.*;
 import Main.*;
 import Noyau.*;
 import javax.swing.*;
 import javax.swing.table.*;
-import org.math.plot.Plot3DPanel;
 import org.math.plot.plotObjects.Plotable;
 import org.math.plot.plots.Plot;
 import org.w3c.dom.*;
 /**
+ *The PanelTab Class is in charge of one tab of the application. It will display
+ *3 panes with which the user can interact
+ * 
  * @author  Baldr Team
+ *
+ *@see WindowBalder
+ *
  */
 public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savable{
+    /** id number of the tab*/
     private int monNumero;
+    /** which graph is in use 0: 2D 1:3D*/
     private int curview;
+    /** Does the label be visible on the 3D graph */
     private boolean slabels;
+    /** file tree which would be anlysed*/
     private DefaultMutableTreeNode fileList;
+    /** Analysis Results*/
     private Task analys=null;
+    /** 3D Graphs data*/
     private double[][] vectorsd;
     /** Creates new form panelTab */
+    
+    /** Construct and display a tab
+      @param monNum Tab's Id number
+     */
     public panelTab(int monNum) {
         fileList = new DefaultMutableTreeNode("Documents");
         initComponents();
@@ -59,6 +70,10 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         unset3Dview();
         
     }
+    
+    /**
+     *Matisse stuff
+    */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
         menuContextuel = new javax.swing.JPopupMenu();
@@ -594,6 +609,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jTree1.updateUI();
         
     }//GEN-LAST:event_NouveauDossierActionPerformed
+    /**
+     *Function wich return the node in the filetree that is selected
+     *
+     *@return a node, its parents if the node is a leaf selected or the root of the tree
+     */
+    
     public DefaultMutableTreeNode getLastSelectedNode(){
         if(jTree1.isSelectionEmpty())
             return fileList;
@@ -752,6 +773,10 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         return null;
     }
     
+    /**
+     * Function that display a file chooser to add files or directories to the analysis
+     * @param void
+     */
     private void ajouterFichiers() {
         DefaultMutableTreeNode lro;
         TreePath ins=jTree1.getSelectionPath();
@@ -990,7 +1015,11 @@ SwingUtilities.invokeLater(new Runnable() {
         slabels = false;
         jButton12.setText("Afficher les étiquettes");
     }
-    
+    /**
+     * Deals with the results of the projection from N-dimension to 3D
+     * save them in fields in the class and display them on the graph
+     *@param vectors array of points to plot
+    */
     public void Dispatch3DResult(float[][] vectors){
         Color black = new Color(0,0,0);
         Color blue = new Color(0,0,200);
@@ -1115,6 +1144,11 @@ SwingUtilities.invokeLater(new Runnable() {
         }
       }     */
     
+    /**
+     *Called on closing request to ask for saving.
+     *@param void
+     */
+    
     public int ExitAndSaveOnglet(){
         int choix = JOptionPane.showConfirmDialog(this,"Souhaitez-vous enregistrer les modifications \n apportées avant de fermer cet onglet ?","Baldr",1);
         if(choix==JOptionPane.NO_OPTION) {
@@ -1221,6 +1255,11 @@ SwingUtilities.invokeLater(new Runnable() {
                             }
                             return null;
                         }
+                        
+                        /**
+                         *Function that reinstate the tab from a DOM object (coming from save)
+                         *@param node A dom element wich coresponds to the tab
+                         */
                         
                         public void fromDom(Node node) {
                             int j;

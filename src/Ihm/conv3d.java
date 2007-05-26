@@ -32,6 +32,8 @@ public class conv3d extends Thread{
     private JProgressBar bar;
     private JLabel statusbar;
     
+    private boolean stopNow;
+    
     private ResDispatcher recall;
     
     /** Creates a new instance of conv3d */
@@ -40,6 +42,7 @@ public class conv3d extends Thread{
         this.bar = bar;
         this.statusbar = statusbar;
         this.recall = recall;
+        stopNow=false;
         setPriority(Thread.MIN_PRIORITY);
     }
     
@@ -242,6 +245,9 @@ public class conv3d extends Thread{
             meanErr /= ((float)(size*(size-1F)/2F)); // normalize meanErr
             updateBar((float)iter/10000F);
             //System.out.println("#meanErr = "+meanErr);
+            // Annulation ?
+            if(stopNow)
+                return;
         } while((meanErr>0.00001)&&(iter++ < 10000));
         // param!! (2x) //END OF MAIN LOOP
         
@@ -260,10 +266,17 @@ public class conv3d extends Thread{
         size = res.length;
         dist2vect();
         //filter(1000.00F); // Run only after dist2vect
-        statusbar.setText("Analyse terminée");
-        recall.Dispatch3DResult(vectors);
+        if(!stopNow){
+            statusbar.setText("Analyse terminée");
+            recall.Dispatch3DResult(vectors);
+        }
     }
 
+    public void stopNow(){
+        stopNow=true;
+        while(this.isAlive()){};
+    }
+    
     public float getMeanErr() {
         return meanErr;
     }

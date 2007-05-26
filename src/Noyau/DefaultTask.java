@@ -28,6 +28,10 @@ public class DefaultTask extends Task {
           System.out.println(this.stateMessage);
   
     }
+
+    protected void stopG3d() {
+        
+    }
     
     
 }

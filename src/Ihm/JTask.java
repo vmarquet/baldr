@@ -67,12 +67,16 @@ public class JTask extends Task {
         recall.DispatchResult();
     }
 
+    protected void stopG3d(){
+        if(g3d != null){
+            if(g3d.isAlive())
+                //System.out.println("Stopper analyse: 3D On");
+                g3d.stopNow();
+        }
+    }
+    
     public void setRecall(ResDispatcher recall) {
         this.recall = recall;
-    }
-
-    public conv3d getG3d() {
-        return g3d;
     }
    
 }

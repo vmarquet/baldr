@@ -37,16 +37,31 @@ public abstract class Task extends Thread implements Savable{
     public float meanErr;
     protected float meanDist;
     private Map<File,Long> pCalc;
+    private boolean stopNow;
     
     /** Creates a new instance of Task */
     public Task() {
         setPriority(Thread.MIN_PRIORITY);
+        stopNow=false;
         pCalc=new HashMap<java.io.File,java.lang.Long>();
     }
     public Task(File[] fichs) {
         setPriority(Thread.MIN_PRIORITY);
         setFiles(fichs);
+        stopNow=false;
         pCalc=new HashMap<java.io.File,java.lang.Long>();
+    }
+    
+    protected abstract void stopG3d();
+    
+    public void stopAnalysis(){
+        stopMeNow();
+        stopG3d();
+    }
+    
+    private void stopMeNow(){
+        stopNow=true;
+        while(this.isAlive()){};
     }
     
     public void setFiles(File[] fichs) {
@@ -153,6 +168,9 @@ public abstract class Task extends Thread implements Savable{
             }
             
             for(j=0;j<i;j++){
+                // Annulation ?
+                if(stopNow)
+                    return;
                 try {
                     cj =  getGZipSize(files[j]);
                 } catch (IOException ex) {

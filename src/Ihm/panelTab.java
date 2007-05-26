@@ -829,11 +829,13 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         
         chooser.setMultiSelectionEnabled(true); /* rend un tab de files */
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES); /*Soit des files soit des dirs */
-        int res = chooser.showOpenDialog(this);
+        
         String lastdir = Noyau.opts.readPref("LAST_DIR");
         if(lastdir != null){
             chooser.setCurrentDirectory(new File(lastdir));
         }
+        
+        int res = chooser.showOpenDialog(this);
         
         switch(res) {
             case JFileChooser.APPROVE_OPTION:

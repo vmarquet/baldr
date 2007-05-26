@@ -2,7 +2,7 @@
  * Prefs.java
  *
  * Created on 11 mai 2007, 14:46
- *
+ * $Id$
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */

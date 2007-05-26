@@ -67,7 +67,7 @@ public class JTask extends Task {
         recall.DispatchResult();
     }
 
-    protected void stopG3d(){
+    protected void cleanUp(){
         if(g3d != null){
             if(g3d.isAlive())
                 //System.out.println("Stopper analyse: 3D On");

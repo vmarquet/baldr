@@ -52,11 +52,11 @@ public abstract class Task extends Thread implements Savable{
         pCalc=new HashMap<java.io.File,java.lang.Long>();
     }
     
-    protected abstract void stopG3d();
+    protected abstract void cleanUp();
     
     public void stopAnalysis(){
         stopMeNow();
-        stopG3d();
+        cleanUp();
     }
     
     private void stopMeNow(){

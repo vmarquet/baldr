@@ -29,7 +29,7 @@ public class DefaultTask extends Task {
   
     }
 
-    protected void stopG3d() {
+    protected void cleanUp() {
         
     }
     

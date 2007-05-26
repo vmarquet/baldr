@@ -598,8 +598,9 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         }else if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER)
         {
             File [] fcs= getTreeSelectedFiles();
-            if(fcs.length>0)
-            openEditor(fcs);
+            if(fcs != null && fcs.length > 0){
+                openEditor(fcs);
+            }
             
         }
     }//GEN-LAST:event_jTree1KeyPressed
@@ -741,14 +742,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             menuContextuel.show(evt.getComponent(),evt.getX(), evt.getY());
             
         }
-      
-        if(evt.getClickCount()>1)
-        {
+        
+        if(evt.getClickCount()>1) {
             
-           File[] fs=getTreeSelectedFiles();
-           if(fs.length>0)
-        openEditor(fs);
-        }        
+            File[] fs=getTreeSelectedFiles();
+            
+            if(fs != null && fs.length > 0){
+                openEditor(fs);
+            }
+        }
     }//GEN-LAST:event_jTree1MouseClicked
     /**
      *Set the view in use to 3D
@@ -1337,14 +1339,24 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
        
        Runtime r=Runtime.getRuntime();
        StringBuffer f=new StringBuffer();
-       for(File fi:fichs)
-        {
-        f.append('"').append( fi.getAbsolutePath() ).append('"').append(' ');
-        }
-       String ex=editor.replace("$1",f.toString());
+       if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (editor.contains(".app"))) {
+           for(File fi:fichs) {
+               f.append( fi.getAbsolutePath() ).append(' ');
+           }
+       }else{
+           for(File fi:fichs) {
+               f.append('"').append( fi.getAbsolutePath() ).append('"').append(' ');
+           }
+       }
+       
+       String ex = editor.replace("$1",f.toString());
+       
        System.out.println("Executing : "+ex);
         try {
-            r.exec(ex);
+            if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (editor.contains(".app"))) {
+                r.exec("open -a " + ex);
+            }else
+                r.exec(ex);
         } catch (IOException exp) {
             // TODO gerer l'erreur dans utils.error
             exp.printStackTrace();
@@ -1355,19 +1367,21 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     private File[] getTreeSelectedFiles() {
         
         
-                TreePath[] paths=jTree1.getSelectionPaths();
+        TreePath[] paths=jTree1.getSelectionPaths();
+        if(paths == null)
+            return null;
         List<File> fichs=new ArrayList<File>();
-        for(TreePath p:paths)
-        {
+        for(TreePath p:paths) {
             DefaultMutableTreeNode o=(DefaultMutableTreeNode)p.getLastPathComponent();
-            if(o.isLeaf())
-            {
-            fichs.add((File)o.getUserObject());
+            if(o.isLeaf()) {
+                if(o.getUserObject() instanceof File){
+                    fichs.add((File)o.getUserObject());
+                }
             }
             
         }
         
-        return fichs.toArray(new File[1]);
+        return fichs.toArray(new File[0]);
         
         
     }

@@ -268,6 +268,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
             private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
                 aProposBaldr.setLocationRelativeTo(this);
                 aProposBaldr.setVisible(true);
+                aProposBaldr.startAbout();
     }//GEN-LAST:event_aboutMenuItemActionPerformed
                 private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
                     ajouteOnglet();

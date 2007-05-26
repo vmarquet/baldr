@@ -10,8 +10,6 @@ import java.*;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.*;
 import javax.swing.plaf.ScrollBarUI;
 import javax.swing.text.BadLocationException;
@@ -27,53 +25,30 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
     
     /** Creates new form aPropos */
     
-    //javax.swing.Timer t;
-    Timer scroll;
+    Timer t,scroll;
     String[] about;
     int pos,count;
-    
+        
     public aPropos(java.awt.Component win) {
 
         initComponents();
        
         about = jLabel3.getText().split("<br>");
         jLabel3.setText("");
-        pos = count = 0;
         
         setAlwaysOnTop(true);
         setTitle("A propos");
         
         setLocationRelativeTo(win); 
         setVisible(true);
+       
+        t=new Timer(3000,this);
+        t.start();
         
+        scroll=new Timer(1000,this);
+        scroll.setInitialDelay(0);
         
-        TimerTask scrollTask = new TimerTask() {
-            public void run() {
-                 StringBuffer buf=new StringBuffer();
-                 
-                 if(pos >= about.length){
-                     pos = count = 0;
-                 }
-                 
-                 for(int i=pos;i<(pos+5);i++){
-                     if(i < about.length)
-                         buf.append("<br>"+about[i]);
-                 }
-                 jLabel3.setText("<html><center>"+buf+"</center></html>");
-                 if(count > 2)
-                    pos += 1;
-
-                 count += 1;
-            }
-        };
-        
-        //t=new javax.swing.Timer(6000,this);
-        scroll = new Timer();
-        scroll.scheduleAtFixedRate(scrollTask, 0, 1000);
-        
-        //t.start();
-        
-        
+        startAbout();
     }
     
     /** This method is called from within the constructor to
@@ -161,15 +136,35 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+    public void startAbout(){
+        pos = count = 0;
+        scroll.restart();
+    }
+    private void scroll(){
+        StringBuffer buf=new StringBuffer();
+        
+        if(pos >= about.length){
+            pos = count = 0;
+        }
+        
+        for(int i=pos;i<(pos+5);i++){
+            if(i < about.length)
+                buf.append("<br>"+about[i]);
+        }
+        jLabel3.setText("<html><center>"+buf+"</center></html>");
+        if(count > 2)
+            pos += 1;
+        
+        count += 1;
+    }
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         fprop();
     }//GEN-LAST:event_formKeyPressed
 
     private void fprop()
     {
-       //t.stop();
-       scroll.cancel();
+       t.stop();
+       scroll.stop();
        setVisible(false);
        this.dispose();
     }
@@ -186,9 +181,12 @@ fprop();
     }//GEN-LAST:event_jPanel1FocusGained
 /** Action Listener*/
     public void actionPerformed(ActionEvent e) {
-     
-        fprop();
-        
+        if(e.getSource() == t){
+            fprop();
+        }
+        if(e.getSource() == scroll){
+            scroll();
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

@@ -42,7 +42,7 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
         setLocationRelativeTo(win); 
         setVisible(true);
        
-        t=new Timer(3000,this);
+        t=new Timer(5000,this);
         t.start();
         
         scroll=new Timer(1000,this);
@@ -143,6 +143,9 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
     private void scroll(){
         StringBuffer buf=new StringBuffer();
         
+        if(t.isRunning())
+            scroll.stop();
+        
         if(pos >= about.length){
             pos = count = 0;
         }
@@ -164,7 +167,6 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
     private void fprop()
     {
        t.stop();
-       scroll.stop();
        setVisible(false);
        this.dispose();
     }

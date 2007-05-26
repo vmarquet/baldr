@@ -1089,6 +1089,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         
         jButton11.setVisible(true);
         jButton9.setEnabled(false);
+        jButton3.setEnabled(true);
     }
     
     private void updatePlot(double[] val, int nb) {
@@ -1124,7 +1125,6 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             updateMat(fichs,nb,val);
             updateDefilZone(fichs);
             updatePlot(val,nb);
-            jButton3.setEnabled(true);
             
             jPanel4.setVisible(true);
             //TODO : Ouvrir le splitPane à la bonne taille

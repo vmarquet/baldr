@@ -12,6 +12,7 @@ import java.io.OutputStream;
 
 
 /**
+ *Class which mimics a real stream but doesn't actually do anything besides counting
  *
  * @author zeta
  */

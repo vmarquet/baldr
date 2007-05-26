@@ -11,7 +11,8 @@ package Noyau;
 
 import java.util.prefs.*;
 /**
- *
+ * Class handling the preferences encapsulates java.utils.prefs
+ *@see Preferences
  * @author nezetic
  */
 

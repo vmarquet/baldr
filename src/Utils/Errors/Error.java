@@ -11,9 +11,12 @@ import javax.swing.JComponent.*;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 /**
+ * Class handling the different type of errors and their diplay to the users
  *
  * @author zeta
  */
+
+//TODO move to IHM
 public  class Error {
     
     /** Creates a new instance of Error */

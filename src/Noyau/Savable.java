@@ -12,6 +12,7 @@ import org.w3c.dom.Node;
 
 /**
  *  Interface for saving and restoring Badr's components
+ *@see SaveAndRestore
  * @author zeta
  */
 public interface Savable {

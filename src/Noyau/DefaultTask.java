@@ -8,7 +8,7 @@
 package Noyau;
 
 /**
- *Basic extension of the Task asbstract classs wich will display in console
+ *Basic extension of the Task asbstract classs which will display in console
  * @author zeta
  */
 public class DefaultTask extends Task {

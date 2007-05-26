@@ -7,28 +7,25 @@
 
 package Noyau;
 
+
+
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 import java.io.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
+import java.util.zip.*;
 import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
+import org.xml.sax.*;
 
 /**
+ * Class which handle the saving and restoring tasks of the componnets of the application which are savable
+ *
+ *@see Savable
  *
  * @author zeta
  */
 public class SaveAndRestore {
+    /** uncompressed filetype format constant*/
     public static final int BALDR=1;
+    /** compressed filetype format constant*/
     public static final int BALDRX=2;
     private Savable obj ;
     
@@ -39,6 +36,11 @@ public class SaveAndRestore {
         obj=object;
     }
     
+    /**
+     *Restore the application from a file at the specified format
+     *@param f file from which to load
+     *@param format Format (either BALDR or BALDRX)
+     */
     public void restore(File f,int format) {
         int i;
         
@@ -70,7 +72,10 @@ public class SaveAndRestore {
         
     }
     
-    
+    /**
+     *Restore the application from a file try to gess the format
+     *@param f file from which to load
+     */
     public void restore(File f) {
         if(Utils.Extension.getExtension(f)!=null && Utils.Extension.getExtension(f).equalsIgnoreCase(Utils.Extension.baldrx)) {
             restore(f,BALDRX);
@@ -80,13 +85,23 @@ public class SaveAndRestore {
         
         
     }
-    
+    /**
+     * escape's string to write well-formed xml
+     *@param str string to excape
+     *@return escaped string
+     */ 
     public static String escape(String str)
     {
     return str.replace("&","&amp;").replace("<","&lt;");
         
     }
     
+    /**
+     * Save the object in the specified file in the selected format
+     * @param f file to save into
+     * @param format file format (either BALDR or BALDRX)
+     *
+     */
     
     public void save(File f,int format) {
         if(obj==null)

@@ -95,7 +95,7 @@ public class prefwin extends javax.swing.JFrame {
 
         jLabel1.setText("Mode de fonctionnement :");
 
-        jLabel2.setText("Editeur de texte favori ($1 sera remplacer pas les fichiers \u00e0 ouvrir) :");
+        jLabel2.setText("Editeur de texte favori ($1 sera remplacer par les fichiers \u00e0 ouvrir) :");
 
         jButton5.setText("Parcourir ...");
         jButton5.addActionListener(new java.awt.event.ActionListener() {

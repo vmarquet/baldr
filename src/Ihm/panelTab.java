@@ -600,6 +600,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     }//GEN-LAST:event_jReportMouseClicked
     
     private void jTree1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTree1KeyPressed
+        //in the jTree, key Delete can remove selected files 
+        //and the enter key will open the favorite text editor for the current selected file
         if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE) {
             retirerFichiers();
         }else if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER) {

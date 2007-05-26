@@ -2,7 +2,7 @@
  * TreeCellCustomRenderer.java
  *
  * Created on 12 avril 2007, 14:40
- *$Id: TreeCellCustomRenderer.java 100 2007-05-06 22:24:31Z zeta $
+ *$Id$
  */
 
 package Ihm.renderers;

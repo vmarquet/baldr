@@ -769,20 +769,26 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     
     private File[] getFileTab() {
         Enumeration files = fileList.depthFirstEnumeration();
-        int count=fileList.getLeafCount(); /* Les fichiers ? analyser sont forc?ment des feuilles*/
+        int count=fileList.getLeafCount(); /* Les fichiers ? analyser sont forc?ment des feuilles
+                                              mais les repertoires vides ne sont pas a analyser.*/
         // files = fileList.depthFirstEnumeration();
         int i=0;
         DefaultMutableTreeNode fich;
         if(!fileList.isLeaf()){
+        
             File[] fichiers = new File[count];
             
             while (files.hasMoreElements()) {
                 fich=(DefaultMutableTreeNode)files.nextElement();
                 if(fich.isLeaf()&&!((File)fich.getUserObject()).isDirectory()) {
                     fichiers[i++]=(File)fich.getUserObject();
+                    System.out.println("ajoute le fichier : "+fichiers[i-1].getName());
                 }
             }
-            return fichiers;
+           File[] fichiersSansRepVide=new File[i];
+           for(int o=0;o<i;o++)
+               fichiersSansRepVide[o]=fichiers[o];
+            return fichiersSansRepVide;
             
         }
         return null;

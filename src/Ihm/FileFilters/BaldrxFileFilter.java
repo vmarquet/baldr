@@ -12,7 +12,7 @@ import javax.swing.filechooser.FileFilter;
 import Utils.*;
 
 /**
- *
+ * Class describing the filefilter which accepts compressed baldr files
  * @author zeta
  */
 public class BaldrxFileFilter extends FileFilter{
@@ -20,7 +20,7 @@ public class BaldrxFileFilter extends FileFilter{
     /** Creates a new instance of BaldrxFileFilter */
     public BaldrxFileFilter() {
     }
-
+  /** Whether the file is acceptable*/
     public boolean accept(File f) {
         if(f.isDirectory()) return true;
         String ext=Extension.getExtension(f);
@@ -32,8 +32,8 @@ public class BaldrxFileFilter extends FileFilter{
         }
 //                return f!=null && (f.isDirectory() || Extension.getExtension(f).equalsIgnoreCase(Extension.baldrx));
     }
-
-    public String getDescription() {
+ /** Description for the filechooser*/
+     public String getDescription() {
          return "Fichiers Baldr compressés (."+Extension.baldrx+")";
     }
     

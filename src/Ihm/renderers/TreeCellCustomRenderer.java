@@ -13,7 +13,8 @@ import java.awt.Component;
 import java.io.File;
 import javax.swing.tree.DefaultTreeCellRenderer;
 /**
- *
+ * Renderer for the cell in the Jtree 
+ *@see TreeCellCustomRenderer
  * @author Baldr Team
  */
 public class TreeCellCustomRenderer implements TreeCellRenderer{

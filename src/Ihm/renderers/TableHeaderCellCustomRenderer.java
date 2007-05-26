@@ -20,7 +20,8 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 /**
- *
+ * Cell Renderer for the Table header and first column
+ *@see TableCellRenderer
  * @author zeta
  */
 public class TableHeaderCellCustomRenderer implements TableCellRenderer {

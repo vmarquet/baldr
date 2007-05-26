@@ -15,6 +15,8 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
 /**
+ *CellRenderer for the combobox
+ *@see ListCellRenderer
  *
  * @author zeta
  */

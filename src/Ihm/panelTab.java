@@ -29,7 +29,7 @@ import org.w3c.dom.*;
  *
  * @author  Baldr Team
  *
- *@see WindowBalder
+ *@see windowBalder
  *
  */
 public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savable{

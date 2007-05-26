@@ -12,15 +12,15 @@ import java.io.File;
 import javax.swing.filechooser.FileFilter;
 
 /**
- *
- * @author zeta
+ *Class describing the filefilter which accepts compressed or uncomressed baldr files
+ *  @author zeta
  */
 public class BaldrNBaldrxFileFilter extends FileFilter {
     
     /** Creates a new instance of BaldrNBaldrxFileFilter */
     public BaldrNBaldrxFileFilter() {
     }
-
+/** Whether the file is acceptable*/
     public boolean accept(File f) {
                 if(f.isDirectory()) return true;
         String ext=Extension.getExtension(f);
@@ -31,7 +31,8 @@ public class BaldrNBaldrxFileFilter extends FileFilter {
         return false;
         }
     }
-
+/** Description for the filechooser*/
+ 
     public String getDescription() {
           return "Tous les fichiers Baldr (."+Extension.baldr+", ."+Extension.baldrx+")";
     }

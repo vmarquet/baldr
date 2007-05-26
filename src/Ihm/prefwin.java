@@ -160,32 +160,27 @@ public class prefwin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
-// TODO add your handling code here:
-        if(evt.getStateChange() == evt.SELECTED){
+       if(evt.getStateChange() == evt.SELECTED){
             jRadioButton2.setSelected(false);
         }
     }//GEN-LAST:event_jRadioButton1ItemStateChanged
 
     private void jRadioButton2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton2ItemStateChanged
-// TODO add your handling code here:
         if(evt.getStateChange() == evt.SELECTED){
             jRadioButton1.setSelected(false);
         }
     }//GEN-LAST:event_jRadioButton2ItemStateChanged
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-// TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-// TODO add your handling code here:
         saveMods();
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-// TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
         
         int res = chooser.showOpenDialog(this);

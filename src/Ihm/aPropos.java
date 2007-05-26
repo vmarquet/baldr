@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 /**
- *
+ * Frame with greetings when starting
  * @author  Baldr Team
  */
 public class aPropos extends javax.swing.JFrame implements ActionListener{
@@ -49,11 +49,13 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                formFocusGained(evt);
-            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 formFocusLost(evt);
+            }
+        });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
             }
         });
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,6 +113,10 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+fprop();
+    }//GEN-LAST:event_formKeyPressed
+
     private void fprop()
     {
          t.stop();
@@ -126,14 +132,9 @@ fprop();
 fprop();
     }//GEN-LAST:event_formMouseClicked
 
-    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
-//setVisible(false);// TODO add your handling code here:
-    }//GEN-LAST:event_formFocusGained
-
     private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
-// TODO add your handling code here:
     }//GEN-LAST:event_jPanel1FocusGained
-
+/** Action Listener*/
     public void actionPerformed(ActionEvent e) {
      
         fprop();

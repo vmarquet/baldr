@@ -9,7 +9,7 @@ package Main;
 import Ihm.windowBalder;
 import Noyau.*;
 /**
- *
+ * Entry point in the application used to link gui to kernel
  * @author Baldr Team
  */
 public class Main {

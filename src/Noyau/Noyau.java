@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
 /**
- *
+ * Kernel Main File creates Task and keep them in a tab
  * @author zeta
  */
 public class Noyau {
@@ -32,7 +32,7 @@ public class Noyau {
         }
     }
     
-    
+    /** Basic Task creation*/
     public Task newTask() {
         int i;
         for(i=0;i<Main.MAXONGLET;i++) {
@@ -49,7 +49,9 @@ public class Noyau {
         }
         return null;
     }
-    
+    /** Task creation which take the ref number of the analysis
+     * @param i ref number of the analysis
+     */
     public Task newTask(int i) {
         if(i<Main.MAXONGLET) {
             tasks[i]=new DefaultTask();
@@ -59,6 +61,10 @@ public class Noyau {
         }
         return null;
     }
+    /** Task creation which take the ref number of the analysis and the file to analyse
+     *@param files files to analyse
+     * @param i ref number of the analysis
+     */
     
     public Task newTask(int i,File[] files) {
         Task task=newTask(i);
@@ -68,6 +74,16 @@ public class Noyau {
         
         return task;
     }
+    
+    
+    /** Task creation which take the ref number of the analysis and the file to analyse for the gui
+     *
+     * @param statusbar statusbar to update 
+     * @param bar ProgressBar of to control by the thread
+     * @param ret UI which dispatch the results
+     * @param i ref number of the analysis
+     * 
+     */
     
        public Task newGUITask(int i,JLabel statusbar,JProgressBar bar,ResDispatcher ret) {
         if(i<Main.MAXONGLET) {
@@ -80,7 +96,15 @@ public class Noyau {
         }
         return null;
     }
-    
+        /** Task creation which take the ref number of the analysis and the file to analyse for the gui
+     *
+     * @param statusbar statusbar to update 
+     * @param bar ProgressBar of to control by the thread
+     * @param ret UI which dispatch the results
+     * @param i ref number of the analysis
+     * @param files files to analyse
+     */
+       
         public Task newGUITask(int i,File[] files,JLabel statusbar,JProgressBar bar,ResDispatcher ret) {
         Task task=newGUITask(i,statusbar,bar,ret);
         if(task != null) {

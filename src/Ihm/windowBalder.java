@@ -409,7 +409,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         
                 }
                                         
-    /** @var Preferences Preference of the appliaction*/                                    
+    /** Preferences Preference of the appliaction*/                                    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenuItem Preferences;
     private javax.swing.JMenuItem aboutMenuItem;

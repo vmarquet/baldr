@@ -7,9 +7,9 @@
 
 package Noyau;
 
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+
 
 /**
  *
@@ -22,7 +22,7 @@ public class OutputStreamSizer extends OutputStream{
         size=0;
     }
     /** write character to the counting unit
-     @param byte to write
+     @param b byte to write as int
      */
     public void write(int b) throws IOException {
         size++;

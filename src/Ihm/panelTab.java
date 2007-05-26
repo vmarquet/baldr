@@ -115,6 +115,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
+        jPanel5.setVisible(false);
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
@@ -553,7 +554,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                         .add(jLabel7)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1007, Short.MAX_VALUE))
-                    .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1063, Short.MAX_VALUE))
+                    .add(jSplitPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 1063, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1004,7 +1005,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jLabel3.setText("sur "+Integer.toString(jComboBox1.getItemCount()-1));
         
         //   jComboBox1.updateUI();
-        
+        jPanel5.setVisible(true);
     }
     
     private void plot3Dhlpt(String name){

@@ -167,6 +167,7 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
     private void fprop()
     {
        t.stop();
+       scroll.stop();
        setVisible(false);
        this.dispose();
     }

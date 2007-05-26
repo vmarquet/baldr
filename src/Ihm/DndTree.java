@@ -3,8 +3,9 @@
  *
  * Created on 23 mai 2007, 20:10
  *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
+ *taken from http://www.java2s.com/Code/Java/Swing-JFC/TreeDragandDrop.htm
+ *adapted to accept file drop from other applications
+ *
  */
 package Ihm;
 import java.beans.*;
@@ -56,7 +57,7 @@ import Ihm.TransferableTreeNode;
  *
  * @author ryco
  */
-public class DndTree extends JTree implements Serializable {
+public class DndTree extends JTree {
     private Insets insets;
     private static DefaultMutableTreeNode noeudDragué;
     private int top = 0, bottom = 0, topRow = 0, bottomRow = 0;
@@ -134,7 +135,7 @@ public class DndTree extends JTree implements Serializable {
             } else {
                 node = (DefaultMutableTreeNode) path.getLastPathComponent();
             }
-            if(node.isLeaf()&&!node.isRoot()) {
+            if(node.isLeaf()&&!node.isRoot()&&!((File)node.getUserObject()).isDirectory()) {
                 node=(DefaultMutableTreeNode)node.getParent();
                 System.out.println("Taking parent of leaf...");
             }
@@ -176,6 +177,7 @@ public class DndTree extends JTree implements Serializable {
             System.out.println("Added: " + node + " to " + parent);
             DefaultTreeModel model = (DefaultTreeModel) (DndTree.this.getModel());
             model.insertNodeInto(node, parent, parent.getChildCount());
+            
         }
         private void rmvSrcElement() {
             DefaultTreeModel model = (DefaultTreeModel) (DndTree.this.getModel());

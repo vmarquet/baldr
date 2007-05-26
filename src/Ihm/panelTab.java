@@ -40,7 +40,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     /** Does the label be visible on the 3D graph */
     private boolean slabels;
     /** file tree which would be anlysed*/
-    private DefaultMutableTreeNode fileList;
+    public DefaultMutableTreeNode fileList;
     /** Analysis Results*/
     private Task analys=null;
     /** 3D Graphs data*/
@@ -1175,6 +1175,11 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         if(choix==JOptionPane.NO_OPTION) {
             Main.ihm.fermerTab(this);
         }
+        else if(choix==JOptionPane.OK_OPTION)
+            {
+                if(Main.ihm.sauver()!=null)
+                    Main.ihm.fermerTab(this);
+            }
         
         
     }

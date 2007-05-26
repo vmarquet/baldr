@@ -1324,11 +1324,17 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
        // TODO Dememnagement dans window.balder
         
        String editor=Noyau.opts.readPref("EDITOR");
+             
     if(editor.length()<1)
     {
     Utils.Errors.Error.noEditorDefined();
            return;
-    }   
+    }  
+       if(!editor.contains("$1"))
+       {
+       editor=editor+" $1";
+       }
+       
        Runtime r=Runtime.getRuntime();
        StringBuffer f=new StringBuffer();
        for(File fi:fichs)

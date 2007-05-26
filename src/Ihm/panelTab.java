@@ -1321,7 +1321,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     }
 
     private void openEditor(File[] fichs) {
-       
+       // TODO Dememnagement dans window.balder
         
        String editor=Noyau.opts.readPref("EDITOR");
     if(editor.length()<1)
@@ -1340,7 +1340,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         try {
             r.exec(ex);
         } catch (IOException exp) {
-            
+            // TODO gerer l'erreur dans utils.error
             exp.printStackTrace();
         }
     

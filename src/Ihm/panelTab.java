@@ -1019,7 +1019,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         }
         plot3DPanel1.updateUI();
         
-        if(curview == 0){
+        if(curview == 0 && jProgressBar1.getValue() == jProgressBar1.getMaximum()){
             set3Dview();
         }
     }

@@ -90,6 +90,9 @@ public class DndTree extends JTree {
     
     private class TreeDragGestureListener implements DragGestureListener {
         public void dragGestureRecognized(DragGestureEvent dragGestureEvent) {
+            /*what to do when drag beggins
+             *
+             **/
             JTree tree = (JTree) dragGestureEvent.getComponent();
             TreePath path = tree.getSelectionPath();
             if (path == null) {
@@ -126,7 +129,7 @@ public class DndTree extends JTree {
         public void dropActionChanged(DropTargetDragEvent dropTargetDragEvent) {
         }
         public synchronized void drop(DropTargetDropEvent dropTargetDropEvent) {
-            // Only support dropping over nodes that aren't leafs
+            // what to do when dropping
             Point location = dropTargetDropEvent.getLocation();
             TreePath path = getPathForLocation(location.x, location.y);
             DefaultMutableTreeNode node;
@@ -142,12 +145,14 @@ public class DndTree extends JTree {
             try {
                 Transferable tr = dropTargetDropEvent.getTransferable();
                 if ((tr.getTransferDataFlavors()[0]).equals(TransferableTreeNode.DEFAULT_MUTABLE_TREENODE_FLAVOR)) {
+                    // when some tree nodes are moved
                     dropTargetDropEvent.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
                     Object userObject = tr.getTransferData(TransferableTreeNode.DEFAULT_MUTABLE_TREENODE_FLAVOR);
                     rmvSrcElement();
                     addElement(node, userObject);
                     dropTargetDropEvent.dropComplete(true);
                 } else if (tr.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+                    // when files are dropped ie from windows explorer
                     dropTargetDropEvent.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
                     List ListedeFile=(List)tr.getTransferData(DataFlavor.javaFileListFlavor);
                     Iterator iterator = ListedeFile.iterator();
@@ -170,14 +175,12 @@ public class DndTree extends JTree {
                 dropTargetDropEvent.rejectDrop();
             }
         }
-        
+        // the 2 next functions are use to move node in the tree
         private void addElement(DefaultMutableTreeNode parent, Object element) {
-            
             DefaultMutableTreeNode node = new DefaultMutableTreeNode(element);
             System.out.println("Added: " + node + " to " + parent);
             DefaultTreeModel model = (DefaultTreeModel) (DndTree.this.getModel());
             model.insertNodeInto(node, parent, parent.getChildCount());
-            
         }
         private void rmvSrcElement() {
             DefaultTreeModel model = (DefaultTreeModel) (DndTree.this.getModel());
@@ -185,7 +188,7 @@ public class DndTree extends JTree {
             System.out.println("MOVE: node removed");
         }
     }
-    
+    // listen that is used to modify the mouse cursor when dragging, can also listen for a key to be pressed
     private class MyDragSourceListener implements DragSourceListener {
         public void dragDropEnd(DragSourceDropEvent dragSourceDropEvent) {
         }

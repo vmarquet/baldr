@@ -7,6 +7,8 @@
 
 package Noyau;
 
+import java.io.BufferedOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -90,16 +92,20 @@ public abstract class Task extends Thread implements Savable{
         if(pCalc.containsKey(file)){
             return ((Long) pCalc.get(file)).longValue();
         }
-   
-        ByteArrayOutputStream fos = new ByteArrayOutputStream();
+        OutputStreamSizer fos=new OutputStreamSizer();
+        BufferedOutputStream bfos=new BufferedOutputStream(fos);
+    
+     //   ByteArrayOutputStream fos = new ByteArrayOutputStream();
         GZIPOutputStream gzos = new GZIPOutputStream(fos);
         
         makeComp(gzos,file);
         
         gzos.close(); // Complete l'archive et la clot
-        
-        ret = fos.size();
+    
+        ret = fos.getSize();
+         // ret = fos.size();
         fos.close();
+        fos=null;
         pCalc.put(file,new Long(ret));
 
         return ret;
@@ -109,15 +115,18 @@ public abstract class Task extends Thread implements Savable{
     throws IOException, FileNotFoundException {
         long ret = 0;
         
-        ByteArrayOutputStream fos = new ByteArrayOutputStream();
-        GZIPOutputStream gzos = new GZIPOutputStream(fos);
+        //ByteArrayOutputStream fos = new ByteArrayOutputStream();
+        OutputStreamSizer fos=new OutputStreamSizer();
+        BufferedOutputStream bfos=new BufferedOutputStream(fos);
+        GZIPOutputStream gzos = new GZIPOutputStream(bfos);
         
         makeComp(gzos,file);
         makeComp(gzos,file2);
         
         gzos.close(); // Complete l'archive et la clot
         
-        ret = fos.size();
+        ret = fos.getSize();
+        //System.out.println(ret+"<---taille");
         fos.close();
         return ret;
     }

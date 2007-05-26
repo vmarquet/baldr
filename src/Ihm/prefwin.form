@@ -140,7 +140,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Editeur de texte favori :"/>
+        <Property name="text" type="java.lang.String" value="Editeur de texte favori ($1 sera remplacer pas les fichiers &#xe0; ouvrir) :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">

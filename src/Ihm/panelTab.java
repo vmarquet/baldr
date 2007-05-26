@@ -10,11 +10,14 @@ package Ihm;
 import Ihm.renderers.*;
 import java.awt.Color;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Enumeration;
 import javax.swing.tree.*;
 import Main.*;
 import Noyau.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.*;
 import org.math.plot.plotObjects.Plotable;
@@ -592,6 +595,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_DELETE) {
             // System.out.println("devrait supprimer...");
             retirerFichiers();
+        }else if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER)
+        {
+            File [] fcs= getTreeSelectedFiles();
+            if(fcs.length>0)
+            openEditor(fcs);
+            
         }
     }//GEN-LAST:event_jTree1KeyPressed
     
@@ -732,6 +741,14 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             menuContextuel.show(evt.getComponent(),evt.getX(), evt.getY());
             
         }
+      
+        if(evt.getClickCount()>1)
+        {
+            
+           File[] fs=getTreeSelectedFiles();
+           if(fs.length>0)
+        openEditor(fs);
+        }        
     }//GEN-LAST:event_jTree1MouseClicked
     /**
      *Set the view in use to 3D
@@ -1301,6 +1318,52 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
  */
     public int getTabNumber() {
         return tabNumber;
+    }
+
+    private void openEditor(File[] fichs) {
+       
+        
+       String editor=Noyau.opts.readPref("EDITOR");
+    if(editor.length()<1)
+    {
+    Utils.Errors.Error.noEditorDefined();
+           return;
+    }   
+       Runtime r=Runtime.getRuntime();
+       StringBuffer f=new StringBuffer();
+       for(File fi:fichs)
+        {
+        f.append('"').append( fi.getAbsolutePath() ).append('"').append(' ');
+        }
+       String ex=editor.replace("$1",f.toString());
+       System.out.println("Executing : "+ex);
+        try {
+            r.exec(ex);
+        } catch (IOException exp) {
+            
+            exp.printStackTrace();
+        }
+    
+    }
+
+    private File[] getTreeSelectedFiles() {
+        
+        
+                TreePath[] paths=jTree1.getSelectionPaths();
+        List<File> fichs=new ArrayList<File>();
+        for(TreePath p:paths)
+        {
+            DefaultMutableTreeNode o=(DefaultMutableTreeNode)p.getLastPathComponent();
+            if(o.isLeaf())
+            {
+            fichs.add((File)o.getUserObject());
+            }
+            
+        }
+        
+        return fichs.toArray(new File[1]);
+        
+        
     }
                                         
     // Variables declaration - do not modify//GEN-BEGIN:variables

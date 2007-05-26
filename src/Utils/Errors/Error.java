@@ -46,6 +46,11 @@ public  class Error {
         displayError( "Pas assez de fichiers à analyser (3 minimum)." );
 
     }
+          public static void noEditorDefined()
+    {
+        displayError( "L'éditeur préféré n'est pas défini" );
+
+    }
         public static void nothingToSave()
         {
             displayError( "Rien à enregistrer !" );

@@ -92,6 +92,7 @@ Section "Raccourcis" secShort
 
   CreateDirectory "$SMPROGRAMS\Baldr"
   CreateShortCut "$SMPROGRAMS\Baldr\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
+  CreateShortCut "$SMPROGRAMS\Baldr\Documentation.lnk" "$INSTDIR\baldr.chm" "" "$INSTDIR\baldr.chm" 0
   CreateShortCut "$SMPROGRAMS\Baldr\Baldr.lnk" "$INSTDIR\baldr.exe" "" "$INSTDIR\baldr.ico" 0
   
 SectionEnd
@@ -177,6 +178,7 @@ Section "Uninstall"
   Delete "$INSTDIR\lib\*.*"
   Delete "$INSTDIR\baldr.ico"
   Delete "$INSTDIR\baldr.exe"
+  Delete "$INSTDIR\baldr.chm"
   
   RMDir "$INSTDIR\Images"
   RMDir "$INSTDIR\lib"

@@ -196,18 +196,7 @@ public class prefwin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                prefwin pref = new prefwin();
-                pref.setVisible(true);
-            }
-        });
-    }
-    
+   
     private void loadPrefs(){
         if(Noyau.opts.exist("EDITOR")){
             jTextField1.setText(Noyau.opts.readPref("EDITOR"));

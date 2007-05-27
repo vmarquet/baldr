@@ -21,9 +21,9 @@ import javax.swing.table.TableCellRenderer;
  * @author zeta
  */
 public class TableCellCustomRenderer implements TableCellRenderer{
-    TableCellRenderer rend;
-    double min;
-    double max;
+    private  TableCellRenderer rend;
+    private double min;
+    private double max;
     /** Creates a new instance of TableCellCustomRenderer */
     public TableCellCustomRenderer(double min,double max) {
         this.min=min;

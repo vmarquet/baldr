@@ -23,7 +23,7 @@ public  class Error {
     public  Error() {
     }
     
-    public static void displayError(String message)
+    private static void displayError(String message)
     {
     JOptionPane.showMessageDialog(null, message ,"Erreur",JOptionPane.ERROR_MESSAGE );
     }

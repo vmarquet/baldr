@@ -23,7 +23,7 @@ import javax.swing.ListCellRenderer;
 public class ComboCellCustomRenderer implements ListCellRenderer{
     
     /** Creates a new instance of ComboCellCustomRenderer */
-ListCellRenderer rend;
+private ListCellRenderer rend;
     public ComboCellCustomRenderer() {
         rend=new DefaultListCellRenderer();
     }

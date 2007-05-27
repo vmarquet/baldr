@@ -222,7 +222,7 @@ for(int i=0;i<Main.MAXONGLET;i++){
             {
                 int j = i+1;
                 String choix = JOptionPane.showInputDialog(this,"Nouveau nom :","Renommer l'onglet n°"+j+" ?",JOptionPane.PLAIN_MESSAGE);
-                if(choix!=null)
+                if(choix!=null && !choix.equals(""))
                 {
                     jTabbedPane1.setTitleAt(i,choix);
                 }

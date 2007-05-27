@@ -83,7 +83,6 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     private void initComponents() {
         menuContextuel = new javax.swing.JPopupMenu();
         ajouter = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JSeparator();
         supprimer = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JSeparator();
         lancer = new javax.swing.JMenuItem();
@@ -134,6 +133,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
+        ajouter.setIcon(new javax.swing.ImageIcon("Images/add.png"));
         ajouter.setText("Ajouter");
         ajouter.setName("Ajouter");
         ajouter.addActionListener(new java.awt.event.ActionListener() {
@@ -144,9 +144,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         menuContextuel.add(ajouter);
 
-        menuContextuel.add(jSeparator2);
-
-        supprimer.setText("Supprimer");
+        supprimer.setIcon(new javax.swing.ImageIcon("Images/delete.png"));
+        supprimer.setText("Supprimer  <suppr>");
         supprimer.setName("Supprimer");
         supprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +157,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         menuContextuel.add(jSeparator1);
 
+        lancer.setIcon(new javax.swing.ImageIcon("Images/sum.png"));
         lancer.setText("Lancer l'analyse");
         lancer.setName("Lancer l'analyse");
         lancer.addActionListener(new java.awt.event.ActionListener() {
@@ -168,6 +168,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         menuContextuel.add(lancer);
 
+        couper.setIcon(new javax.swing.ImageIcon("Images/cut_red.png"));
         couper.setText("Couper");
         couper.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +178,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         jPopupMenu1.add(couper);
 
+        copier.setIcon(new javax.swing.ImageIcon("Images/page_copy.png"));
         copier.setText("Copier");
         copier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,6 +188,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
 
         jPopupMenu1.add(copier);
 
+        coller.setIcon(new javax.swing.ImageIcon("Images/page_paste.png"));
         coller.setText("Coller");
         coller.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1452,7 +1455,6 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JSplitPane jSplitPane3;

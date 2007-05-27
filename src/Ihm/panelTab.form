@@ -6,6 +6,9 @@
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="ajouter">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="Images/add.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ajouter"/>
             <Property name="name" type="java.lang.String" value="Ajouter"/>
           </Properties>
@@ -13,11 +16,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ajouterActionPerformed"/>
           </Events>
         </MenuItem>
-        <MenuItem class="javax.swing.JSeparator" name="jSeparator2">
-        </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="supprimer">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Supprimer"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="Images/delete.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Supprimer  &lt;suppr&gt;"/>
             <Property name="name" type="java.lang.String" value="Supprimer"/>
           </Properties>
           <Events>
@@ -28,6 +32,9 @@
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="lancer">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="Images/sum.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Lancer l&apos;analyse"/>
             <Property name="name" type="java.lang.String" value="Lancer l&apos;analyse"/>
           </Properties>
@@ -41,6 +48,9 @@
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="couper">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="Images/cut_red.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Couper"/>
           </Properties>
           <Events>
@@ -49,6 +59,9 @@
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="copier">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="Images/page_copy.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Copier"/>
           </Properties>
           <Events>
@@ -57,6 +70,9 @@
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="coller">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="Images/page_paste.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Coller"/>
           </Properties>
           <Events>

@@ -95,7 +95,7 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
         jLabel2.setText("Balder, dieu scandinave de l'innocence");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("<b>Baldr</b> version 0.1 Alpha <br>\n<br>\nLogiciel de lutte contre la fraude <br>\n<br><br>\nProgrammeurs principaux : <br>\nBeno\u00eet Larroque <br>\nC\u00e9dric Tessier <br>\nHubert Wassner <br>\n<br>\nProgrammeurs en charge de l'IHM : <br>\nCorentin <br>\nSigoigne <br>");
+        jLabel3.setText("<b>Baldr</b> version 0.1 Alpha <br> <br> Logiciel de lutte contre la fraude <br> <br><br> Programmeurs principaux : <br> Beno\u00eet Larroque <br> C\u00e9dric Tessier <br> Hubert Wassner <br> <br> Programmeurs en charge de l'IHM : <br> Corentin <br> Sigoigne <br>");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
@@ -104,11 +104,14 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                    .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                        .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(48, 48, 48)
                         .add(jLabel2)))
                 .addContainerGap())
         );
@@ -117,11 +120,11 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel2)
+                .add(12, 12, 12)
+                .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 99, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());

@@ -1,0 +1,5 @@
+Ce logiciel, Baldr, est encore dans sa première phase de développement.
+
+Cette copie, destinée à donner une idée des possibilités de la version final, est utilisable gratuitement mais n'est redistributable qu'avec l'accord de l'équipe en charge du développement de Baldr.
+
+De plus, ceux-ci ne pourront être tenus pour responsables en cas de dommages liées directement ou indirectement à l'utilisation de Baldr.

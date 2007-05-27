@@ -152,6 +152,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         menuBar.add(fileMenu);
 
         editMenu.setText("Options");
+        Preferences.setIcon(new javax.swing.ImageIcon("Images/pref.png"));
         Preferences.setText("Pr\u00e9f\u00e9rences ...");
         Preferences.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

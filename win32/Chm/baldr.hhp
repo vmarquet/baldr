@@ -1,0 +1,26 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=baldr.chm
+Contents file=Baldr.hhc
+Default Window=W1
+Default topic=intro.html
+Display compile progress=No
+Full-text search=Yes
+Index file=Baldr.hhk
+Language=0x40c Français (France)
+Title=Baldr
+
+[WINDOWS]
+W1="Baldr Help File","Baldr.hhc","Baldr.hhk","intro.html","intro.html",,,,,0x2520,,0x304e,,0x1020000,,,,,,0
+
+
+[FILES]
+intro.html
+main.html
+analyse.html
+onglets.html
+resultats.html
+graphiques.html
+
+[INFOTYPES]
+

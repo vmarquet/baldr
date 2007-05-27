@@ -34,12 +34,10 @@ import org.w3c.dom.NodeList;
  */
 public class windowBalder extends javax.swing.JFrame implements Savable {
     // int i=0;
-    private HashMap actions;
-    static java.awt.event.ActionEvent event;
-    panelTab[] listeOnglets=new panelTab[Main.MAXONGLET];
+    private panelTab[] listeOnglets=new panelTab[Main.MAXONGLET];
     
-    aPropos aProposBaldr;
-    java.awt.Image iconBaldr = java.awt.Toolkit.getDefaultToolkit().getImage("Images/baldr.gif");
+    private aPropos aProposBaldr;
+    final java.awt.Image iconBaldr = java.awt.Toolkit.getDefaultToolkit().getImage("Images/baldr.gif");
 
     public windowBalder() {
         int i;
@@ -77,7 +75,6 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         fileMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JSeparator();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
@@ -117,17 +114,6 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         });
 
         fileMenu.add(jMenuItem2);
-
-        jMenuItem3.setIcon(new javax.swing.ImageIcon("Images/tab_edit.png"));
-        jMenuItem3.setText("Renommer l'onglet courant");
-        jMenuItem3.setToolTipText("");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-
-        fileMenu.add(jMenuItem3);
 
         fileMenu.add(jSeparator1);
 
@@ -213,24 +199,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-for(int i=0;i<Main.MAXONGLET;i++){
-        if(listeOnglets[i]!=null)
-        {
-            if(listeOnglets[i].isShowing())
-            {
-                int j = i+1;
-                String choix = JOptionPane.showInputDialog(this,"Nouveau nom :","Renommer l'onglet n°"+j+" ?",JOptionPane.PLAIN_MESSAGE);
-                if(choix!=null && !choix.equals(""))
-                {
-                    jTabbedPane1.setTitleAt(i,choix);
-                }
-            }
-        }
-    }
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-    
+/*    */
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 
         for(int i=0;i<Main.MAXONGLET;i++)
@@ -254,11 +223,10 @@ for(int i=0;i<Main.MAXONGLET;i++){
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentsMenuItemActionPerformed
-// TODO add your handling code here:
+
     }//GEN-LAST:event_contentsMenuItemActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-// TODO add your handling code here:
           if(Main.modifie)
             {
                 ExitAndSave();
@@ -447,7 +415,11 @@ for(int i=0;i<Main.MAXONGLET;i++){
                                                     if(n.getChildNodes().item(i).getNodeName()!="#text"){
                                                         panelTab tab= ajouteOnglet();
                                                         tab.fromDom(n.getChildNodes().item(i));
-                                                        System.out.println(n.getChildNodes().item(i).getNodeName());
+                                                      //  System.out.println(n.getChildNodes().item(i).getNodeName());
+                                                      /*  if(n.getChildNodes().item(i).getAttributes().getNamedItem("title")!=null)
+                                                        {
+                                                        jTabbedPane1.setTitleAt(tab.getTabNumber(),n.getChildNodes().item(i).getAttributes().getNamedItem("title").getTextContent());
+                                                        }*/
                                                     }
                                                 }
                                                 
@@ -470,8 +442,15 @@ for(int i=0;i<Main.MAXONGLET;i++){
                 if(Main.ihm.sauver()!=null)
                     System.exit(0);
             }
-        
-                }
+            }
+            
+            String getTitle(int i)
+            {
+            return jTabbedPane1.getTitleAt(i);
+            }
+            
+            
+                
                                         
     /** Preferences Preference of the appliaction*/                                    
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -484,7 +463,6 @@ for(int i=0;i<Main.MAXONGLET;i++){
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menuBar;

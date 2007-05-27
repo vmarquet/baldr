@@ -25,9 +25,9 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
     
     /** Creates new form aPropos */
     
-    Timer t,scroll;
-    String[] about;
-    int pos,count;
+   private Timer t,scroll;
+   private String[] about;
+   private  int pos,count;
         
     public aPropos(java.awt.Component win) {
 

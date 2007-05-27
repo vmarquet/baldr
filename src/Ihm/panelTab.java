@@ -1275,7 +1275,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                                                             
                                                             public StringBuffer toXml() {
                                                                 StringBuffer str=new StringBuffer();
-                                                                str.append("<onglet>\n");
+                                                              //  str.append("<onglet  name=\"").append(Main.ihm.getTitle(tabNumber)).append("\" >\n");
+                                                                  str.append("<onglet>\n");
                                                                 
                                                                 str.append("<filelist>\n").append(recursXmlFile(fileList)).append("</filelist>\n");
                                                                 

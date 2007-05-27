@@ -77,6 +77,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         fileMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JSeparator();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
@@ -116,6 +117,17 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         });
 
         fileMenu.add(jMenuItem2);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon("Images/tab_edit.png"));
+        jMenuItem3.setText("Renommer l'onglet courant");
+        jMenuItem3.setToolTipText("");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+
+        fileMenu.add(jMenuItem3);
 
         fileMenu.add(jSeparator1);
 
@@ -202,6 +214,23 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+for(int i=0;i<Main.MAXONGLET;i++){
+        if(listeOnglets[i]!=null)
+        {
+            if(listeOnglets[i].isShowing())
+            {
+                int j = i+1;
+                String choix = JOptionPane.showInputDialog(this,"Nouveau nom :","Renommer l'onglet n°"+j+" ?",JOptionPane.PLAIN_MESSAGE);
+                if(choix!=null)
+                {
+                    jTabbedPane1.setTitleAt(i,choix);
+                }
+            }
+        }
+    }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 
         for(int i=0;i<Main.MAXONGLET;i++)
@@ -455,6 +484,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menuBar;

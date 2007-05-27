@@ -8,6 +8,7 @@
 package Main;
 import Ihm.windowBalder;
 import Noyau.*;
+import java.io.File;
 /**
  * Entry point in the application used to link gui to kernel
  * @author Baldr Team
@@ -25,7 +26,9 @@ public class Main {
     
     public static void main(String args[]) {
     main=new Main();
+    final String fargs[]=args;
 
+    
     java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
         noyau = new Noyau();
@@ -34,6 +37,18 @@ public class Main {
     java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
         ihm = new windowBalder();
+        
+            if(fargs.length>0)
+    {
+            SaveAndRestore defLoad = new SaveAndRestore(ihm);
+            
+    for(String arg:fargs)
+    {
+    File f=new File(arg);
+    if(f.exists()){defLoad.restore(f);}
+    }
+    }
+        
         }
     });
     }

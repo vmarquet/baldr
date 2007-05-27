@@ -766,7 +766,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
      *Set the view in use to 3D
      */
     
-    public void set3Dview(){
+    private void set3Dview(){
         //jButton11.setText("Vue 2D");
         jButton11.setIcon(new ImageIcon("Images/chart_bar.png"));
         jButton11.setToolTipText("Vue 2D");
@@ -779,7 +779,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     /**
      *Set the view in use to 2D
      */
-    public void unset3Dview(){
+    private void unset3Dview(){
         //jButton11.setText("Vue 3D");
         jButton11.setIcon(new ImageIcon("Images/char3D.png"));
         jButton11.setToolTipText("Vue 3D");
@@ -911,7 +911,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
      *Destroy the node and their children which are selected in the jTree
      */
     
-    public void retirerFichiers() {
+    private void retirerFichiers() {
         boolean flag;
         if(jTree1.isSelectionEmpty()){ /*Retire que les fichier* selectionnez*/
             return;

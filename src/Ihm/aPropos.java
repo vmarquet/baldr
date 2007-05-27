@@ -89,12 +89,12 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon("Images/Baldur.jpg"));
+        jLabel1.setIcon(new javax.swing.ImageIcon("Images/baldr.png"));
 
         jLabel2.setText("<html><u>Balder, dieu scandinave de l'innocence</u></html>");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText(" ---------------------------------------- <br><b>Baldr</b> version 0.1 Alpha <br> <br> Logiciel de lutte contre la fraude <br> ----------------------------------------<br> <u>Programmeurs principaux :</u> <br> Beno\u00eet Larroque <br> C\u00e9dric Tessier <br> Hubert Wassner <br> ---------------------------------------- <br> <u>Programmeurs en charge de l'IHM :</u> <br> Corentin Ch\u00e9ron <br> Laurent Sigoigne <br>  ---------------------------------------- <br> <u>Remerciements :</u> <br><br> A Michel Futtersack pour nous <br> avoir permis de r\u00e9aliser ce projet.<br><br> A famfamfam.com pour les ic\u00f4nes.<br>---------------------------------------- ");
+        jLabel3.setText("<b>Baldr</b> version 0.1 Alpha<br>\n<br>\nLogiciel de lutte contre la fraude<br>\n<br><br>\n<u>Programmeurs principaux</u><br>\nBeno\u00eet Larroque <br>\nC\u00e9dric Tessier <br>\nHubert Wassner <br>\n<br>\n<u>Programmeurs en charge de l'IHM</u> <br>\nCorentin Ch\u00e9ron <br>\nLaurent Sigoigne <br><br>\n<u>Remerciements</u>\n<br>A Michel Futtersack pour nous avoir permis de r\u00e9aliser ce projet.\n<br><br>\nA Hubert pour l'id\u00e9e, les conseils et les encouragements.\n<br><br>\nA famfamfam.com pour les ic\u00f4nes.<br>");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 

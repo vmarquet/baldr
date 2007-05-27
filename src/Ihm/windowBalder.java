@@ -66,7 +66,9 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         setVisible(true);
         aProposBaldr = new aPropos(this);
         aProposBaldr.setIconImage(iconBaldr);
-   
+        // On supprime le lien tant que la documentation en ligne n'est pas prete
+        contentsMenuItem.setEnabled(false);
+        contentsMenuItem.setVisible(false);
     }
     
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents

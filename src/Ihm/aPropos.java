@@ -32,7 +32,6 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
     public aPropos(java.awt.Component win) {
 
         initComponents();
-       
         about = jLabel3.getText().split("<br>");
         jLabel3.setText("");
         
@@ -45,7 +44,7 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
         t=new Timer(5000,this);
         t.start();
         
-        scroll=new Timer(1000,this);
+        scroll=new Timer(800,this);
         scroll.setInitialDelay(0);
         
         startAbout();
@@ -92,10 +91,10 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon("Images/Baldur.jpg"));
 
-        jLabel2.setText("Balder, dieu scandinave de l'innocence");
+        jLabel2.setText("<html><u>Balder, dieu scandinave de l'innocence</u></html>");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("<b>Baldr</b> version 0.1 Alpha <br> <br> Logiciel de lutte contre la fraude <br> <br><br> Programmeurs principaux : <br> Beno\u00eet Larroque <br> C\u00e9dric Tessier <br> Hubert Wassner <br> <br> Programmeurs en charge de l'IHM : <br> Corentin <br> Sigoigne <br>");
+        jLabel3.setText(" ---------------------------------------- <br><b>Baldr</b> version 0.1 Alpha <br> <br> Logiciel de lutte contre la fraude <br> ----------------------------------------<br> <u>Programmeurs principaux :</u> <br> Beno\u00eet Larroque <br> C\u00e9dric Tessier <br> Hubert Wassner <br> ---------------------------------------- <br> <u>Programmeurs en charge de l'IHM :</u> <br> Corentin Ch\u00e9ron <br> Laurent Sigoigne <br>  ---------------------------------------- <br> <u>Remerciements :</u> <br><br> A Michel Futtersack pour nous <br> avoir permis de r\u00e9aliser ce projet.<br><br> A famfamfam.com pour les ic\u00f4nes.<br>---------------------------------------- ");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
@@ -107,12 +106,13 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                            .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(48, 48, 48)
-                        .add(jLabel2)))
+                        .add(jLabel2))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 270, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -120,11 +120,11 @@ public class aPropos extends javax.swing.JFrame implements ActionListener{
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel1)
-                .add(12, 12, 12)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 12, Short.MAX_VALUE)
                 .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(0, 0, 0)
                 .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 99, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());

@@ -65,6 +65,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         setExtendedState(MAXIMIZED_BOTH);
         setVisible(true);
         aProposBaldr = new aPropos(this);
+        aProposBaldr.setIconImage(iconBaldr);
    
     }
     

@@ -56,14 +56,15 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" alignment="0" pref="263" max="32767" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" min="-2" pref="251" max="-2" attributes="1"/>
-                          </Group>
+                          <Component id="jLabel1" pref="270" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="1"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel3" pref="270" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -75,11 +76,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="14" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" pref="99" max="-2" attributes="0"/>
-                  <EmptySpace pref="23" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -95,13 +96,13 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Balder, dieu scandinave de l&apos;innocence"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;u&gt;Balder, dieu scandinave de l&apos;innocence&lt;/u&gt;&lt;/html&gt;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="&lt;b&gt;Baldr&lt;/b&gt; version 0.1 Alpha &lt;br&gt; &lt;br&gt; Logiciel de lutte contre la fraude &lt;br&gt; &lt;br&gt;&lt;br&gt; Programmeurs principaux : &lt;br&gt; Beno&#xee;t Larroque &lt;br&gt; C&#xe9;dric Tessier &lt;br&gt; Hubert Wassner &lt;br&gt; &lt;br&gt; Programmeurs en charge de l&apos;IHM : &lt;br&gt; Corentin &lt;br&gt; Sigoigne &lt;br&gt;"/>
+            <Property name="text" type="java.lang.String" value=" ---------------------------------------- &lt;br&gt;&lt;b&gt;Baldr&lt;/b&gt; version 0.1 Alpha &lt;br&gt; &lt;br&gt; Logiciel de lutte contre la fraude &lt;br&gt; ----------------------------------------&lt;br&gt; &lt;u&gt;Programmeurs principaux :&lt;/u&gt; &lt;br&gt; Beno&#xee;t Larroque &lt;br&gt; C&#xe9;dric Tessier &lt;br&gt; Hubert Wassner &lt;br&gt; ---------------------------------------- &lt;br&gt; &lt;u&gt;Programmeurs en charge de l&apos;IHM :&lt;/u&gt; &lt;br&gt; Corentin Ch&#xe9;ron &lt;br&gt; Laurent Sigoigne &lt;br&gt;  ---------------------------------------- &lt;br&gt; &lt;u&gt;Remerciements :&lt;/u&gt; &lt;br&gt;&lt;br&gt; A Michel Futtersack pour nous &lt;br&gt; avoir permis de r&#xe9;aliser ce projet.&lt;br&gt;&lt;br&gt; A famfamfam.com pour les ic&#xf4;nes.&lt;br&gt;---------------------------------------- "/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="verticalTextPosition" type="int" value="1"/>
           </Properties>

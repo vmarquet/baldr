@@ -40,7 +40,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     /** Does the label be visible on the 3D graph */
     private boolean slabels;
     /** file tree which would be anlysed*/
-    public DefaultMutableTreeNode fileList;
+    private DefaultMutableTreeNode fileList;
     /** Analysis Results*/
     private Task analys=null;
     /** 3D Graphs data*/
@@ -634,7 +634,10 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             
         }
     }//GEN-LAST:event_jTree1KeyPressed
-    
+    public boolean isFilelistEmpty()
+    {
+    return fileList.isLeaf();
+    }
     
     /**
      *Function wich return the node in the filetree that is selected
@@ -825,7 +828,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                 fich=(DefaultMutableTreeNode)files.nextElement();
                 if(fich.isLeaf()&&!((File)fich.getUserObject()).isDirectory()) {
                     fichiers[i++]=(File)fich.getUserObject();
-                    System.out.println("ajoute le fichier : "+fichiers[i-1].getName());
+                 //   System.out.println("ajoute le fichier : "+fichiers[i-1].getName());
                 }
             }
            File[] fichiersSansRepVide=new File[i];
@@ -1161,14 +1164,22 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         File[] files = getFileTab();
         if(files!=null && files.length>2){
             if(analys==null){
-                analys=Main.noyau.newGUITask(tabNumber,files,this.jLabel2,this.jProgressBar1,this);
+            analys=Main.noyau.registerTask(tabNumber,new JTask(jProgressBar1,jLabel2,this));
+            if(analys!=null)
+            {
+            analys.setFiles(files);
+            }
+            // analys=Main.noyau.newGUITask(tabNumber,files,this.jLabel2,this.jProgressBar1,this);
             } else{
                 File[] exfiles = analys.getFiles();
                 float [][] exRes= analys.getResults();
                 //A thread cannot be repalyed so we have to create a new
-                analys=Main.noyau.newGUITask(tabNumber,files,this.jLabel2,this.jProgressBar1,this);
+                //analys=Main.noyau.newGUITask(tabNumber,files,this.jLabel2,this.jProgressBar1,this);
+                analys=Main.noyau.registerTask(tabNumber,new JTask(this.jProgressBar1,jLabel2,this));
+                if(analys!=null){
+                analys.setFiles(files);
                 analys.setExRes(exfiles,exRes);
-                
+                }
             }
             if(analys!=null) {
                 jButton3.setEnabled(false);
@@ -1279,7 +1290,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                                                             private DefaultMutableTreeNode recursDomTree(Node n) {
                                                                 int i;
                                                                 File f;
-                                                                System.out.println(n.getNodeName());
+                                                              //  System.out.println(n.getNodeName());
                                                                 if(n!=null) {
                                                                     if(n.getNodeName()=="dir") {
                                                                         DefaultMutableTreeNode t;
@@ -1333,7 +1344,12 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                                                                         jReport.setText(l.item(i).getTextContent());
                                                                     }else if(l.item(i).getNodeName()!="#text") {
                                                                         File[] files=getFileTab();
-                                                                        analys=Main.noyau.newGUITask(tabNumber,files,this.jLabel2,this.jProgressBar1,this);
+                                                                        //analys=Main.noyau.newGUITask(tabNumber,files,this.jLabel2,this.jProgressBar1,this);
+                                                                        analys=Main.noyau.registerTask(tabNumber,new JTask(jProgressBar1,jLabel2,this));
+                                                                        if(analys!=null)
+                                                                        {
+                                                                        analys.setFiles(files);
+                                                                        }
                                                                         analys.fromDom(l.item(i));
                                                                         
                                                                     }
@@ -1377,7 +1393,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
                                                                 
                                                                 String ex = editor.replace("$1",f.toString());
                                                                 
-                                                                System.out.println("Executing : "+ex);
+                                                              //  System.out.println("Executing : "+ex);
                                                                 try {
                                                                     if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (editor.contains(".app"))) {
                                                                         r.exec("open -a " + ex);

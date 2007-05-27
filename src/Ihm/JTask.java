@@ -37,6 +37,13 @@ public class JTask extends Task {
     setBar(bar);
     this.statusbar = statusbar;
     }
+    public JTask(JProgressBar bar, JLabel statusbar, ResDispatcher recall)
+    {
+    super();
+    setBar(bar);
+    this.statusbar = statusbar;
+    this.setRecall(recall);
+    }
     
     protected void printState() {
         float a=this.getStateCount();

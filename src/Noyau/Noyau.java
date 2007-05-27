@@ -74,46 +74,25 @@ public class Noyau {
         
         return task;
     }
-    
-    
-    /** Task creation which take the ref number of the analysis and the file to analyse for the gui
-     *
-     * @param statusbar statusbar to update 
-     * @param bar ProgressBar of to control by the thread
-     * @param ret UI which dispatch the results
-     * @param i ref number of the analysis
-     * 
+    /**
+     * Register a Task in the table
+     *@param i anlysis number
+     *@param tsk Task to register
+     *@return the Task given or null in case of error
      */
     
-       public Task newGUITask(int i,JLabel statusbar,JProgressBar bar,ResDispatcher ret) {
-        if(i<Main.MAXONGLET) {
-            tasks[i]=new Ihm.JTask(bar,statusbar);
-            //((JTask) tasks[i]).setBar(bar);
-            ((JTask) tasks[i]).setRecall(ret);
+    public Task registerTask(int i, Task tsk)
+    {
+     if(i<Main.MAXONGLET) {
+            tasks[i]=tsk;
             return tasks[i];
         }else{
             Utils.Errors.Error.tropAnalyse();
         }
         return null;
     }
-        /** Task creation which take the ref number of the analysis and the file to analyse for the gui
-     *
-     * @param statusbar statusbar to update 
-     * @param bar ProgressBar of to control by the thread
-     * @param ret UI which dispatch the results
-     * @param i ref number of the analysis
-     * @param files files to analyse
-     */
-       
-        public Task newGUITask(int i,File[] files,JLabel statusbar,JProgressBar bar,ResDispatcher ret) {
-        Task task=newGUITask(i,statusbar,bar,ret);
-        if(task != null) {
-            task.setFiles(files);
-        }
-        
-        
-        return task;
-    }
+    
+   
     
     
 }

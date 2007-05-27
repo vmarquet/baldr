@@ -239,7 +239,7 @@ for(int i=0;i<Main.MAXONGLET;i++){
         {
             if(listeOnglets[i].isShowing())
             {
-                if(Main.modifie && !listeOnglets[i].fileList.isLeaf())
+                if(Main.modifie && !listeOnglets[i].isFilelistEmpty())
                 {
                     listeOnglets[i].ExitAndSaveOnglet();
                 }

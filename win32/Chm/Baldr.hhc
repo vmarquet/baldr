@@ -24,9 +24,12 @@
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Analyse">
-		<param name="Local" value="analyse.html">
 		</OBJECT>
 	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Analyse">
+			<param name="Local" value="analyse.html">
+			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="R&eacute;sultats">
 			<param name="Local" value="resultats.html">
@@ -34,6 +37,23 @@
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="Graphiques">
 			<param name="Local" value="graphiques.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Avanc&eacute;e">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Pr&eacute;f&eacute;rences">
+			<param name="Local" value="preferences.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Gestion des analyses">
+			<param name="Local" value="enregistrer.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Astuces">
+			<param name="Local" value="astuces.html">
 			</OBJECT>
 	</UL>
 </UL>

@@ -974,12 +974,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         
         //jTable1.setColumnSelectionAllowed(true);
         jTable1.setRowSelectionAllowed(true);
-        String[] heading=new String[fichs.length+1];
-        for(i=1;i<=fichs.length;i++) {
-            heading[i]=fichs[i-1].getName();
-        }
-        heading[0]="Fichiers";
-        mat = new DefaultTableModel(heading,fichs.length){
+
+        mat = new BaldrTableModel(fichs,analys.getResults()){
             public boolean isCellEditable(int i, int j ){return false;}
         };
         double [] val2= val.clone();
@@ -996,7 +992,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
             if(i==0){
                 //on se passe de aller chercher la font du table header...
                 // TODO : Ameliorer ça
-                tc.setMinWidth(heading[0].length()*5);
+                tc.setMinWidth(((String)mat.getValueAt(0,0)).length()*5);
                 tc.setCellRenderer(tr);
             }else{
                 tc.setCellRenderer(td);
@@ -1133,12 +1129,13 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
      */
     public void DispatchResult() {
         if(analys!=null) {
+            //number of analysis
             int nb = analys.getNumAnalyse();
             File [] fichs;
-            
+            //files analysed
             fichs=analys.getFiles();
             int  i, j;
-            
+            //linearized res matrix (used for renderers)
             double[] val= new double[nb];
             int a=0;
             for(i=0;i<fichs.length;i++){

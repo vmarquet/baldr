@@ -69,7 +69,11 @@ public class TableHeaderCellCustomRenderer implements TableCellRenderer {
             reu.setIcon(null);
         }
         reu.setToolTipText(s);
-        
+        if(isSelected && row!=0){
+        reu.setBackground(table.getSelectionBackground());
+        reu.setForeground(table.getSelectionForeground());
+ 
+        }
         // System.out.println(str);
         return reu;
     }

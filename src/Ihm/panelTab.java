@@ -972,7 +972,7 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         int j;  int i;
         TableModel mat;
         
-        jTable1.setColumnSelectionAllowed(true);
+        //jTable1.setColumnSelectionAllowed(true);
         jTable1.setRowSelectionAllowed(true);
         String[] heading=new String[fichs.length+1];
         for(i=1;i<=fichs.length;i++) {

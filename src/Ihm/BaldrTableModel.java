@@ -29,6 +29,7 @@ public class BaldrTableModel extends AbstractTableModel{
   
     private File[] files;
     private String[] headings;
+    private int [] pCol;
     
     public BaldrTableModel(File[] _files,float [][] _data) {
         int i;
@@ -70,7 +71,7 @@ public class BaldrTableModel extends AbstractTableModel{
     
     //newOrderCol map exOrder with new
     int[] newOrderCol=new int[files.length];
-    int[] newOrderLin=new int[files.length];
+ //   int[] newOrderLin=new int[files.length];
     i=0; 
     String [] nheadings=headings.clone();
     String [] nlheadings=headings.clone();
@@ -86,6 +87,7 @@ public class BaldrTableModel extends AbstractTableModel{
        }
     headings=nheadings;
     //newOrderLin=newOrderCol;
+    pCol=newOrderCol;
     for(i=0;i<data.length;i++){
         for(j=0;j<data.length;j++)
         {
@@ -105,6 +107,16 @@ public class BaldrTableModel extends AbstractTableModel{
 
     public int getColumnCount() {
         return files.length+1;
+    }
+    
+    public File getColumnFile(int columnIndex)
+    {
+    return files[pCol[columnIndex-1]];
+    }
+    
+    public File getRowFile(int columnIndex)
+    {
+    return files[pCol[columnIndex]];
     }
     
     public String getColumnName(int columnIndex)

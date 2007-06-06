@@ -16,6 +16,9 @@ import java.util.Enumeration;
 import javax.swing.tree.*;
 import Main.*;
 import Noyau.*;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -74,6 +77,13 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         
         jSplitPane3.setDividerSize(0);
         unset3Dview();
+    
+        
+        	
+
+jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
+
+        
         
     }
     

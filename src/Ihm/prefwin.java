@@ -24,6 +24,7 @@ public class prefwin extends javax.swing.JFrame {
     private static class opts {
         static String editor;
         static boolean expert;
+        static String comparator;
     }
     
     /** Creates new form prefwin */
@@ -33,7 +34,7 @@ public class prefwin extends javax.swing.JFrame {
         this.setIconImage(Main.ihm.iconBaldr);
         this.setResizable(false);
         loadPrefs();
-      }
+    }
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -51,6 +52,9 @@ public class prefwin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setTitle("Pr\u00e9f\u00e9rences");
         jRadioButton1.setText("Mode Expert");
@@ -104,6 +108,15 @@ public class prefwin extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setText("Parcourir ...");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("comparateur de texte favori ($1$2 seront remplac\u00e9 par les fichiers \u00e0 ouvrir) :");
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,7 +141,15 @@ public class prefwin extends javax.swing.JFrame {
                                 .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 298, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jButton5)))
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(layout.createSequentialGroup()
+                        .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 298, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jButton6)
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(layout.createSequentialGroup()
+                        .add(jLabel3)
+                        .addContainerGap(35, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -145,7 +166,13 @@ public class prefwin extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButton5))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabel3)
+                .add(7, 7, 7)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jButton6))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 41, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jButton1)
                     .add(jButton3)
@@ -154,32 +181,48 @@ public class prefwin extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+JFileChooser chooser = new JFileChooser();
+        
+        int res = chooser.showOpenDialog(this);
+        
+        switch(res) {
+            case JFileChooser.APPROVE_OPTION:
+                jTextField2.setText(chooser.getSelectedFile().toString());
+                break;
+            case JFileChooser.CANCEL_OPTION:
+                break;
+            case JFileChooser.ERROR_OPTION:
+                break;
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         saveMods();
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
     private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
-       if(evt.getStateChange() == evt.SELECTED){
+        if(evt.getStateChange() == evt.SELECTED){
             jRadioButton2.setSelected(false);
         }
     }//GEN-LAST:event_jRadioButton1ItemStateChanged
-
+    
     private void jRadioButton2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton2ItemStateChanged
         if(evt.getStateChange() == evt.SELECTED){
             jRadioButton1.setSelected(false);
         }
     }//GEN-LAST:event_jRadioButton2ItemStateChanged
-
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         saveMods();
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         JFileChooser chooser = new JFileChooser();
         
@@ -196,17 +239,22 @@ public class prefwin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
     
-   
+    
     private void loadPrefs(){
         if(Noyau.opts.exist("EDITOR")){
             jTextField1.setText(Noyau.opts.readPref("EDITOR"));
         }
         opts.editor = jTextField1.getText();
         
+        if(Noyau.opts.exist("COMPARATOR")){
+            jTextField2.setText(Noyau.opts.readPref("COMPARATOR"));
+        }
+        opts.comparator = jTextField1.getText();
+        
         if(Noyau.opts.exist("EXPERT")){
             if((Boolean)Noyau.opts.readPref("EXPERT",false)){
-               jRadioButton1.doClick();
-               opts.expert = true;
+                jRadioButton1.doClick();
+                opts.expert = true;
             }else{opts.expert = false;}
         }
     }
@@ -215,6 +263,10 @@ public class prefwin extends javax.swing.JFrame {
         if(jTextField1.getText().compareTo(opts.editor) != 0){
             Noyau.opts.writePref("EDITOR",jTextField1.getText());
         }
+        if(jTextField2.getText().compareTo(opts.comparator) != 0){
+            Noyau.opts.writePref("COMPARATOR",jTextField2.getText());
+        }
+        
         if(jRadioButton1.isSelected() && !opts.expert){
             Noyau.opts.writePref("EXPERT",true);
         }
@@ -229,11 +281,14 @@ public class prefwin extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
     
 }

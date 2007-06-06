@@ -26,6 +26,7 @@ public class BaldrTableModel extends AbstractTableModel{
     /** Creates a new instance of BaldrTableModel */
     private float [][] data;
     private float [][] orderedData;
+    private boolean [][] done;
   
     private File[] files;
     private String[] headings;
@@ -43,6 +44,7 @@ public class BaldrTableModel extends AbstractTableModel{
          this.files=_files;
         this.data=_data;
         this.orderedData=new float[files.length][files.length];
+        this.done=new boolean[files.length][files.length];
         
         reOrder();
     }
@@ -130,7 +132,7 @@ public class BaldrTableModel extends AbstractTableModel{
             return headings[rowIndex+1];
         
  //    return getOrderedData(rowIndex,columnIndex-1);   
-       return  orderedData[rowIndex][columnIndex-1];
+       return  new TableCell(orderedData[rowIndex][columnIndex-1],done[rowIndex][columnIndex-1]);
     }
     
     private float valRead(float [][] tab,int i,int j){
@@ -144,7 +146,16 @@ public class BaldrTableModel extends AbstractTableModel{
     
     private float  getData(int i,int j){return valRead(data,i,j);}
 
+    public void toggleDone(int i,int j)
+    {
+    //pCol[columnIndex-1]
+    done[i][j-1] ^= true;
+    // ! WARNING 
+    done[j-1][i] ^= true;
     
+        
+        
+    }    
     
     private class MargEl implements Comparable
     {
@@ -175,10 +186,11 @@ public class BaldrTableModel extends AbstractTableModel{
             return rank;
         }
 
+        
+        
     }
     
 }
-
 
 
 

@@ -23,42 +23,40 @@ public  class Error {
     public  Error() {
     }
     
-    private static void displayError(String message)
-    {
-    JOptionPane.showMessageDialog(null, message ,"Erreur",JOptionPane.ERROR_MESSAGE );
+    private static void displayError(String message) {
+        JOptionPane.showMessageDialog(null, message ,"Erreur",JOptionPane.ERROR_MESSAGE );
     }
     
-    public static void tropOnglets()
-    {
+    public static void tropOnglets() {
         displayError( "Désolé mais vous ne pouvez pas créer plus d'onglets."  );
-
+        
     }
     
-    public static void tropAnalyse()
-    {
+    public static void tropAnalyse() {
         displayError( "Désolé mais vous ne pouvez pas effectuer plus d'analyse." );
-
+        
     }
-    public static void noFiles()
-    {
+    public static void noFiles() {
         displayError( "Aucun fichiers à analyser." );
-
+        
     }
-        public static void noEnoughFiles()
-    {
+    public static void noEnoughFiles() {
         displayError( "Pas assez de fichiers à analyser (3 minimum)." );
-
+        
     }
-          public static void noEditorDefined()
-    {
+    public static void noEditorDefined() {
         displayError( "L'éditeur préféré n'est pas défini" );
-
+        
     }
-        public static void nothingToSave()
-        {
-            displayError( "Rien à enregistrer !" );
-        }
+    public static void noComparatorDefined() {
+        displayError( "Le comparateur préféré n'est pas défini" );
+        
+    }
+    
+    public static void nothingToSave() {
+        displayError( "Rien à enregistrer !" );
+    }
     
     
     
- }
+}

@@ -32,7 +32,10 @@ public class ResTableMouseAdapter extends MouseAdapter{
             int row = table.rowAtPoint(pt);
             int col = table.columnAtPoint(pt);
 //jLabel2.setText(col+" "+row+"  "+jTable1.getColumnName(col)+" "+jTable1.getValueAt(row,0));
-            
+               BaldrTableModel tmod=(BaldrTableModel) table.getModel();
+         col=table.convertColumnIndexToModel(col);
+            tmod.toggleDone(row,col);
+            table.repaint();
         }
         
         if(e.getClickCount()>1  && e.getButton()==e.BUTTON1) {

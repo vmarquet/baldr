@@ -7,6 +7,7 @@
 
 package Ihm.renderers;
 
+import Ihm.TableCell;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.CellRendererPane;
@@ -37,23 +38,36 @@ public class TableCellCustomRenderer implements TableCellRenderer{
         if(column!=0 ){
             if(value!=null) {
                 //TODO : ajouter une pref pour le multiplier
-                float v=Float.valueOf(value.toString());
+                float v=((TableCell)value).v;
                 reu.setText(v*10+"e-1");
                 //TODO ajout pref pour couleur
                 if(!isSelected ){
                     if( v!=0){
-                        reu.setBackground(Color.getHSBColor((float)(0.37*((v-min)/(max-min))),0.5F,1));
+                        
+                        reu.setBackground(Color.getHSBColor((float)(0.37*(((((TableCell)value).done?0:v)-min)/(max-min))),0.5F,1));
                         
                     }else{
                         reu.setBackground(Color.WHITE);
                         
                     }
+                }else{
+                    if( v!=0){
+                        reu.setBackground(Color.getHSBColor((float)(0.37*(((((TableCell)value).done?0:v)-min)/(max-min))),0.5F,0.75F));
+                        
+                    }else{
+                        reu.setBackground(Color.WHITE);
+                        
+                    }
+                    
+                    
+                    
+                    
                 }
                 if(v==0){
                     reu.setToolTipText("O par définition");
                     reu.setText("");
                 }else{
-                    reu.setToolTipText(value.toString());
+                    reu.setToolTipText(Float.toString(v));
                 }
             }
         }else{

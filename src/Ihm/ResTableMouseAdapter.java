@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import javax.swing.JTable;
 import Noyau.*;
+import java.io.File;
 
 /**
  *
@@ -32,8 +33,8 @@ public class ResTableMouseAdapter extends MouseAdapter{
             int row = table.rowAtPoint(pt);
             int col = table.columnAtPoint(pt);
 //jLabel2.setText(col+" "+row+"  "+jTable1.getColumnName(col)+" "+jTable1.getValueAt(row,0));
-               BaldrTableModel tmod=(BaldrTableModel) table.getModel();
-         col=table.convertColumnIndexToModel(col);
+            BaldrTableModel tmod=(BaldrTableModel) table.getModel();
+            col=table.convertColumnIndexToModel(col);
             tmod.toggleDone(row,col);
             table.repaint();
         }
@@ -62,22 +63,31 @@ public class ResTableMouseAdapter extends MouseAdapter{
             System.out.println(tmod.getColumnName(col)+" "+tmod.getValueAt(row,0));
             
             StringBuffer f1=new StringBuffer();
-            f1.append('"').append(tmod.getColumnFile(col).getAbsolutePath()).append('"').append(' ');
+            f1.append(tmod.getColumnFile(col).getAbsolutePath());
             
             StringBuffer f2=new StringBuffer();
-            f2.append('"').append(tmod.getRowFile(row).getAbsolutePath()).append('"').append(' ');
+            f2.append(tmod.getRowFile(row).getAbsolutePath());
             
-            String exe=comparator.replace("$1",f1.toString()).replace("$2",f2.toString());
+            String[] exe=new String[3];
+            exe[0]=comparator.replace("$1","").replace("$2","").trim();
+            exe[1]=f1.toString();
+            exe[2]=f2.toString();
             
-            System.out.println(exe);
+            
+//comparator.replace("$1",f1.toString()).replace("$2",f2.toString());
+            
+            //System.out.println(exe);
+            for(String toto:exe) {
+                System.out.print(toto);
+            }
+            System.out.println("done");
             
             Runtime r=Runtime.getRuntime();
             try {
-                r.exec(exe);
+                r.exec(exe,(String[])null,File.listRoots()[0]);
             } catch (IOException ex) { //TODO gerer mieux
                 ex.printStackTrace();
             }
-            
             
         }
         

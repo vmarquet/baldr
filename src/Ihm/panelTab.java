@@ -134,6 +134,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
+        jPanel9.setVisible(false);
         jLabel9 = new javax.swing.JLabel();
         jSlider1 = new javax.swing.JSlider();
         jPanel4 = new javax.swing.JPanel();
@@ -147,6 +148,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
+        jButton13 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -353,15 +355,15 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
             .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel1)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -481,7 +483,6 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
 
         jPanel5.add(jButton4, new java.awt.GridBagConstraints());
 
-        jPanel9.setVisible(false);
         jLabel9.setText("classes :");
 
         jSlider1.setMinimum(3);
@@ -570,8 +571,8 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
             jPanel7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel7Layout.createSequentialGroup()
                 .add(jLabel6)
-                .addContainerGap(187, Short.MAX_VALUE))
-            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addContainerGap(250, Short.MAX_VALUE))
+            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -598,21 +599,32 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
 
         jLabel4.setText("R\u00e9sultats :");
 
+        jButton13.setText("locale");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jPanel8Layout = new org.jdesktop.layout.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel8Layout.createSequentialGroup()
                 .add(jLabel4)
-                .addContainerGap())
-            .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .add(13, 13, 13)
+                .add(jButton13)
+                .add(87, 87, 87))
+            .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel8Layout.createSequentialGroup()
-                .add(jLabel4)
+                .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel4)
+                    .add(jButton13))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE))
         );
         jSplitPane4.setRightComponent(jPanel8);
 
@@ -620,7 +632,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jSplitPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+            .add(jSplitPane4)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -644,9 +656,9 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                 .addContainerGap()
                 .add(jLabel7)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
+                .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
                 .addContainerGap())
-            .add(jSplitPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 919, Short.MAX_VALUE)
+            .add(jSplitPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -658,6 +670,36 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                     .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+int i;
+        BaldrTableModel tmod=((BaldrTableModel) jTable1.getModel())/*.toggleMethod()*/;
+    
+        /*jTable1.setModel(new BaldrTableModel(tmod.getFiles(),tmod.getData(),tmod.isMoy()^true));*/
+    
+    TableCellRenderer tr=jTable1.getCellRenderer(0,0);
+        TableCellRenderer td=jTable1.getCellRenderer(0,1);
+        TableColumn tc;
+        jTable1.setModel(new BaldrTableModel(tmod.getFiles(),tmod.getData(),tmod.isMoy()^true));
+        for(i=0;i<=tmod.getFiles().length;i++){
+            tc=jTable1.getColumnModel().getColumn(i);
+            tc.setHeaderRenderer(tr);
+            tc.setCellRenderer(td);
+            if(i==0){
+                //on se passe de aller chercher la font du table header...
+                // TODO : Ameliorer ça
+                tc.setMinWidth(((String)tmod.getValueAt(0,0)).length()*5);
+                tc.setCellRenderer(tr);
+            }else{
+                tc.setCellRenderer(td);
+            }
+        }
+    
+    
+        jTable1.repaint();
+        jButton13.setText((!tmod.isMoy()?"locale":"globale"));
+        
+    }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
   jLabel9.setText("Classes : "+jSlider1.getValue()+"/"+(jSlider1.getMaximum()-1));
@@ -884,7 +926,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         plot2DPanel1.setVisible(true);
         plot3DPanel1.setVisible(false);
         jButton12.setVisible(false);
-        jPanel9.setVisible(true);
+      ///  jPanel9.setVisible(true);
         curview = 0;
     }
     
@@ -1246,13 +1288,14 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                valLin=val;
     
             updateMat(fichs,nb,val);
-            updateDefilZone(fichs);
+           // updateDefilZone(fichs);
             updatePlot(val,nb);
             
             jPanel4.setVisible(true);
             //TODO : Ouvrir le splitPane à la bonne taille
             jSplitPane2.setDividerLocation(this.getSize().width*1/2);
-            
+            jButton9.setEnabled(false);
+            jButton3.setEnabled(true);
         }
     }
     
@@ -1479,24 +1522,29 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                                                                 
                                                                 Runtime r=Runtime.getRuntime();
                                                                 StringBuffer f=new StringBuffer();
+                                                                String [] ex =new String[fichs.length+1];
+                                                                        ex[0]=editor.replace("$1","").trim();
+                                                                
+                                                                
                                                                 if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (editor.contains(".app"))) {
                                                                     for(File fi:fichs) {
                                                                         f.append( fi.getAbsolutePath() ).append(' ');
                                                                     }
                                                                 }else{
+                                                                            int i=1;
                                                                     for(File fi:fichs) {
-                                                                        f.append('"').append( fi.getAbsolutePath() ).append('"').append(' ');
+                                                                        ex[i]=fi.getAbsolutePath();
+                                                                        i++;
                                                                     }
                                                                 }
                                                                 
-                                                                String ex = editor.replace("$1",f.toString());
                                                                 
                                                               //  System.out.println("Executing : "+ex);
                                                                 try {
                                                                     if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (editor.contains(".app"))) {
                                                                         r.exec("open -a " + ex);
                                                                     }else
-                                                                        r.exec(ex);
+                                                                        r.exec(ex,(String[])null,File.listRoots()[0]);
                                                                 } catch (IOException exp) {
                                                                     // TODO gerer l'erreur dans utils.error
                                                                     exp.printStackTrace();
@@ -1539,6 +1587,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

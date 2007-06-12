@@ -1254,14 +1254,21 @@ int i;
         /*double[][] v2 =new double[1][];
         v2[0]=val;*/
         jSlider1.setMinimum(3);
-        jSlider1.setMaximum(nb);
+        jSlider1.setMaximum(Math.max(nb,3));
         jSlider1.setExtent(1);
         jSlider1.setValue(nb/2);
         plot2DPanel1.removeAllPlots();
+        if(Math.max(nb/2,3)==Math.max(3,(nb-1)))
+        {
+        jSlider1.setVisible(false);
+        jLabel9.setText("Classes : 3");
+        }else{
         jLabel9.setText("Classes : "+nb/2+"/"+(nb-1));
+        }
         jPanel9.setVisible(true);
         
-        plot2DPanel1.addHistogramPlot("Histogramme des valeurs",val,nb/2);
+        
+        plot2DPanel1.addHistogramPlot("Histogramme des valeurs",val,Math.max(nb/2,3));
         
     }
     /**

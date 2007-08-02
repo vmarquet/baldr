@@ -262,12 +262,12 @@ public class conv3d extends Thread{
     }
     
     public void run(){
-        statusbar.setText("Calcul des coordonnées 3D");
+        statusbar.setText(recall.getMsgs().getString("3D_Calc"));
         size = res.length;
         dist2vect();
         //filter(1000.00F); // Run only after dist2vect
         if(!stopNow){
-            statusbar.setText("Analyse terminée");
+            statusbar.setText(recall.getMsgs().getString("Finished_Analysing"));
             recall.Dispatch3DResult(vectors);
         }
     }

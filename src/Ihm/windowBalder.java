@@ -14,6 +14,7 @@ import Noyau.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
@@ -38,8 +39,11 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
     
     private aPropos aProposBaldr;
     final java.awt.Image iconBaldr = java.awt.Toolkit.getDefaultToolkit().getImage("Images/baldr.gif");
-
+    private ResourceBundle msgs;
+    
     public windowBalder() {
+        msgs=ResourceBundle.getBundle("i18n/Balder");
+        
         int i;
         /** Look n feel du system*/
         try {
@@ -97,9 +101,9 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
             }
         });
 
-        fileMenu.setText("Fichier");
+        fileMenu.setText(msgs.getString("File"));
         jMenuItem1.setIcon(new javax.swing.ImageIcon("Images/tab_add.png"));
-        jMenuItem1.setText("Nouvel onglet");
+        jMenuItem1.setText(msgs.getString("New_Tab"));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -109,7 +113,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         fileMenu.add(jMenuItem1);
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon("Images/tab_delete.png"));
-        jMenuItem2.setText("Fermer l'onglet courant");
+        jMenuItem2.setText(msgs.getString("Close_Tab"));
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -121,7 +125,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         fileMenu.add(jSeparator1);
 
         openMenuItem.setIcon(new javax.swing.ImageIcon("Images/folder_go.png"));
-        openMenuItem.setText("Ouvrir");
+        openMenuItem.setText(msgs.getString("Open"));
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openMenuItemActionPerformed(evt);
@@ -131,7 +135,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         fileMenu.add(openMenuItem);
 
         saveMenuItem.setIcon(new javax.swing.ImageIcon("Images/disk.png"));
-        saveMenuItem.setText("Enregistrer");
+        saveMenuItem.setText(msgs.getString("Save"));
         saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveMenuItemActionPerformed(evt);
@@ -141,7 +145,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         fileMenu.add(saveMenuItem);
 
         exitMenuItem.setIcon(new javax.swing.ImageIcon("Images/cross.png"));
-        exitMenuItem.setText("Quitter");
+        exitMenuItem.setText(msgs.getString("Exit"));
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitMenuItemActionPerformed(evt);
@@ -152,9 +156,9 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
         menuBar.add(fileMenu);
 
-        editMenu.setText("Options");
+        editMenu.setText(msgs.getString("Options"));
         Preferences.setIcon(new javax.swing.ImageIcon("Images/pref.png"));
-        Preferences.setText("Pr\u00e9f\u00e9rences ...");
+        Preferences.setText(msgs.getString("Preference"));
         Preferences.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Prefev(evt);
@@ -165,9 +169,9 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
 
         menuBar.add(editMenu);
 
-        helpMenu.setText("Aide");
+        helpMenu.setText(msgs.getString("Help"));
         contentsMenuItem.setIcon(new javax.swing.ImageIcon("Images/help.png"));
-        contentsMenuItem.setText("Rubriques d'aide");
+        contentsMenuItem.setText(msgs.getString("Help_Topics"));
         contentsMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contentsMenuItemActionPerformed(evt);
@@ -177,7 +181,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         helpMenu.add(contentsMenuItem);
 
         aboutMenuItem.setIcon(new javax.swing.ImageIcon("Images/baldr.gif"));
-        aboutMenuItem.setText("A propos de Baldr ...");
+        aboutMenuItem.setText(msgs.getString("About"));
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aboutMenuItemActionPerformed(evt);
@@ -345,7 +349,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                                                 }
     }//GEN-LAST:event_openMenuItemActionPerformed
                                 private void Prefev(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Prefev
-                                    prefwin test = new prefwin();
+                                    prefwin test = new prefwin(this);
                                     test.setVisible(true);
     }//GEN-LAST:event_Prefev
                                         private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
@@ -451,6 +455,10 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
             {
             return jTabbedPane1.getTitleAt(i);
             }
+
+    public ResourceBundle getMsgs() {
+        return msgs;
+    }
             
             
                 

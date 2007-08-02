@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import javax.swing.table.AbstractTableModel;
@@ -32,19 +33,21 @@ public class BaldrTableModel extends AbstractTableModel{
     private String[] headings;
     private int [] pCol;
     private boolean moy=true;
+    private ResourceBundle msgs;
     
-    public BaldrTableModel(File[] _files,float [][] _data) {
-        this(_files, _data,true);
+    public BaldrTableModel(File[] _files,float [][] _data,ResourceBundle _msgs) {
+        this(_files, _data,true,_msgs);
     }
     
-    public BaldrTableModel(File[] _files,float [][] _data,boolean _moy) {
+    public BaldrTableModel(File[] _files,float [][] _data,boolean _moy,ResourceBundle _msgs) {
+        msgs=_msgs;
         int i;
         //pre-calculate headings
         headings=new String[_files.length+1];
         for(i=1;i<=_files.length;i++) {
             headings[i]=_files[i-1].getName();
         }
-        headings[0]="Fichiers";
+        headings[0]=msgs.getString("Files");
         // setting attributes
         this.files=_files;
         this.data=_data;
@@ -165,7 +168,7 @@ public class BaldrTableModel extends AbstractTableModel{
         for(i=1;i<=files.length;i++) {
             headings[i]=files[i-1].getName();
         }
-        headings[0]="Fichiers";
+        headings[0]=msgs.getString("Files");
  reOrder();
  //fireTableStructureChanged();
     fireTableDataChanged();    

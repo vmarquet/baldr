@@ -11,6 +11,8 @@
 
 package Ihm;
 
+import java.util.ResourceBundle;
+
 /**
  * Interface which direct the communication between the analysis thread and the gui
  *
@@ -23,4 +25,5 @@ public interface ResDispatcher {
      * @param vectors 3D vectors to plot
      */
     public void Dispatch3DResult(float[][] vectors);
+    public ResourceBundle getMsgs();
 }

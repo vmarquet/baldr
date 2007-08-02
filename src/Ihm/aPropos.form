@@ -96,13 +96,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;u&gt;Balder, dieu scandinave de l&apos;innocence&lt;/u&gt;&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="i18n/Balder.properties" key="About_Title" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="&lt;b&gt;Baldr&lt;/b&gt; version 0.1 Alpha&lt;br&gt;&#xa;&lt;br&gt;&#xa;Logiciel de lutte contre la fraude&lt;br&gt;&#xa;&lt;br&gt;&lt;br&gt;&#xa;&lt;u&gt;Programmeurs principaux&lt;/u&gt;&lt;br&gt;&#xa;Beno&#xee;t Larroque &lt;br&gt;&#xa;C&#xe9;dric Tessier &lt;br&gt;&#xa;Hubert Wassner &lt;br&gt;&#xa;&lt;br&gt;&#xa;&lt;u&gt;Programmeurs en charge de l&apos;IHM&lt;/u&gt; &lt;br&gt;&#xa;Corentin Ch&#xe9;ron &lt;br&gt;&#xa;Laurent Sigoigne &lt;br&gt;&lt;br&gt;&#xa;&lt;u&gt;Remerciements&lt;/u&gt;&#xa;&lt;br&gt;A Michel Futtersack pour nous avoir permis de r&#xe9;aliser ce projet.&#xa;&lt;br&gt;&lt;br&gt;&#xa;A Hubert pour l&apos;id&#xe9;e, les conseils et les encouragements.&#xa;&lt;br&gt;&lt;br&gt;&#xa;A famfamfam.com pour les ic&#xf4;nes.&lt;br&gt;"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="i18n/Balder.properties" key="About_Text" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="verticalTextPosition" type="int" value="1"/>
           </Properties>

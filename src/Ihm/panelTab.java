@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.ResourceBundle;
 import javax.swing.tree.*;
 import Main.*;
 import Noyau.*;
@@ -51,11 +52,15 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     /** Creates new form panelTab */
     private double[] valLin;
     
+    private ResourceBundle msgs;
     /** Construct and display a tab
      * @param monNum Tab's Id number
      */
     public panelTab(int monNum) {
-        fileList = new DefaultMutableTreeNode("Documents");
+        msgs=ResourceBundle.getBundle("i18n/Balder");
+        
+        
+        fileList = new DefaultMutableTreeNode(msgs.getString("Documents"));
         initComponents();
         tabNumber=monNum;
         //jButton10.setVisible(false);
@@ -63,7 +68,9 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         
         jButton11.setVisible(false);
         jComboBox1.setSelectedIndex(0);
-        jLabel3.setText("sur "+Integer.toString(jComboBox1.getItemCount()));
+        
+        
+        jLabel3.setText(msgs.getString("Of")+Integer.toString(jComboBox1.getItemCount()));
         // TODO: Comprendre pourquoi les getWidth retournent 0 ici
         //jSplitPane2.setDividerLocation(this.getPreferredSize().width*2/3);
         plot2DPanel1.plotToolBar.remove(3); // On dégage les entrées du menu de la toolbar qui servent à rien
@@ -247,10 +254,10 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
 
         jScrollPane1.setViewportView(jTree1);
 
-        jLabel1.setText("Ajout de fichiers :");
+        jLabel1.setText(msgs.getString("Tree"));
 
         jButton1.setIcon(new javax.swing.ImageIcon("Images/add.png"));
-        jButton1.setToolTipText("Ajouter un fichier");
+        jButton1.setToolTipText(msgs.getString("Add_Files"));
         jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,7 +266,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         });
 
         jButton2.setIcon(new javax.swing.ImageIcon("Images/delete.png"));
-        jButton2.setToolTipText("Supprime le fichier s\u00e9lectionn\u00e9");
+        jButton2.setToolTipText(msgs.getString("Suppr"));
         jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,7 +275,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         });
 
         jButton3.setIcon(new javax.swing.ImageIcon("Images/sum.png"));
-        jButton3.setToolTipText("Lancer l'analyse");
+        jButton3.setToolTipText(msgs.getString("Start_Analysis"));
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,7 +287,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jProgressBar1.setString("43%");
 
         jButton8.setIcon(new javax.swing.ImageIcon("Images/tab_delete.png"));
-        jButton8.setToolTipText("Fermer l'analyse courante");
+        jButton8.setToolTipText(msgs.getString("Close_Tab"));
         jButton8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,10 +295,10 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
             }
         });
 
-        jLabel8.setText("Progression de l'analyse :");
+        jLabel8.setText(msgs.getString("Analysis_Progression"));
 
         jButton9.setIcon(new javax.swing.ImageIcon("Images/cross.png"));
-        jButton9.setToolTipText("Stopper l'analyse");
+        jButton9.setToolTipText(msgs.getString("Stop_Analysis"));
         jButton9.setBorder(null);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,7 +307,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         });
 
         jButton10.setIcon(new javax.swing.ImageIcon("Images/tab_add.png"));
-        jButton10.setToolTipText("Ouvre un nouvel onglet");
+        jButton10.setToolTipText(msgs.getString("New_Tab"));
         jButton10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -328,7 +335,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                                 .add(6, 6, 6)))
                         .add(11, 11, 11)
                         .add(jButton9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 26, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 28, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 41, Short.MAX_VALUE)
                         .add(jButton10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jButton8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
@@ -355,15 +362,15 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
             .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel1)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -383,7 +390,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
 
         jSplitPane3.setRightComponent(plot2DPanel1);
 
-        jLabel5.setText("R\u00e9sultats graphiques :");
+        jLabel5.setText(msgs.getString("Graphics"));
 
         jButton11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -460,7 +467,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
 
         jPanel5.add(jComboBox1, new java.awt.GridBagConstraints());
 
-        jLabel3.setText("sur N");
+        jLabel3.setText(msgs.getString("Of"));
         jPanel5.add(jLabel3, new java.awt.GridBagConstraints());
 
         jButton5.setIcon(new javax.swing.ImageIcon("Images/arrow_right.png"));
@@ -483,7 +490,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
 
         jPanel5.add(jButton4, new java.awt.GridBagConstraints());
 
-        jLabel9.setText("classes :");
+        jLabel9.setText(msgs.getString("Classes"));
 
         jSlider1.setMinimum(3);
         jSlider1.setPaintLabels(true);
@@ -524,7 +531,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                 .addContainerGap()
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel5)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 374, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                     .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                     .add(jPanel3Layout.createSequentialGroup()
                         .add(jPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -551,7 +558,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jSplitPane4.setDividerLocation(170);
         jSplitPane4.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane4.setOneTouchExpandable(true);
-        jLabel6.setText("Notes :");
+        jLabel6.setText(msgs.getString("Notes"));
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane2.setAutoscrolls(true);
@@ -597,9 +604,9 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane4.setViewportView(jTable1);
 
-        jLabel4.setText("R\u00e9sultats :");
+        jLabel4.setText(msgs.getString("Results"));
 
-        jButton13.setText("locale");
+        jButton13.setText(msgs.getString("Local"));
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton13ActionPerformed(evt);
@@ -642,11 +649,11 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
 
         jSplitPane1.setRightComponent(jSplitPane2);
 
-        jLabel2.setText("Pr\u00eat");
+        jLabel2.setText(msgs.getString("Ready"));
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Statut : ");
+        jLabel7.setText(msgs.getString("Status"));
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -656,7 +663,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                 .addContainerGap()
                 .add(jLabel7)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
+                .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 926, Short.MAX_VALUE)
                 .addContainerGap())
             .add(jSplitPane1)
         );
@@ -680,7 +687,7 @@ int i;
     TableCellRenderer tr=jTable1.getCellRenderer(0,0);
         TableCellRenderer td=jTable1.getCellRenderer(0,1);
         TableColumn tc;
-        jTable1.setModel(new BaldrTableModel(tmod.getFiles(),tmod.getData(),tmod.isMoy()^true));
+        jTable1.setModel(new BaldrTableModel(tmod.getFiles(),tmod.getData(),tmod.isMoy()^true,getMsgs()));
         for(i=0;i<=tmod.getFiles().length;i++){
             tc=jTable1.getColumnModel().getColumn(i);
             tc.setHeaderRenderer(tr);
@@ -697,17 +704,17 @@ int i;
     
     
         jTable1.repaint();
-        jButton13.setText((!tmod.isMoy()?"locale":"globale"));
+        jButton13.setText((!tmod.isMoy()?msgs.getString("Local"):msgs.getString("Global")));
         
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-  jLabel9.setText("Classes : "+jSlider1.getValue()+"/"+(jSlider1.getMaximum()-1));
+  jLabel9.setText(msgs.getString("Classes")+jSlider1.getValue()+"/"+(jSlider1.getMaximum()-1));
         if(!((JSlider) evt.getSource()).getValueIsAdjusting()){
         plot2DPanel1.removeAllPlots();
   System.out.println("val ch : "+jSlider1.getValue());
   
-      plot2DPanel1.addHistogramPlot("Histogramme des valeurs",valLin,jSlider1.getValue());
+      plot2DPanel1.addHistogramPlot(msgs.getString("Values_Histogram"),valLin,jSlider1.getValue());
  }
     }//GEN-LAST:event_jSlider1StateChanged
 
@@ -725,7 +732,7 @@ int i;
         if(analys != null){
             analys.stopAnalysis();
             jProgressBar1.setValue(0);
-            jLabel2.setText("Analyse Annulée");
+            jLabel2.setText(msgs.getString("Analysis_Canceled"));
             jButton3.setEnabled(true);
             jButton9.setEnabled(false);
         }
@@ -907,7 +914,7 @@ int i;
     private void set3Dview(){
         //jButton11.setText("Vue 2D");
         jButton11.setIcon(new ImageIcon("Images/chart_bar.png"));
-        jButton11.setToolTipText("Vue 2D");
+        jButton11.setToolTipText(msgs.getString("2DView"));
         
         plot2DPanel1.setVisible(false);
         plot3DPanel1.setVisible(true);
@@ -922,7 +929,7 @@ int i;
     private void unset3Dview(){
         //jButton11.setText("Vue 3D");
         jButton11.setIcon(new ImageIcon("Images/char3D.png"));
-        jButton11.setToolTipText("Vue 3D");
+        jButton11.setToolTipText(msgs.getString("3DView"));
         plot2DPanel1.setVisible(true);
         plot3DPanel1.setVisible(false);
         jButton12.setVisible(false);
@@ -1110,7 +1117,7 @@ int i;
         //jTable1.setColumnSelectionAllowed(true);
         jTable1.setRowSelectionAllowed(true);
 
-        mat = new BaldrTableModel(fichs,analys.getResults()){
+        mat = new BaldrTableModel(fichs,analys.getResults(),getMsgs()){
             public boolean isCellEditable(int i, int j ){return false;}
         };
         double [] val2= val.clone();
@@ -1202,7 +1209,7 @@ int i;
         slabels = true;
         //jButton12.setText("Masquer les étiquettes");
         jButton12.setIcon(new ImageIcon("Images/textfield_delete.png"));
-        jButton12.setToolTipText("Masquer les étiquettes");
+        jButton12.setToolTipText(msgs.getString("Hide_Lablels"));
     }
     
     private void hidePlotlabels(){
@@ -1213,7 +1220,7 @@ int i;
         slabels = false;
         //jButton12.setText("Afficher les étiquettes");
         jButton12.setIcon(new ImageIcon("Images/textfield_add.png"));
-        jButton12.setToolTipText("Afficher les étiquettes");
+        jButton12.setToolTipText(msgs.getString("Show_Lablels"));
     }
     /**
      * Deals with the results of the projection from N-dimension to 3D
@@ -1261,14 +1268,14 @@ int i;
         if(Math.max(nb/2,3)==Math.max(3,(nb-1)))
         {
         jSlider1.setVisible(false);
-        jLabel9.setText("Classes : 3");
+        jLabel9.setText(msgs.getString("Classes")+"3");
         }else{
-        jLabel9.setText("Classes : "+nb/2+"/"+(nb-1));
+        jLabel9.setText(msgs.getString("Classes")+nb/2+"/"+(nb-1));
         }
         jPanel9.setVisible(true);
         
         
-        plot2DPanel1.addHistogramPlot("Histogramme des valeurs",val,Math.max(nb/2,3));
+        plot2DPanel1.addHistogramPlot(msgs.getString("Values_Histogram"),val,Math.max(nb/2,3));
         
     }
     /**
@@ -1580,6 +1587,10 @@ int i;
                                                                 
                                                                 
                                                             }
+
+    public ResourceBundle getMsgs() {
+        return msgs;
+    }
                                                             
                                                             
                                                           

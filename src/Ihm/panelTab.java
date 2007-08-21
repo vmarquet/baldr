@@ -1358,7 +1358,7 @@ int i;
      */
     
     public void ExitAndSaveOnglet(){
-        int choix = JOptionPane.showConfirmDialog(this,"Souhaitez-vous enregistrer les modifications \n apportées avant de fermer cet onglet ?","Baldr",1);
+        int choix = JOptionPane.showConfirmDialog(this,msgs.getString("Save_Mods"),"Baldr",1);
         if(choix==JOptionPane.NO_OPTION) {
             Main.ihm.fermerTab(this);
         }
@@ -1536,28 +1536,29 @@ int i;
                                                                 
                                                                 Runtime r=Runtime.getRuntime();
                                                                 StringBuffer f=new StringBuffer();
-                                                                String [] ex =new String[fichs.length+1];
-                                                                        ex[0]=editor.replace("$1","").trim();
-                                                                
+                                                                String [] ex;
+                                                                int i;
                                                                 
                                                                 if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (editor.contains(".app"))) {
-                                                                    for(File fi:fichs) {
-                                                                        f.append( fi.getAbsolutePath() ).append(' ');
-                                                                    }
+                                                                    ex = new String[fichs.length+3];
+                                                                    ex[0]="open";
+                                                                    ex[1]="-a";
+                                                                    ex[2]=editor.replace("$1","").trim();
+                                                                    i=3;
                                                                 }else{
-                                                                            int i=1;
-                                                                    for(File fi:fichs) {
-                                                                        ex[i]=fi.getAbsolutePath();
-                                                                        i++;
-                                                                    }
+                                                                    ex = new String[fichs.length+1];
+                                                                    ex[0]=editor.replace("$1","").trim();
+                                                                    i=1;
+                                                                }    
+                                                     
+                                                                            
+                                                                for(File fi:fichs) {
+                                                                      ex[i]=fi.getAbsolutePath();
+                                                                      i++;
                                                                 }
-                                                                
-                                                                
-                                                              //  System.out.println("Executing : "+ex);
+                                                            
+                                                              
                                                                 try {
-                                                                    if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (editor.contains(".app"))) {
-                                                                        r.exec("open -a " + ex);
-                                                                    }else
                                                                         r.exec(ex,(String[])null,File.listRoots()[0]);
                                                                 } catch (IOException exp) {
                                                                     // TODO gerer l'erreur dans utils.error

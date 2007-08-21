@@ -160,7 +160,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jLabel7 = new javax.swing.JLabel();
 
         ajouter.setIcon(new javax.swing.ImageIcon("Images/add.png"));
-        ajouter.setText("Ajouter");
+        ajouter.setText(msgs.getString("Add_Files"));
         ajouter.setName("Ajouter");
         ajouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,7 +171,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         menuContextuel.add(ajouter);
 
         supprimer.setIcon(new javax.swing.ImageIcon("Images/delete.png"));
-        supprimer.setText("Supprimer  <suppr>");
+        supprimer.setText(msgs.getString("Delete"));
         supprimer.setName("Supprimer");
         supprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,7 +184,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         menuContextuel.add(jSeparator1);
 
         lancer.setIcon(new javax.swing.ImageIcon("Images/sum.png"));
-        lancer.setText("Lancer l'analyse");
+        lancer.setText(msgs.getString("Start_Analysis"));
         lancer.setName("Lancer l'analyse");
         lancer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,7 +195,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         menuContextuel.add(lancer);
 
         couper.setIcon(new javax.swing.ImageIcon("Images/cut_red.png"));
-        couper.setText("Couper");
+        couper.setText(msgs.getString("Cut"));
         couper.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 couperActionPerformed(evt);
@@ -205,7 +205,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jPopupMenu1.add(couper);
 
         copier.setIcon(new javax.swing.ImageIcon("Images/page_copy.png"));
-        copier.setText("Copier");
+        copier.setText(msgs.getString("Copy"));
         copier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 copierActionPerformed(evt);
@@ -215,7 +215,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jPopupMenu1.add(copier);
 
         coller.setIcon(new javax.swing.ImageIcon("Images/page_paste.png"));
-        coller.setText("Coller");
+        coller.setText(msgs.getString("Paste"));
         coller.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 collerActionPerformed(evt);
@@ -224,7 +224,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
 
         jPopupMenu1.add(coller);
 
-        SelectAll.setText("S\u00e9lectionner tout");
+        SelectAll.setText(msgs.getString("Select_All"));
         SelectAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SelectAllActionPerformed(evt);
@@ -322,7 +322,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                    .add(jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                     .add(jPanel2Layout.createSequentialGroup()
                         .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(jLabel8)
@@ -362,15 +362,15 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
             .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel1)
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -380,7 +380,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         jSplitPane1.setLeftComponent(jPanel1);
 
@@ -501,10 +501,10 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
             }
         });
         jSlider1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jSlider1CaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -531,8 +531,8 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                 .addContainerGap()
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel5)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
-                    .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                    .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
                     .add(jPanel3Layout.createSequentialGroup()
                         .add(jPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -579,14 +579,14 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
             .add(jPanel7Layout.createSequentialGroup()
                 .add(jLabel6)
                 .addContainerGap(250, Short.MAX_VALUE))
-            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel7Layout.createSequentialGroup()
                 .add(jLabel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
         );
         jSplitPane4.setLeftComponent(jPanel7);
 
@@ -622,7 +622,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                 .add(13, 13, 13)
                 .add(jButton13)
                 .add(87, 87, 87))
-            .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+            .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -631,7 +631,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                     .add(jLabel4)
                     .add(jButton13))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE))
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
         );
         jSplitPane4.setRightComponent(jPanel8);
 
@@ -643,7 +643,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jSplitPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
         );
         jSplitPane2.setRightComponent(jPanel4);
 
@@ -663,7 +663,7 @@ jTable1.addMouseListener(new ResTableMouseAdapter(jTable1));
                 .addContainerGap()
                 .add(jLabel7)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 926, Short.MAX_VALUE)
+                .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
                 .addContainerGap())
             .add(jSplitPane1)
         );
@@ -1209,7 +1209,7 @@ int i;
         slabels = true;
         //jButton12.setText("Masquer les étiquettes");
         jButton12.setIcon(new ImageIcon("Images/textfield_delete.png"));
-        jButton12.setToolTipText(msgs.getString("Hide_Lablels"));
+        jButton12.setToolTipText(msgs.getString("Hide_Labels"));
     }
     
     private void hidePlotlabels(){
@@ -1220,7 +1220,7 @@ int i;
         slabels = false;
         //jButton12.setText("Afficher les étiquettes");
         jButton12.setIcon(new ImageIcon("Images/textfield_add.png"));
-        jButton12.setToolTipText(msgs.getString("Show_Lablels"));
+        jButton12.setToolTipText(msgs.getString("Show_Labels"));
     }
     /**
      * Deals with the results of the projection from N-dimension to 3D

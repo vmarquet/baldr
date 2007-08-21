@@ -393,7 +393,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
                                                 int numOnglet=i+1;
                                                 final panelTab newtab=new panelTab(numeroDuTabLibre);
                                                 listeOnglets[numeroDuTabLibre]=newtab;
-                                                jTabbedPane1.addTab("Analyse "+numOnglet ,newtab);
+                                                jTabbedPane1.addTab(msgs.getString("Analysis")+" "+numOnglet ,newtab);
                                                 jTabbedPane1.setSelectedComponent(newtab);
                                                 return newtab;
                                             }
@@ -439,7 +439,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
      *
      */                           
             public void ExitAndSave() {
-            int choix = JOptionPane.showConfirmDialog(this,"Souhaitez-vous enregistrer les modifications \n apportées avant de fermer cet onglet ?","Baldr",1);
+            int choix = JOptionPane.showConfirmDialog(this,msgs.getString("Save_Mods"),"Baldr",1);
             if(choix==JOptionPane.NO_OPTION)
             {
                 System.exit(0);

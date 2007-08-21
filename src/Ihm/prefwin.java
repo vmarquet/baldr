@@ -30,10 +30,12 @@ public class prefwin extends javax.swing.JFrame {
     private ResourceBundle msgs;
     /** Creates new form prefwin */
     public prefwin(windowBalder win) {
+        msgs=win.getMsgs();
+        
         initComponents();
         //TODO Work on the 2 functioning modes 
         jPanel1.setVisible(false);
-        msgs=win.getMsgs();
+    
         this.setLocationRelativeTo(this.getParent());
         this.setIconImage(Main.ihm.iconBaldr);
         this.setResizable(false);
@@ -132,7 +134,7 @@ public class prefwin extends javax.swing.JFrame {
                     .add(jLabel1)
                     .add(jRadioButton2)
                     .add(jRadioButton1))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -167,12 +169,12 @@ public class prefwin extends javax.swing.JFrame {
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jButton5))
                             .add(jLabel2))
-                        .addContainerGap(18, Short.MAX_VALUE))
+                        .addContainerGap(104, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 298, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jButton6)
-                        .addContainerGap(18, Short.MAX_VALUE))
+                        .addContainerGap(104, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(jLabel3)
                         .addContainerGap(107, Short.MAX_VALUE))

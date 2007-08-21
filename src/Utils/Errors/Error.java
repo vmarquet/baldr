@@ -10,6 +10,8 @@ import Main.*;
 import javax.swing.JComponent.*;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import java.util.ResourceBundle;
+
 /**
  * Class handling the different type of errors and their diplay to the users
  *
@@ -18,43 +20,45 @@ import javax.swing.JOptionPane;
 
 //TODO move to IHM
 public  class Error {
+    static private ResourceBundle msgs=ResourceBundle.getBundle("i18n/Balder");
     
     /** Creates a new instance of Error */
     public  Error() {
+        
     }
     
     private static void displayError(String message) {
-        JOptionPane.showMessageDialog(null, message ,"Erreur",JOptionPane.ERROR_MESSAGE );
+        JOptionPane.showMessageDialog(null, message ,msgs.getString("ERROR"),JOptionPane.ERROR_MESSAGE );
     }
     
     public static void tropOnglets() {
-        displayError( "Désolé mais vous ne pouvez pas créer plus d'onglets."  );
+        displayError(msgs.getString("NO_MORE_TABS"));
         
     }
     
     public static void tropAnalyse() {
-        displayError( "Désolé mais vous ne pouvez pas effectuer plus d'analyse." );
+        displayError(msgs.getString("TOO_MUCH_ANALYSIS"));
         
     }
     public static void noFiles() {
-        displayError( "Aucun fichiers à analyser." );
+         displayError(msgs.getString("NO_FILES"));
         
     }
     public static void noEnoughFiles() {
-        displayError( "Pas assez de fichiers à analyser (3 minimum)." );
+        displayError(msgs.getString("NO_ENOUGH_FILES"));
         
     }
     public static void noEditorDefined() {
-        displayError( "L'éditeur préféré n'est pas défini" );
+        displayError(msgs.getString("NO_EDITOR"));
         
     }
     public static void noComparatorDefined() {
-        displayError( "Le comparateur préféré n'est pas défini" );
+        displayError(msgs.getString("NO_DIFF"));
         
     }
     
     public static void nothingToSave() {
-        displayError( "Rien à enregistrer !" );
+        displayError(msgs.getString("NOTHING_SAVE"));
     }
     
     

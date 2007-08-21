@@ -9,7 +9,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="Images/add.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ajouter"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="i18n/Balder.properties" key="Add_Files" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="Ajouter"/>
           </Properties>
           <Events>
@@ -21,7 +23,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="Images/delete.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Supprimer  &lt;suppr&gt;"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="i18n/Balder.properties" key="Delete" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="Supprimer"/>
           </Properties>
           <Events>
@@ -35,7 +39,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="Images/sum.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Lancer l&apos;analyse"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="i18n/Balder.properties" key="Start_Analysis" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="Lancer l&apos;analyse"/>
           </Properties>
           <Events>
@@ -51,7 +57,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="Images/cut_red.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Couper"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="i18n/Balder.properties" key="Cut" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="couperActionPerformed"/>
@@ -62,7 +70,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="Images/page_copy.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Copier"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="i18n/Balder.properties" key="Copy" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copierActionPerformed"/>
@@ -73,7 +83,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="Images/page_paste.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Coller"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="i18n/Balder.properties" key="Paste" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="collerActionPerformed"/>
@@ -81,7 +93,9 @@
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="SelectAll">
           <Properties>
-            <Property name="text" type="java.lang.String" value="S&#xe9;lectionner tout"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="i18n/Balder.properties" key="Select_All" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SelectAllActionPerformed"/>
@@ -106,7 +120,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel2" pref="926" max="32767" attributes="0"/>
+              <Component id="jLabel2" pref="998" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Component id="jSplitPane1" alignment="0" max="32767" attributes="0"/>
@@ -149,16 +163,16 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="1" pref="296" max="32767" attributes="2"/>
+                  <Component id="jScrollPane1" alignment="1" pref="358" max="32767" attributes="2"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="14" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="238" max="32767" attributes="0"/>
+                      <EmptySpace pref="277" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -170,7 +184,7 @@
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="2"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="176" max="32767" attributes="0"/>
+                      <EmptySpace pref="104" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -218,7 +232,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jProgressBar1" alignment="0" pref="249" max="32767" attributes="1"/>
+                              <Component id="jProgressBar1" alignment="0" pref="280" max="32767" attributes="1"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -417,8 +431,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSplitPane3" alignment="1" pref="374" max="32767" attributes="0"/>
-                              <Component id="jPanel5" alignment="0" pref="374" max="32767" attributes="1"/>
+                              <Component id="jSplitPane3" alignment="1" pref="382" max="32767" attributes="0"/>
+                              <Component id="jPanel5" alignment="0" pref="382" max="32767" attributes="1"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -714,7 +728,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jSplitPane4" alignment="1" pref="626" max="32767" attributes="0"/>
+                      <Component id="jSplitPane4" alignment="1" pref="624" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -742,7 +756,7 @@
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="250" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="jScrollPane2" alignment="0" pref="285" max="32767" attributes="1"/>
+                              <Component id="jScrollPane2" alignment="0" pref="295" max="32767" attributes="1"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -750,7 +764,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel6" min="-2" pref="14" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane2" pref="149" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane2" pref="146" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -811,7 +825,7 @@
                                   <Component id="jButton13" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jScrollPane4" alignment="0" pref="285" max="32767" attributes="2"/>
+                              <Component id="jScrollPane4" alignment="0" pref="295" max="32767" attributes="2"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -822,7 +836,7 @@
                                       <Component id="jButton13" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane4" pref="421" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane4" pref="405" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>

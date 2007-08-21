@@ -9,6 +9,7 @@ package Ihm.FileFilters;
 
 import Utils.Extension;
 import java.io.File;
+import java.util.ResourceBundle;
 import javax.swing.filechooser.FileFilter;
 
 /**
@@ -16,9 +17,11 @@ import javax.swing.filechooser.FileFilter;
  *  @author zeta
  */
 public class BaldrNBaldrxFileFilter extends FileFilter {
+    private ResourceBundle msgs;
     
     /** Creates a new instance of BaldrNBaldrxFileFilter */
     public BaldrNBaldrxFileFilter() {
+        msgs = ResourceBundle.getBundle("i18n/Balder");
     }
 /** Whether the file is acceptable*/
     public boolean accept(File f) {
@@ -34,7 +37,7 @@ public class BaldrNBaldrxFileFilter extends FileFilter {
 /** Description for the filechooser*/
  
     public String getDescription() {
-          return "Tous les fichiers Baldr (."+Extension.baldr+", ."+Extension.baldrx+")";
+          return msgs.getString("FT_BALDR_ALL") + " (."+Extension.baldr+", ."+Extension.baldrx+")";
     }
     
 }

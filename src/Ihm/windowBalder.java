@@ -45,7 +45,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
     public windowBalder() {
         
         String loc = Noyau.opts.readPref("LOCALE");
-        if(loc != null){
+        if(loc != null && loc.length() > 1){
             Locale.setDefault(new Locale(loc));
         }
         

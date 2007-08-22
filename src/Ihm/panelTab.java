@@ -1539,7 +1539,7 @@ int i;
                                                                 String [] ex;
                                                                 int i;
                                                                 
-                                                                if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (editor.contains(".app"))) {
+                                                                if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (editor.replace("$1","").trim().endsWith(".app"))) {
                                                                     ex = new String[fichs.length+3];
                                                                     ex[0]="open";
                                                                     ex[1]="-a";

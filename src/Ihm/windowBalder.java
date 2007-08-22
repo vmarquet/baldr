@@ -14,6 +14,7 @@ import Noyau.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -42,6 +43,12 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
     private ResourceBundle msgs;
     
     public windowBalder() {
+        
+        String loc = Noyau.opts.readPref("LOCALE");
+        if(loc != null){
+            Locale.setDefault(new Locale(loc));
+        }
+        
         msgs=ResourceBundle.getBundle("i18n/Balder");
         
         int i;

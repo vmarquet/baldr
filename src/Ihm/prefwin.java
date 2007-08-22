@@ -8,6 +8,7 @@
 package Ihm;
 
 import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
@@ -26,6 +27,7 @@ public class prefwin extends javax.swing.JFrame {
         static String editor;
         static boolean expert;
         static String comparator;
+        static String locale;
     }
     private ResourceBundle msgs;
     /** Creates new form prefwin */
@@ -62,6 +64,8 @@ public class prefwin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton1 = new javax.swing.JRadioButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
 
         setTitle(msgs.getString("Preference"));
         jButton1.setText(msgs.getString("Ok"));
@@ -134,7 +138,7 @@ public class prefwin extends javax.swing.JFrame {
                     .add(jLabel1)
                     .add(jRadioButton2)
                     .add(jRadioButton1))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -147,6 +151,10 @@ public class prefwin extends javax.swing.JFrame {
                 .add(jRadioButton1)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "En", "Fr" }));
+
+        jLabel4.setText(msgs.getString("Language"));
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,18 +177,23 @@ public class prefwin extends javax.swing.JFrame {
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jButton5))
                             .add(jLabel2))
-                        .addContainerGap(104, Short.MAX_VALUE))
+                        .addContainerGap(167, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 298, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jButton6)
-                        .addContainerGap(104, Short.MAX_VALUE))
+                        .addContainerGap(167, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(jLabel3)
                         .addContainerGap(107, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(214, 214, 214))))
+                        .add(214, 214, 214))
+                    .add(layout.createSequentialGroup()
+                        .add(jLabel4)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(446, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -199,7 +212,11 @@ public class prefwin extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButton6))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel4))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 11, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jButton1)
                     .add(jButton3)
@@ -265,7 +282,7 @@ JFileChooser chooser = new JFileChooser();
                 break;
         }
     }//GEN-LAST:event_jButton5ActionPerformed
-    
+
     
     private void loadPrefs(){
         if(Noyau.opts.exist("EDITOR")){
@@ -284,6 +301,25 @@ JFileChooser chooser = new JFileChooser();
                 opts.expert = true;
             }else{opts.expert = false;}
         }
+        
+        String loc;
+        int i,nbr;
+        
+        if(Noyau.opts.exist("LOCALE")){
+            loc = Noyau.opts.readPref("LOCALE");
+        }else{
+            loc = Locale.getDefault().getLanguage();
+        }
+        
+        nbr = jComboBox1.getItemCount();
+        
+        for(i=0;i<nbr;i++){
+            if(jComboBox1.getItemAt(i).toString().toLowerCase().compareTo(loc) == 0)
+                jComboBox1.setSelectedIndex(i);
+        }
+
+        opts.locale = loc;
+        
     }
     
     private void saveMods(){
@@ -292,6 +328,10 @@ JFileChooser chooser = new JFileChooser();
         }
         if(jTextField2.getText().compareTo(opts.comparator) != 0){
             Noyau.opts.writePref("COMPARATOR",jTextField2.getText());
+        }
+        
+        if(jComboBox1.getSelectedItem().toString().toLowerCase().compareTo(opts.locale) != 0){
+            Noyau.opts.writePref("LOCALE",jComboBox1.getSelectedItem().toString().toLowerCase());
         }
         
         if(jRadioButton1.isSelected() && !opts.expert){
@@ -309,9 +349,11 @@ JFileChooser chooser = new JFileChooser();
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;

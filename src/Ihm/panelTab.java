@@ -1533,31 +1533,23 @@ int i;
                                                                 if(!editor.contains("$1")) {
                                                                     editor=editor+" $1";
                                                                 }
+
                                                                 
                                                                 Runtime r=Runtime.getRuntime();
-                                                                StringBuffer f=new StringBuffer();
                                                                 String [] ex;
-                                                                int i;
+                                                                String files="";
+                                                                
+                                                                
+                                                                for(File fi:fichs) {
+                                                                      files += fi.getAbsolutePath() + " ";
+                                                                }
+                                                                files = files.trim();
                                                                 
                                                                 if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (editor.replace("$1","").trim().endsWith(".app"))) {
-                                                                    ex = new String[fichs.length+3];
-                                                                    ex[0]="open";
-                                                                    ex[1]="-a";
-                                                                    ex[2]=editor.replace("$1","").trim();
-                                                                    i=3;
-                                                                }else{
-                                                                    ex = new String[fichs.length+1];
-                                                                    ex[0]=editor.replace("$1","").trim();
-                                                                    i=1;
-                                                                }    
-                                                     
-                                                                            
-                                                                for(File fi:fichs) {
-                                                                      ex[i]=fi.getAbsolutePath();
-                                                                      i++;
+                                                                    editor = "open -a " + editor;
                                                                 }
-                                                            
-                                                              
+                                                                ex=editor.replace("$1",files).split(" ");
+                                                                
                                                                 try {
                                                                         r.exec(ex,(String[])null,File.listRoots()[0]);
                                                                 } catch (IOException exp) {

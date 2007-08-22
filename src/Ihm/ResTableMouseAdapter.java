@@ -70,29 +70,11 @@ public class ResTableMouseAdapter extends MouseAdapter{
             
             String[] exe;
           
-            
             if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (comparator.replace("$1","").replace("$2","").trim().endsWith(".app"))) {
-                exe = new String[5];
-                exe[0]="open";
-                exe[1]="-a";
-                exe[2]=comparator.replace("$1","").replace("$2","").trim();
-                exe[3]=f1.toString();
-                exe[4]=f2.toString();
-            }else{
-                exe = new String[3];
-                exe[0]=comparator.replace("$1","").replace("$2","").trim();
-                exe[1]=f1.toString();
-                exe[2]=f2.toString();
-            }
-            
-            
-//comparator.replace("$1",f1.toString()).replace("$2",f2.toString());
-            
-            //System.out.println(exe);
-            for(String toto:exe) {
-                System.out.print(toto);
-            }
-            System.out.println("done");
+                comparator = "open -a " + comparator;
+            }    
+          
+            exe=comparator.replace("$1",f1.toString()).replace("$2",f2.toString()).split(" ");
             
             Runtime r=Runtime.getRuntime();
             try {

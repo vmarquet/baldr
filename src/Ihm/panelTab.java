@@ -1521,6 +1521,7 @@ int i;
                                                                 return tabNumber;
                                                             }
                                                             
+      
                                                             private void openEditor(File[] fichs) {
                                                                 // TODO Dememnagement dans window.balder
                                                                 
@@ -1536,19 +1537,26 @@ int i;
 
                                                                 
                                                                 Runtime r=Runtime.getRuntime();
-                                                                String [] ex;
                                                                 String files="";
-                                                                
+                                                                String ex [];
                                                                 
                                                                 for(File fi:fichs) {
                                                                       files += fi.getAbsolutePath() + " ";
                                                                 }
                                                                 files = files.trim();
                                                                 
+                                                                
                                                                 if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (editor.replace("$1","").trim().endsWith(".app"))) {
                                                                     editor = "open -a " + editor;
                                                                 }
-                                                                ex=editor.replace("$1",files).split(" ");
+                                                                
+                                                                editor = editor.replace("$1",files);
+                                                                
+                                                                ex = Args.getArgs(editor);
+                                                                
+                                                                System.out.print("Start: "); for(String s : ex){
+                                                                   System.out.print("<" + s + "> ");
+                                                                }System.out.println();
                                                                 
                                                                 try {
                                                                         r.exec(ex,(String[])null,File.listRoots()[0]);

@@ -26,7 +26,7 @@ public class ResTableMouseAdapter extends MouseAdapter{
         super();
         this.table=tab;
     }
-    
+     
     public void mouseClicked(MouseEvent e) {
         if(e.isMetaDown()){
             Point pt=new Point(e.getX(), e.getY());
@@ -68,19 +68,25 @@ public class ResTableMouseAdapter extends MouseAdapter{
             StringBuffer f2=new StringBuffer();
             f2.append(tmod.getRowFile(row).getAbsolutePath());
             
-            String[] exe;
+            String[] ex;
           
             if ((System.getProperty("os.name").toUpperCase().indexOf("MAC") != -1) && (comparator.replace("$1","").replace("$2","").trim().endsWith(".app"))) {
                 comparator = "open -a " + comparator;
             }    
           
-            exe=comparator.replace("$1",f1.toString()).replace("$2",f2.toString()).split(" ");
+            comparator=comparator.replace("$1",f1.toString()).replace("$2",f2.toString());
+            
+            ex = Args.getArgs(comparator);
+            
+            System.out.print("Start: "); for(String s : ex){
+                System.out.print("<" + s + "> ");
+            }System.out.println();
             
             Runtime r=Runtime.getRuntime();
             try {
-                r.exec(exe,(String[])null,File.listRoots()[0]);
-            } catch (IOException ex) { //TODO gerer mieux
-                ex.printStackTrace();
+                r.exec(ex,(String[])null,File.listRoots()[0]);
+            } catch (IOException exp) { //TODO gerer mieux
+                exp.printStackTrace();
             }
             
         }

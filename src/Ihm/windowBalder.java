@@ -25,6 +25,7 @@ import javax.swing.JFileChooser;
 import java.awt.*;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.plaf.OptionPaneUI;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
 import org.w3c.dom.Document;
@@ -43,6 +44,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
     private ResourceBundle msgs;
     
     public windowBalder() {
+        int i;
         
         String loc = Noyau.opts.readPref("LOCALE");
         if(loc != null && loc.length() > 1){
@@ -51,7 +53,19 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         
         msgs=ResourceBundle.getBundle("i18n/Balder");
         
-        int i;
+        UIManager.put("OptionPane.yesButtonText", msgs.getString("Yes"));
+        UIManager.put("OptionPane.noButtonText", msgs.getString("No"));
+        UIManager.put("OptionPane.cancelButtonText", msgs.getString("Cancel"));
+        
+        UIManager.put("FileChooser.lookInLabelText",msgs.getString("Look_in"));
+        UIManager.put("FileChooser.saveInLabelText",msgs.getString("Save_in"));
+        UIManager.put("FileChooser.fileNameLabelText",msgs.getString("File_name"));
+        UIManager.put("FileChooser.filesOfTypeLabelText",msgs.getString("File_type"));
+        UIManager.put("FileChooser.cancelButtonText",msgs.getString("Cancel"));
+        UIManager.put("FileChooser.openButtonText",msgs.getString("Open"));
+        UIManager.put("FileChooser.saveButtonText",msgs.getString("Save"));
+        
+        
         /** Look n feel du system*/
         try {
             UIManager.setLookAndFeel(
@@ -446,7 +460,8 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
      *
      */                           
             public void ExitAndSave() {
-            int choix = JOptionPane.showConfirmDialog(this,msgs.getString("Save_Mods"),"Baldr",1);
+             
+            int choix = JOptionPane.showConfirmDialog(this,msgs.getString("Save_Mods"),"Baldr",JOptionPane.YES_NO_CANCEL_OPTION);
             if(choix==JOptionPane.NO_OPTION)
             {
                 System.exit(0);

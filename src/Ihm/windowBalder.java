@@ -334,6 +334,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
                                             private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
                                                 JFileChooser chooser = new JFileChooser();
+                                                chooser.setAccessory(new FilePreview(chooser));
                                                 chooser.setMultiSelectionEnabled(false);
                                                         FileFilter baldrxfifi=new BaldrxFileFilter();
         chooser.setFileFilter(baldrxfifi);

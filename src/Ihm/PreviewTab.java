@@ -6,20 +6,22 @@
 
 package Ihm;
 
+import java.util.ResourceBundle;
+
 /**
  *
  * @author  nezetic
  */
 public class PreviewTab extends javax.swing.JPanel {
     private int tabnum;
-    
+    private ResourceBundle msgs;
     
     /** Creates new form PreviewTab */
-    public PreviewTab(int tabnum) {
-        initComponents();
-        
+    public PreviewTab(int tabnum, ResourceBundle msgs) {
+        this.msgs=msgs;
         this.tabnum=tabnum;
-        
+
+        initComponents();
     }
     
     public void setSumm(String desc){
@@ -51,9 +53,9 @@ public class PreviewTab extends javax.swing.JPanel {
         UIsum_scroll = new javax.swing.JScrollPane();
         UIsum = new javax.swing.JTextPane();
 
-        UIsum_desc.setText("Rapport :");
+        UIsum_desc.setText(msgs.getString("Report"));
 
-        UIfiles_desc.setText("fichier(s) :");
+        UIfiles_desc.setText(msgs.getString("Files_c"));
 
         UIfiles.setText("jLabel1");
 
@@ -61,7 +63,7 @@ public class PreviewTab extends javax.swing.JPanel {
 
         UIdnum.setText("jLabel1");
 
-        UIdnum_desc.setText("r\u00e9pertoire(s), ");
+        UIdnum_desc.setText(msgs.getString("Directories_c"));
 
         UIsum.setEditable(false);
         UIsum_scroll.setViewportView(UIsum);

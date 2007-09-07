@@ -39,12 +39,11 @@ public class FilePreview extends javax.swing.JPanel implements PropertyChangeLis
      * Creates new form FilePreview
      */
     public FilePreview(JFileChooser chooser, ResourceBundle msgs) {
-        initComponents();
-        
         this.msgs = msgs;
         this.chooser = chooser;
         this.chooser.addPropertyChangeListener(this);
         
+        initComponents();        
     }
     
     /** This method is called from within the constructor to
@@ -74,23 +73,23 @@ public class FilePreview extends javax.swing.JPanel implements PropertyChangeLis
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         UItype.setText("jLabel1");
 
-        UItype_desc.setText("Type :");
+        UItype_desc.setText(msgs.getString("File_type"));
 
         UIanalysis.setText("jLabel1");
 
-        UIanalysis_desc.setText("Analyse :");
+        UIanalysis_desc.setText(msgs.getString("Analysis_c"));
 
         UImod.setText("jLabel1");
 
-        UImod_desc.setText("Derni\u00e8re Modification :");
+        UImod_desc.setText(msgs.getString("Last_Mod"));
 
         UIname.setText("jLabel1");
 
-        UIname_desc.setText("Nom du fichier :");
+        UIname_desc.setText(msgs.getString("File_name"));
 
         UIsize.setText("jLabel1");
 
-        UIsize_desc.setText("Taille :");
+        UIsize_desc.setText(msgs.getString("Size"));
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -111,7 +110,7 @@ public class FilePreview extends javax.swing.JPanel implements PropertyChangeLis
                         .add(UIname_desc)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(UIname)))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -139,18 +138,22 @@ public class FilePreview extends javax.swing.JPanel implements PropertyChangeLis
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel2Layout.createSequentialGroup()
-                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(UIanalysis_desc)
-                            .add(UItype_desc))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(UItype)
-                            .add(UIanalysis)))
-                    .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(jPanel2Layout.createSequentialGroup()
+                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(UItype_desc)
+                                    .add(UIanalysis_desc))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(UItype)
+                                    .add(UIanalysis)))
+                            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(61, Short.MAX_VALUE))
+                    .add(jPanel2Layout.createSequentialGroup()
+                        .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                        .add(61, 61, 61))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -159,14 +162,14 @@ public class FilePreview extends javax.swing.JPanel implements PropertyChangeLis
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(UItype)
-                    .add(UIanalysis_desc))
+                    .add(UItype_desc))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(UItype_desc)
-                    .add(UIanalysis))
+                    .add(UIanalysis)
+                    .add(UIanalysis_desc))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 212, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jScrollPane1.setViewportView(jPanel2);
 
@@ -217,7 +220,7 @@ public class FilePreview extends javax.swing.JPanel implements PropertyChangeLis
             
             for(int i=0; i<tabs.getLength(); i++){
                 int tcnt = jTabbedPane1.getTabCount();
-                final PreviewTab newtab=new PreviewTab(tcnt + 1);
+                final PreviewTab newtab=new PreviewTab(tcnt + 1,msgs);
                 newtab.setFiles(0,"...");
                 
                 /* <onglet> */
@@ -257,10 +260,10 @@ public class FilePreview extends javax.swing.JPanel implements PropertyChangeLis
                 /* <analys> */
                 Element eanalys = (Element)etab.getElementsByTagName("analys").item(0);
                 if(eanalys != null){
-                    UIanalysis.setText("Oui");
+                    UIanalysis.setText(msgs.getString("Yes"));
                     //System.out.println("Analyse: Ok");
                 }else{
-                    UIanalysis.setText("Non");
+                    UIanalysis.setText(msgs.getString("No"));
                 }
                 /* <rapport> */
                 Element erapport = (Element)etab.getElementsByTagName("rapport").item(0);
@@ -274,7 +277,8 @@ public class FilePreview extends javax.swing.JPanel implements PropertyChangeLis
             }
             
         }catch(Exception e){
-            throw e;
+            e.printStackTrace();
+            //throw e;
         }finally{
             try{fs.close();}catch(Exception e){}
             return;

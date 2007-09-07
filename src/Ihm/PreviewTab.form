@@ -56,12 +56,16 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="UIsum_desc">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rapport :"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="i18n/Balder.properties" key="Report" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="UIfiles_desc">
       <Properties>
-        <Property name="text" type="java.lang.String" value="fichier(s) :"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="i18n/Balder.properties" key="Files_c" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="UIfiles">
@@ -81,7 +85,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="UIdnum_desc">
       <Properties>
-        <Property name="text" type="java.lang.String" value="r&#xe9;pertoire(s), "/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="i18n/Balder.properties" key="Directories_c" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="UIsum_scroll">

@@ -49,22 +49,29 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTabbedPane1" alignment="0" pref="337" max="32767" attributes="1"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="UIanalysis_desc" min="-2" max="-2" attributes="0"/>
-                                  <Component id="UItype_desc" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="UItype_desc" min="-2" max="-2" attributes="0"/>
+                                          <Component id="UIanalysis_desc" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="UItype" min="-2" max="-2" attributes="0"/>
+                                          <Component id="UIanalysis" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jPanel1" alignment="0" max="32767" attributes="1"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="UItype" min="-2" max="-2" attributes="0"/>
-                                  <Component id="UIanalysis" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace pref="61" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jPanel1" alignment="0" max="32767" attributes="1"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jTabbedPane1" pref="337" max="32767" attributes="1"/>
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="61" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -75,16 +82,16 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="UItype" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="UIanalysis_desc" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="UItype_desc" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="UItype_desc" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="UIanalysis" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="UIanalysis_desc" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTabbedPane1" min="-2" pref="212" max="-2" attributes="0"/>
-                      <EmptySpace pref="47" max="32767" attributes="0"/>
+                      <EmptySpace pref="68" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -97,7 +104,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="UItype_desc">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Type :"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="i18n/Balder.properties" key="File_type" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="UIanalysis">
@@ -107,7 +116,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="UIanalysis_desc">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Analyse :"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="i18n/Balder.properties" key="Analysis_c" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel1">
@@ -134,7 +145,7 @@
                                   <Component id="UIname" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="132" max="32767" attributes="0"/>
+                          <EmptySpace pref="159" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jSeparator1" alignment="1" pref="337" max="32767" attributes="0"/>
                   </Group>
@@ -171,7 +182,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="UImod_desc">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Derni&#xe8;re Modification :"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="i18n/Balder.properties" key="Last_Mod" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="UIname">
@@ -181,7 +194,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="UIname_desc">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nom du fichier :"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="i18n/Balder.properties" key="File_name" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="UIsize">
@@ -191,7 +206,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="UIsize_desc">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Taille :"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="i18n/Balder.properties" key="Size" replaceFormat="msgs.getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JSeparator" name="jSeparator1">

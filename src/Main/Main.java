@@ -50,7 +50,11 @@ public class Main {
         
         i++;
     }
+    if(i!=1){
     ihmc.go();
+    }else{
+    System.err.println("No files ...");
+    }
     }else{
     java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {

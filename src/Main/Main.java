@@ -6,6 +6,7 @@
  */
 
 package Main;
+import Ihm.ConsoleIhm;
 import Ihm.windowBalder;
 import Noyau.*;
 import java.io.File;
@@ -25,6 +26,7 @@ public class Main {
     }
     
     public static void main(String args[]) {
+        int i;
     main=new Main();
     final String fargs[]=args;
 
@@ -34,6 +36,22 @@ public class Main {
         noyau = new Noyau();
         }
     });
+    if(args.length>0 &&  fargs[0].equals("-")){
+        i=0;
+        ConsoleIhm ihmc=new ConsoleIhm();
+    for(String arg:fargs)
+    {
+        if(i!=0){
+      File f=new File(arg);
+    if(f.exists()){ihmc.addFile(f); }
+            
+        }
+        
+        
+        i++;
+    }
+    ihmc.go();
+    }else{
     java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
         ihm = new windowBalder();
@@ -51,6 +69,8 @@ public class Main {
         
         }
     });
+    }
+    
     }
     
 }

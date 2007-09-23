@@ -153,16 +153,16 @@ public abstract class Task extends Thread implements Savable{
         meanDist = k = 0;
         ci = cj = cij = 0L;
         
-        System.out.println("# " + files.length + " files");
+        //System.out.println("# " + files.length + " files");
         
         for(i=0;i<nbr;i++){
             
-            System.out.println("# filename : " + files[i].getName());
+          //  System.out.println("# filename : " + files[i].getName());
             try  {
                 ci =  getGZipSize(files[i]);
                 
-                System.out.println("# file size: " + files[i].length());
-                System.out.println("# compressed file size: " + ci);
+         //       System.out.println("# file size: " + files[i].length());
+          //      System.out.println("# compressed file size: " + ci);
             } catch (Exception e) {
                 System.err.println(e);
             }
@@ -188,14 +188,14 @@ public abstract class Task extends Thread implements Savable{
                 }
                 setState(i,j);
                 
-                System.out.println(" # pair " + files[i].getName()+"<->" + files[j].getName() + " = " + getRes(i,j));
+            //    System.out.println(" # pair " + files[i].getName()+"<->" + files[j].getName() + " = " + getRes(i,j));
                 meanDist += getRes(i,j);
                 k++;
             }
         }
         
         meanDist /= (float)k;
-        System.out.println("# meanDist = "+meanDist);
+      //  System.out.println("# meanDist = "+meanDist);
         
         stateMessage="Analyse Terminée";
         this.state=1;

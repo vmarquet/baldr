@@ -28,6 +28,7 @@ public class prefwin extends javax.swing.JFrame {
         static boolean expert;
         static String comparator;
         static String locale;
+        static boolean preview;
     }
     private ResourceBundle msgs;
     /** Creates new form prefwin */
@@ -66,6 +67,7 @@ public class prefwin extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setTitle(msgs.getString("Preference"));
         jButton1.setText(msgs.getString("Ok"));
@@ -138,7 +140,7 @@ public class prefwin extends javax.swing.JFrame {
                     .add(jLabel1)
                     .add(jRadioButton2)
                     .add(jRadioButton1))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(425, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -156,6 +158,10 @@ public class prefwin extends javax.swing.JFrame {
 
         jLabel4.setText(msgs.getString("Language"));
 
+        jCheckBox1.setText(msgs.getString("Preview_files"));
+        jCheckBox1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jCheckBox1.setMargin(new java.awt.Insets(0, 0, 0, 0));
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,6 +170,8 @@ public class prefwin extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(jCheckBox1)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 352, Short.MAX_VALUE)
                         .add(jButton4)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jButton3)
@@ -177,15 +185,15 @@ public class prefwin extends javax.swing.JFrame {
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jButton5))
                             .add(jLabel2))
-                        .addContainerGap(167, Short.MAX_VALUE))
+                        .addContainerGap(355, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 298, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jButton6)
-                        .addContainerGap(167, Short.MAX_VALUE))
+                        .addContainerGap(355, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(jLabel3)
-                        .addContainerGap(107, Short.MAX_VALUE))
+                        .addContainerGap(303, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(214, 214, 214))
@@ -216,12 +224,18 @@ public class prefwin extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel4))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 11, Short.MAX_VALUE)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButton1)
-                    .add(jButton3)
-                    .add(jButton4))
-                .addContainerGap())
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createSequentialGroup()
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 11, Short.MAX_VALUE)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(jButton1)
+                            .add(jButton3)
+                            .add(jButton4))
+                        .addContainerGap())
+                    .add(layout.createSequentialGroup()
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jCheckBox1)
+                        .addContainerGap())))
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -285,6 +299,11 @@ JFileChooser chooser = new JFileChooser();
 
     
     private void loadPrefs(){
+        if(Noyau.opts.exist("PREVIEW")){
+            jCheckBox1.setSelected((Boolean)Noyau.opts.readPref("PREVIEW",false));
+        }
+        opts.preview = jCheckBox1.isSelected();
+        
         if(Noyau.opts.exist("EDITOR")){
             jTextField1.setText(Noyau.opts.readPref("EDITOR"));
         }
@@ -323,6 +342,11 @@ JFileChooser chooser = new JFileChooser();
     }
     
     private void saveMods(){
+        if(jCheckBox1.isSelected() && !opts.preview){
+            Noyau.opts.writePref("PREVIEW",true);
+        }else if(!jCheckBox1.isSelected() && opts.preview){
+            Noyau.opts.writePref("PREVIEW",false);
+        }
         if(jTextField1.getText().compareTo(opts.editor) != 0){
             Noyau.opts.writePref("EDITOR",jTextField1.getText());
         }
@@ -349,6 +373,7 @@ JFileChooser chooser = new JFileChooser();
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

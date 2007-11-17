@@ -64,6 +64,7 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
         UIManager.put("FileChooser.cancelButtonText",msgs.getString("Cancel"));
         UIManager.put("FileChooser.openButtonText",msgs.getString("Open"));
         UIManager.put("FileChooser.saveButtonText",msgs.getString("Save"));
+        UIManager.put("FileChooser.chooseButtonText",msgs.getString("Choose"));
         
         
         /** Look n feel du system*/
@@ -334,7 +335,9 @@ public class windowBalder extends javax.swing.JFrame implements Savable {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
                                             private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
                                                 JFileChooser chooser = new JFileChooser();
-                                                chooser.setAccessory(new FilePreview(chooser,msgs));
+                                                if(Noyau.opts.exist("PREVIEW") && (Boolean)Noyau.opts.readPref("PREVIEW",false)){
+                                                    chooser.setAccessory(new FilePreview(chooser,msgs));
+                                                }
                                                 //chooser.setMinimumSize(new Dimension(530,530));
                                                 //chooser.setSize(new Dimension(530,530));
                                                 chooser.setMultiSelectionEnabled(false);

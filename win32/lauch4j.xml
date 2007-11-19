@@ -1,29 +1,32 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
-  <headerType>0</headerType>
-  <jar>E:\Baldr\win32\Balder.jar</jar>
-  <outfile>E:\Baldr\win32\baldr.exe</outfile>
+  <headerType>gui</headerType>
+  <jar>C:\Documents and Settings\NeZetiC\Bureau\Baldr\Balder.jar</jar>
+  <outfile>C:\Documents and Settings\NeZetiC\Bureau\Baldr\baldr.exe</outfile>
   <errTitle></errTitle>
-  <jarArgs></jarArgs>
+  <cmdLine></cmdLine>
   <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
   <customProcName>false</customProcName>
   <stayAlive>false</stayAlive>
-  <icon>E:\Baldr\win32\bin\baldr.ico</icon>
+  <icon>C:\Documents and Settings\NeZetiC\Bureau\Baldr\bin\baldr.ico</icon>
   <jre>
     <path></path>
     <minVersion>1.5.0</minVersion>
     <maxVersion></maxVersion>
+    <dontUsePrivateJres>false</dontUsePrivateJres>
     <initialHeapSize>0</initialHeapSize>
     <maxHeapSize>0</maxHeapSize>
-    <args></args>
   </jre>
   <versionInfo>
-    <fileVersion>0.1.0.0</fileVersion>
-    <txtFileVersion>0.1a</txtFileVersion>
+    <fileVersion>0.2.0.0</fileVersion>
+    <txtFileVersion>0.2b</txtFileVersion>
     <fileDescription>Baldr</fileDescription>
     <copyright>esiea-labs</copyright>
-    <productVersion>0.1.0.0</productVersion>
-    <txtProductVersion>0.1a</txtProductVersion>
+    <productVersion>0.2.0.0</productVersion>
+    <txtProductVersion>0.2b</txtProductVersion>
     <productName>Baldr</productName>
     <companyName>esiea-labs</companyName>
     <internalName>Baldr</internalName>

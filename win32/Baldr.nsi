@@ -2,7 +2,7 @@
 ;Written by NeZetiC
 
 !ifndef VERSION
-  !define VERSION '0.1a'
+  !define VERSION '0.2b'
 !endif
 
 ;--------------------------------
@@ -179,6 +179,8 @@ Section "Uninstall"
   Delete "$INSTDIR\baldr.ico"
   Delete "$INSTDIR\baldr.exe"
   Delete "$INSTDIR\baldr.chm"
+  Delete "$INSTDIR\GPL.txt"
+  Delete "$INSTDIR\License.txt"
   
   RMDir "$INSTDIR\Images"
   RMDir "$INSTDIR\lib"

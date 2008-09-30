@@ -59,7 +59,7 @@ import Ihm.TransferableTreeNode;
  */
 public class DndTree extends JTree {
     private Insets insets;
-    private static DefaultMutableTreeNode noeudDragué;
+    private static DefaultMutableTreeNode noeudDragued;
     private int top = 0, bottom = 0, topRow = 0, bottomRow = 0;
     private panelTab currentPanelTab;
     public DndTree(DefaultMutableTreeNode racine,panelTab PT) {
@@ -102,7 +102,7 @@ public class DndTree extends JTree {
             } else {
                 DefaultMutableTreeNode selection = (DefaultMutableTreeNode) path.getLastPathComponent();
                 if (selection.isLeaf()) {
-                    noeudDragué =selection;
+                    noeudDragued =selection;
                     TransferableTreeNode node = new TransferableTreeNode(selection);
                     dragGestureEvent.startDrag(DragSource.DefaultCopyDrop,node, new MyDragSourceListener());
                 } else {
@@ -184,7 +184,7 @@ public class DndTree extends JTree {
         }
         private void rmvSrcElement() {
             DefaultTreeModel model = (DefaultTreeModel) (DndTree.this.getModel());
-            model.removeNodeFromParent(noeudDragué);
+            model.removeNodeFromParent(noeudDragued);
             System.out.println("MOVE: node removed");
         }
     }

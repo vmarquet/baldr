@@ -20,6 +20,8 @@ import Noyau.*;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -51,6 +53,8 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
     private double[][] vectorsd;
     /** Creates new form panelTab */
     private double[] valLin;
+
+    private JButton graphButton = null;
     
     private ResourceBundle msgs;
     /** Construct and display a tab
@@ -73,17 +77,35 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         jLabel3.setText(msgs.getString("Of")+Integer.toString(jComboBox1.getItemCount()));
         // TODO: Comprendre pourquoi les getWidth retournent 0 ici
         //jSplitPane2.setDividerLocation(this.getPreferredSize().width*2/3);
-        plot2DPanel1.plotToolBar.remove(3); // On dégage les entrées du menu de la toolbar qui servent à rien
+        plot2DPanel1.plotToolBar.remove(3); // On dï¿½gage les entrï¿½es du menu de la toolbar qui servent ï¿½ rien
         plot2DPanel1.plotToolBar.remove(4);
         
-        plot3DPanel1.plotToolBar.remove(4); // On dégage les entrées du menu de la toolbar qui servent à rien
+        plot3DPanel1.plotToolBar.remove(4); // On dï¿½gage les entrï¿½es du menu de la toolbar qui servent ï¿½ rien
         plot3DPanel1.plotToolBar.remove(5);
-        
+
+        // adding button to open a window with the graph display
+        graphButton = new JButton(new ImageIcon("Images/graph.png"));
+        graphButton.setSize(16,16);
+        graphButton.setToolTipText("graph display");
+        graphButton.addActionListener(new ActionListener() { 
+            public void actionPerformed(ActionEvent e) { 
+                JFrame fen = new JFrame();
+                fen.setVisible(true);
+                // TODO: get access to the float[][]
+                // TODO: pb: ma classe modÃ¨le est un pattern singleton, 
+                // alors qu'il est possible d'avoir plusieurs onglets ici
+            } 
+        });
+        plot2DPanel1.plotToolBar.add(graphButton);
+
+
         plot2DPanel1.setVisible(true);
         plot3DPanel1.setVisible(false);
         
         jSplitPane3.setDividerSize(0);
         unset3Dview();
+
+
     
         
         	
@@ -694,7 +716,7 @@ int i;
             tc.setCellRenderer(td);
             if(i==0){
                 //on se passe de aller chercher la font du table header...
-                // TODO : Ameliorer ça
+                // TODO : Ameliorer ï¿½a
                 tc.setMinWidth(((String)tmod.getValueAt(0,0)).length()*5);
                 tc.setCellRenderer(tr);
             }else{
@@ -793,7 +815,7 @@ int i;
         
         lro=fileList; /*par def racine*/
         
-        if(ins!=null)  /*permet de recuperer le noeud selectionné */
+        if(ins!=null)  /*permet de recuperer le noeud selectionnï¿½ */
         {
             
             Enumeration files = fileList.breadthFirstEnumeration(); /*Tout l'arbre en largeur*/
@@ -1047,7 +1069,7 @@ int i;
         /*premier fichier selectionn?*/
         DefaultMutableTreeNode lro=noeud;
         Main.modifie=true;
-        //une fois le noeud selectionné trouvé, on insère les fichiers
+        //une fois le noeud selectionnï¿½ trouvï¿½, on insï¿½re les fichiers
         for(File fich : listeDeFichiers){
             lro.add(recursDir(fich)); /*Fonction d'ajout r?cursive de fichiers*/
         }
@@ -1133,7 +1155,7 @@ int i;
             tc.setCellRenderer(td);
             if(i==0){
                 //on se passe de aller chercher la font du table header...
-                // TODO : Ameliorer ça
+                // TODO : Ameliorer ï¿½a
                 tc.setMinWidth(((String)mat.getValueAt(0,0)).length()*5);
                 tc.setCellRenderer(tr);
             }else{
@@ -1207,7 +1229,7 @@ int i;
         }
         
         slabels = true;
-        //jButton12.setText("Masquer les étiquettes");
+        //jButton12.setText("Masquer les ï¿½tiquettes");
         jButton12.setIcon(new ImageIcon("Images/textfield_delete.png"));
         jButton12.setToolTipText(msgs.getString("Hide_Labels"));
     }
@@ -1218,7 +1240,7 @@ int i;
             plot3DPanel1.removePlotable(labels[i]);
         }
         slabels = false;
-        //jButton12.setText("Afficher les étiquettes");
+        //jButton12.setText("Afficher les ï¿½tiquettes");
         jButton12.setIcon(new ImageIcon("Images/textfield_add.png"));
         jButton12.setToolTipText(msgs.getString("Show_Labels"));
     }
@@ -1306,7 +1328,7 @@ int i;
             updatePlot(val,nb);
             
             jPanel4.setVisible(true);
-            //TODO : Ouvrir le splitPane à la bonne taille
+            //TODO : Ouvrir le splitPane ï¿½ la bonne taille
             jSplitPane2.setDividerLocation(this.getSize().width*1/2);
             jButton9.setEnabled(false);
             jButton3.setEnabled(true);

@@ -27,53 +27,54 @@ public class Main {
     
     public static void main(String args[]) {
         int i;
-    main=new Main();
-    final String fargs[]=args;
+        main=new Main();
+        final String fargs[]=args;
 
     
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-        noyau = new Noyau();
-        }
-    });
-    if(args.length>0 &&  fargs[0].equals("-")){
-        i=0;
-        ConsoleIhm ihmc=new ConsoleIhm();
-    for(String arg:fargs)
-    {
-        if(i!=0){
-      File f=new File(arg);
-    if(f.exists()){ihmc.addFile(f); }
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                noyau = new Noyau();
+            }
+        });
+
+        if(args.length>0 &&  fargs[0].equals("-")){
+            i=0;
+            ConsoleIhm ihmc=new ConsoleIhm();
+            for(String arg:fargs)
+            {
+                if(i!=0){
+                    File f=new File(arg);
+                    if(f.exists()){ihmc.addFile(f); }
             
-        }
-        
-        
-        i++;
-    }
-    if(i!=1){
-    ihmc.go();
-    }else{
-    System.err.println("No files ...");
-    }
-    }else{
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-        ihm = new windowBalder();
-        
-            if(fargs.length>0)
-    {
-            SaveAndRestore defLoad = new SaveAndRestore(ihm);
+                }
+                i++;
+            }
+
+            if(i!=1){
+                ihmc.go();
+            }else{
+                System.err.println("No files ...");
+            }
             
-    for(String arg:fargs)
-    {
-    File f=new File(arg);
-    if(f.exists()){defLoad.restore(f);}
-    }
-    }
+        }else{
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    ihm = new windowBalder();
         
+                    if(fargs.length>0)
+                    {
+                        SaveAndRestore defLoad = new SaveAndRestore(ihm);
+            
+                        for(String arg:fargs)
+                        {
+                            File f=new File(arg);
+                            if(f.exists()){defLoad.restore(f);}
+                        }
+                    }
+        
+                }
+            });
         }
-    });
-    }
     
     }
     

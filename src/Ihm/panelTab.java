@@ -7,25 +7,29 @@
 
 package Ihm;
 
+import Graph.controler.*;
+import Graph.model.*;
+import Graph.view.*;
 import Ihm.renderers.*;
-import java.awt.Color;
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.ResourceBundle;
-import javax.swing.tree.*;
 import Main.*;
 import Noyau.*;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.swing.*;
 import javax.swing.table.*;
+import javax.swing.tree.*;
 import org.math.plot.plotObjects.Plotable;
 import org.math.plot.plots.Plot;
 import org.w3c.dom.*;
@@ -87,14 +91,11 @@ public class panelTab extends javax.swing.JPanel implements ResDispatcher,Savabl
         graphButton = new JButton(new ImageIcon("Images/graph.png"));
         graphButton.setSize(16,16);
         graphButton.setToolTipText("graph display");
-        graphButton.addActionListener(new ActionListener() { 
-            public void actionPerformed(ActionEvent e) { 
-                JFrame fen = new JFrame();
-                fen.setVisible(true);
-                // TODO: get access to the float[][]
-                // TODO: pb: ma classe modèle est un pattern singleton, 
-                // alors qu'il est possible d'avoir plusieurs onglets ici
-            } 
+        //graphButton.addActionListener(new graphButtonActionListener(this));
+        graphButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                graphButtonActionListener(e);
+            }
         });
         plot2DPanel1.plotToolBar.add(graphButton);
 
@@ -1464,7 +1465,7 @@ int i;
                                                                 return str;
                                                             }
                                                             
-                                                            private DefaultMutableTreeNode recursDomTree(Node n) {
+                                                            private DefaultMutableTreeNode recursDomTree(org.w3c.dom.Node n) {
                                                                 int i;
                                                                 File f;
                                                               //  System.out.println(n.getNodeName());
@@ -1504,7 +1505,7 @@ int i;
                                                              *@see Savable
                                                              */
                                                             
-                                                            public void fromDom(Node node) {
+                                                            public void fromDom(org.w3c.dom.Node node) {
                                                                 int j;
                                                                 int i;
                                                                 NodeList l=node.getChildNodes();
@@ -1611,12 +1612,49 @@ int i;
                                                                 
                                                             }
 
-    public ResourceBundle getMsgs() {
-        return msgs;
+    // called when we click on the graph button:
+    private void graphButtonActionListener(ActionEvent e) {
+        // we get the files and the matrix computed by Baldr
+        Task task = this.analys;
+        if (task == null)
+            return;
+        File[] files = task.getFiles();
+        float[][] coef = task.getResults();
+        
+        // we create the model and we initialize it
+        SimulationModel model = new SimulationModel();
+        GraphCreatorFromBalder modelSetter = new GraphCreatorFromBalder(coef, model);
+        // we create the view (JPanel)
+        SimulationViewJPanel panel = new SimulationViewJPanel(model);
+        // we create the simulation
+        SimulationControler simu = new SimulationControler(panel, model);
+
+        // we create a new window to display the graph
+        JFrame fen = new JFrame();
+        fen.setMinimumSize(new Dimension(640,480));
+        fen.setVisible(true);
+        fen.add(panel);
+        panel.requestFocus();
+        
+        // we launch the simulation
+        Thread thread = new Thread(simu);
+
+        // TODO: the SimulationControler is a thread, prevent it from
+        // runnning after the window is closed
     }
                                                             
                                                             
-                                                          
+    // getters:
+    public ResourceBundle getMsgs() {
+        return msgs;
+    }
+
+    public Task getTask() {
+        return this.analys;
+    }
+                              
+    
+    
                                                                 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem SelectAll;

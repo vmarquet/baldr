@@ -15,6 +15,11 @@ public class GraphCreatorFromBalder {
 		// for each file, we create a node
 		for (int i=0; i<tab.length; i++) {
 			Node node = new Node(i);
+			model.addNode(node);
+
+			// we set it's departure position randomly
+			node.pos_x = Math.random();
+			node.pos_y = Math.random();
 
 			// we search for the color to give to the node, proportionnate to
 			// the minimum of the score between this file and other files
@@ -38,8 +43,10 @@ public class GraphCreatorFromBalder {
 		// for each node, we create a link with every other node (file)
 		// proportionnate to the distance between the files
 		for (int i=0; i<tab.length; i++) {
-			for (int j=0; j<i+1; j++) {
+			for (int j=0; j<i; j++) {
 				Link link = new Link(i,j,model);
+				model.addLink(link);
+
 				link.setLength((double)tab[i][j]);
 
 				// we set the link color, depending on how the files are close

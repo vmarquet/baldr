@@ -1638,6 +1638,7 @@ int i;
         
         // we launch the simulation
         Thread thread = new Thread(simu);
+        thread.start();
 
         // TODO: the SimulationControler is a thread, prevent it from
         // runnning after the window is closed

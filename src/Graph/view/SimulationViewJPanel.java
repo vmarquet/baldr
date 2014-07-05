@@ -58,8 +58,13 @@ public class SimulationViewJPanel extends JPanel implements SimulationView {
 			           (int)diameter, (int)diameter);
 			// we draw the text (node number / ...)
 			g.setColor(Color.BLACK);
-			g.drawString(Integer.toString(node.getNodeNumber()),
-			             (int)(margin_x+node.pos_x*min_size -7),
+			int n = node.getNodeNumber(); int offset;
+			if (n<10)
+				offset = -4;
+			else
+				offset = -7;
+			g.drawString(Integer.toString(n),
+			             (int)(margin_x+node.pos_x*min_size +offset),
 			             (int)(margin_y+node.pos_y*min_size +4));
 		}
 

@@ -9,7 +9,7 @@ public class Link {
 	private Node node_end   = null;
 
 	// physic simulation: we consider the link as a spring:
-	private double length = 0.5;  // longueur au repos
+	private double length = 0.1;  // longueur au repos
 	private double rigidity = 5.0;  // constante de raideur
 
 	private Color color = Color.decode("#888888");

@@ -59,6 +59,9 @@ public class SimulationModel {
 		Node node = getNodeNumber(number);
 		node.setPosition(X,Y);
 	}
+	public void setLinks(ArrayList<Link> links) {
+		this.links = links;
+	}
 
 	// to know if two nodes are linked
 	public boolean isLinked(Node node1, Node node2) {

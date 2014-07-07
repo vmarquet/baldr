@@ -30,8 +30,6 @@ public class SimulationControler implements Runnable {
 			// initialization
 			boolean wantToQuit = false;
 
-			boolean first = true;
-
 			// main loop
 			while ( ! wantToQuit ) {
 
@@ -63,34 +61,6 @@ public class SimulationControler implements Runnable {
 					link.applyForceBetweenNodes(f);
 				}
 
-				// Force de répulsion en 1/r avec r la distance entre les noeuds
-				// on parcours tous les noeuds
-				for (int i=0; i<model.getNumberOfNodes(); i++) {
-
-					// on parcours tous les noeuds pas encore traités
-					for (int j=i+1; j<model.getNumberOfNodes(); j++) {
-
-						Node node1 = model.getNodeNumber(i);
-						Node node2 = model.getNodeNumber(j);
-
-						// on n'applique la force répulsive qu'aux noeuds non directement reliés par ressort
-						if (model.isLinked(node1, node2) == true)
-							continue;
-
-						// on récupère la distance entre les noeuds
-						double distance = Link.getDistance(node1, node2);
-
-						// on évite de diviser par 0:
-						if (distance <= 0)
-							continue;
-
-						// norme de la force en 1/r
-						double coef_repulsion = model.getCoefRepulsion();
-						double f = coef_repulsion / distance;
-						Link.applyForceBetweenNodes(f, node1, node2);
-					}
-				}
-
 				// force de frottement fluide: f = -lambda*v
 				double lambda = model.getLambda();
 				for (Node node : model.getNodes()) {
@@ -120,6 +90,35 @@ public class SimulationControler implements Runnable {
 					node.pos_y += node.vit_y*(this.timeStep/1000.0);
 				}
 
+
+				// we resize the graph, so that the maximum difference of nodes positions
+				// on x axis is 1 and same thing for y axis
+				// after, we center the graph around the point (0.5, 0.5)
+				// so all node positions will be >= 0 and <= 1
+				// after that, it's very easy to compute pixels positions
+				// even if the user resizes the window
+				double min_x = 0.5, max_x = 0.5;
+				double min_y = 0.5, max_y = 0.5;
+				for (Node node : model.getNodes()) {
+					if (node.pos_x < min_x)
+						min_x = node.pos_x;
+					if (node.pos_x > max_x)
+						max_x = node.pos_x;
+					if (node.pos_y < min_y)
+						min_y = node.pos_y;
+					if (node.pos_y > max_y)
+						max_y = node.pos_y;
+				}
+				double diff_x = max_x - min_x;
+				double diff_y = max_y - min_y;
+				for (Node node : model.getNodes()) {
+					if (diff_x > 0.9)
+						node.pos_x /= diff_x*1.15;
+					if (diff_y > 0.9)
+						node.pos_y /= diff_y*1.15;
+				}
+
+
 				// afin que le graphe ne se déplace pas hors du champ de la fenêtre,
 				// on fait en sorte que son barycentre soit toujours au milieu de la fenêtre
 
@@ -146,22 +145,9 @@ public class SimulationControler implements Runnable {
 					node.pos_y += ecart_y;
 				}
 
-				// DEBUG:
-				// for (Node node : model.getNodes()) {
-				// 	System.out.println("-----------------" + i);
-				// 	System.out.println("for_x: " + node.for_x);
-				// 	System.out.println("for_y: " + node.for_y);
-				// 	System.out.println("acc_x: " + node.acc_x);
-				// 	System.out.println("acc_y: " + node.acc_y);
-				// 	System.out.println("vit_x: " + node.vit_x);
-				// 	System.out.println("vit_y: " + node.vit_y);
-				// 	System.out.println("pos_x: " + node.pos_x);
-				// 	System.out.println("pos_y: " + node.pos_y);
-				// }
-
 
 				view.updateDisplay();
-				Thread.sleep(50);  // Synchronize the simulation with real time
+				Thread.sleep(timeStep);  // Synchronize the simulation with real time
 			}
 		}
 		catch(InterruptedException ex) {

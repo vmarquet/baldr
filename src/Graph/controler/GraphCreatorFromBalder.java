@@ -6,12 +6,15 @@ import Graph.model.Link;
 import java.io.*;
 import java.util.Scanner;
 import java.awt.Color;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.ArrayList;
 
 public class GraphCreatorFromBalder {
 
 	// the table given as argument is the table of the match score
 	// between files found by Baldr
-	public GraphCreatorFromBalder(float[][] tab, SimulationModel model) {
+	public GraphCreatorFromBalder(float[][] tab, File[] files, SimulationModel model) {
 		// we search min and max match values, we need them to compute the colors
 		float min = 10;
 		float max = 0;
@@ -26,7 +29,7 @@ public class GraphCreatorFromBalder {
 
 		// for each file, we create a node
 		for (int i=0; i<tab.length; i++) {
-			Node node = new Node(i);
+			Node node = new Node(i, files[i].getName());
 			model.addNode(node);
 
 			// we set it's departure position randomly
@@ -58,10 +61,11 @@ public class GraphCreatorFromBalder {
 
 		// for each node, we create a link with every other node (file)
 		// proportionnate to the distance between the files
+		ArrayList<Link> links = new ArrayList<Link>();
 		for (int i=0; i<tab.length; i++) {
 			for (int j=0; j<tab[i].length-1; j++) {
 				Link link = new Link(i,j,model);
-				model.addLink(link);
+				links.add(link);
 
 				link.setLength((double)tab[i][j]);
 
@@ -71,6 +75,23 @@ public class GraphCreatorFromBalder {
 			} 
 		}
 
+		// we sort links from greatest length to smallest length
+		// because we want links with smallest length to be draw last
+		// because then it's easier to see which files are close
+		Collections.sort(links, new Comparator<Link>() {
+			@Override
+			public int compare(Link link1, Link link2) {
+				if (link1.getLength() == link2.getLength())
+					return 0;
+				else if (link1.getLength() > link2.getLength())
+					return -1;
+				else
+					return 1;
+			}
+		});
+
+		// we add the links to the model
+		model.setLinks(links);
 	}
 
 

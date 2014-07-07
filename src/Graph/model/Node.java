@@ -6,6 +6,7 @@ public class Node {
 
 	private int number;   // starts from 0
 	private static int totalNodeNumber = 0;
+	private String filename;
 
 	public double pos_x = 0;  // position
 	public double pos_y = 0;
@@ -26,6 +27,10 @@ public class Node {
 	// if node number < 0, automatic numerotation
 	public Node(int number) {
 		setNodeNumber(number);
+	}
+	public Node(int number, String filename) {
+		setNodeNumber(number);
+		this.filename = filename;
 	}
 	public Node(int number, double X, double Y) {
 		setNodeNumber(number);
@@ -68,5 +73,8 @@ public class Node {
 	}
 	public double getDiameter() {
 		return this.diameter;
+	}
+	public String getFileName() {
+		return this.filename;
 	}
 }

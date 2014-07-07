@@ -1623,7 +1623,7 @@ int i;
         
         // we create the model and we initialize it
         SimulationModel model = new SimulationModel();
-        GraphCreatorFromBalder modelSetter = new GraphCreatorFromBalder(coef, model);
+        GraphCreatorFromBalder modelSetter = new GraphCreatorFromBalder(coef, files, model);
         // we create the view (JPanel)
         SimulationViewJPanel panel = new SimulationViewJPanel(model);
         // we create the simulation
@@ -1631,7 +1631,8 @@ int i;
 
         // we create a new window to display the graph
         JFrame fen = new JFrame();
-        fen.setMinimumSize(new Dimension(640,480));
+        fen.setTitle("Graph display (beta)");
+        fen.setMinimumSize(new Dimension(500,500));
         fen.setVisible(true);
         fen.add(panel);
         panel.requestFocus();

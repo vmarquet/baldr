@@ -6,7 +6,12 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+import java.awt.BasicStroke;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.lang.Math;
+import javax.swing.JLabel;
+import java.awt.Dimension;
 
 
 public class SimulationViewJPanel extends JPanel implements SimulationView {
@@ -15,17 +20,27 @@ public class SimulationViewJPanel extends JPanel implements SimulationView {
 
 	private int margin_x;
 	private int margin_y;
-	private int min_size;
+	private int min_size;  // minimum between window size and height
+	private double scale = 1.0;
 
 	public SimulationViewJPanel(SimulationModel model) {
 		this.model = model;
+		this.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int x = e.getX();
+				int y = e.getY();
+				searchNodeInformation(x,y);
+			}
+			public void mouseExited(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {}
+			public void mousePressed(MouseEvent e) {}
+		});
 	}
 
 	public void updateDisplay() {
 		this.updateUI();
-		// this.update();
-		// this.repaint();
-		// this.revalidate();
 	}
 	@Override
 	public void paintComponent(Graphics g) {
@@ -39,78 +54,106 @@ public class SimulationViewJPanel extends JPanel implements SimulationView {
 		g2d.clearRect(0,0,this.getWidth(),this.getHeight());
 
 		// we compute the ratio for the display
-		computeMargin(g2d);
+		computeMargin();
 
 		// we paint the objetcs
 		paintLinks(g2d);
 		paintNodes(g2d);
-		//paintForce(g2d); // debug
 	}
 	private void paintNodes(Graphics2D g) {
 		for (Node node : model.getNodes()) {
 			Color color = node.getColor();
-			double diameter = min_size*node.getDiameter();
+			double diameter = convertNodeDiameterToPixel(node);
 			// we draw the circle:
 			g.setColor(color);
-			g.fillOval((int)(margin_x+node.pos_x*min_size-diameter/2), 
-			           (int)(margin_y+node.pos_y*min_size-diameter/2), 
+			g.fillOval((int)(convertNodePositionToPixelX(node) -diameter/2), 
+			           (int)(convertNodePositionToPixelY(node) -diameter/2), 
 			           (int)diameter, (int)diameter);
-			// we draw the text (node number / ...)
+			// we draw the node number inside the circle
 			g.setColor(Color.BLACK);
-			int n = node.getNodeNumber(); int offset;
-			if (n<10)
-				offset = -4;
-			else
-				offset = -7;
+			int n = node.getNodeNumber(); int string_offset;
+			if (n<10) // one digit number
+				string_offset = -4;
+			else if (n>= 10 && n<100) // two digit number
+				string_offset = -7;
+			else // 3 or more digits number
+				string_offset = -10;
 			g.drawString(Integer.toString(n),
-			             (int)(margin_x+node.pos_x*min_size +offset),
-			             (int)(margin_y+node.pos_y*min_size +4));
+			             (int)(convertNodePositionToPixelX(node) +string_offset),
+			             (int)(convertNodePositionToPixelY(node) +4));
 		}
 
 	}
 	private void paintLinks(Graphics2D g) {
+		g.setStroke(new BasicStroke(2)); // to draw thicker lines
 		for (Link link : model.getLinks()) {
 			Color color = link.getColor();
 			g.setColor(color);
 			Node node1 = link.getStartNode();
 			Node node2 = link.getEndNode();
-			g.drawLine((int)(margin_x+node1.pos_x*min_size), 
-			           (int)(margin_y+node1.pos_y*min_size), 
-			           (int)(margin_x+node2.pos_x*min_size), 
-			           (int)(margin_y+node2.pos_y*min_size));
-		}
-	}
-	// debug:
-	private void paintForce(Graphics2D g) {
-		for (Node node : model.getNodes()) {
-			g.setColor(Color.BLUE);
-			g.drawLine((int)(margin_x+node.pos_x*min_size), 
-			           (int)(margin_y+node.pos_y*min_size), 
-			           (int)(margin_x+(node.pos_x+node.for_x)*min_size), 
-			           (int)(margin_y+(node.pos_y+node.for_y)*min_size));
+			g.drawLine((int)(convertNodePositionToPixelX(node1)), 
+			           (int)(convertNodePositionToPixelY(node1)), 
+			           (int)(convertNodePositionToPixelX(node2)), 
+			           (int)(convertNodePositionToPixelY(node2)));
 		}
 	}
 
-	public void computeMargin(Graphics2D g) {
+	// computeMargin permet de trouver la position du plus grand carré
+	// qui tient à l'intérieur de la fenêtre (celle-ci étant un rectangle)
+	private void computeMargin() {
 		int width = this.getWidth();
 		int height = this.getHeight();
-		g.setColor(Color.decode("#111111"));
 
 		if (width > height) {
 			this.min_size = height;
 			this.margin_x = (width-height)/2;
 			this.margin_y = 0;
-			// g.fillRect(0,0,margin_x,height);
-			// g.fillRect(width-margin_x,0,margin_x,height);
 		}
 		else {
 			this.min_size = width;
 			this.margin_x = 0;
 			this.margin_y = (height-width)/2;
-			// g.fillRect(0,0,width,margin_y);
-			// g.fillRect(0,height-margin_y,width,margin_y);
 		}
-
 	}
 
+	// the values used for the simulation and stored in the node class are NOT pixel values
+	// because the simulation should not depend on the size of the window
+	// so the following functions convert these values to pixels
+	// these functions return the position of the center of the node
+	private double convertNodePositionToPixelX(Node node) {
+		return margin_x+node.pos_x*min_size;
+	}
+	private double convertNodePositionToPixelY(Node node) {
+		return margin_y+node.pos_y*min_size;
+	}
+	private double convertNodeDiameterToPixel(Node node) {
+		return min_size*node.getDiameter();
+	}
+
+	// to search informations about a node when we click on him
+	private void searchNodeInformation(int x, int y) {
+		Node n = null;
+		// we search into the list of nodes if one of them is where the user clicked
+		for (Node node : model.getNodes()) {
+			double X = convertNodePositionToPixelX(node);
+			double Y = convertNodePositionToPixelY(node);
+			double gap_x = X - x;
+			double gap_y = Y - y;
+			double distance = Math.sqrt(gap_x*gap_x + gap_y*gap_y);
+			if (distance <= convertNodeDiameterToPixel(node)) {
+				n = node;
+				break;
+			}
+		}
+		if (n == null)
+			return;
+		// we open a popup with node information
+		JLabel label = new JLabel("File name: " + n.getFileName());
+		JFrame frame = new JFrame();
+		frame.setTitle("File information");
+		frame.setMinimumSize(new Dimension(500,100));
+		frame.setVisible(true);
+		frame.add(label);
+		frame.requestFocus();
+	}
 }

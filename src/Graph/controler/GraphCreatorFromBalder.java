@@ -12,6 +12,18 @@ public class GraphCreatorFromBalder {
 	// the table given as argument is the table of the match score
 	// between files found by Baldr
 	public GraphCreatorFromBalder(float[][] tab, SimulationModel model) {
+		// we search min and max match values, we need them to compute the colors
+		float min = 10;
+		float max = 0;
+		for (int i=0; i<tab.length; i++) {
+			for (int j=0; j<tab[i].length-1; j++) {
+				if (tab[i][j] < min)
+					min = tab[i][j];
+				if (tab[i][j] > max)
+					max = tab[i][j];
+			}
+		}
+
 		// for each file, we create a node
 		for (int i=0; i<tab.length; i++) {
 			Node node = new Node(i);
@@ -28,29 +40,33 @@ public class GraphCreatorFromBalder {
 			// if his file is not close to any other file, it will be green
 
 			// we get the minimum of the scores between this file and other files:
-			float coef_min = 10;
-			for (int j=0; j<i+1; j++) {
+			float coef_min = 10; float coef;
+			for (int j=0; j<tab.length; j++) {
 				if (i==j)
 					continue;
-				if (tab[i][j] < coef_min)
-					coef_min = tab[i][j];
+				if (j > i)
+					coef = tab[j][i];
+				else
+					coef = tab[i][j];
+				if (coef < coef_min)
+					coef_min = coef;
 			}
 
-			Color color = convertCoefToColor(coef_min);
+			Color color = convertCoefToColor(coef_min, min, max);
 			node.setColor(color);
 		}
 
 		// for each node, we create a link with every other node (file)
 		// proportionnate to the distance between the files
 		for (int i=0; i<tab.length; i++) {
-			for (int j=0; j<i; j++) {
+			for (int j=0; j<tab[i].length-1; j++) {
 				Link link = new Link(i,j,model);
 				model.addLink(link);
 
 				link.setLength((double)tab[i][j]);
 
 				// we set the link color, depending on how the files are close
-				Color color = convertCoefToColor(tab[i][j]);
+				Color color = convertCoefToColor(tab[i][j], min, max);
 				link.setColor(color);
 			} 
 		}
@@ -60,25 +76,9 @@ public class GraphCreatorFromBalder {
 
 	// this function converts the match score to a color
 	// exemple: 0 => red    5.0 => yellow    10.0 => green
-	private Color convertCoefToColor(float coef) {
-		int R, G, B;
-		if (coef >= 0.0 && coef <= 5.0) {
-			R = 255;
-			G = (int)(255*(coef/10.0));
-			B = 0;
-		}
-		else if (coef > 5.0 && coef < 10.0) {
-			R = (int)(255*(1-(coef/10.0)));
-			G = 255;
-			B = 0;
-		}
-		else {
-			// default: white (the background is black)
-			R = 255;
-			G = 255;
-			B = 255;
-		}
-		Color color = new Color(R,G,B);
-		return color;
+	private Color convertCoefToColor(float coef, float min, float max) {
+		float H, S = 0.5F, B = 1.0F;  // Hue Saturation Brightness
+		H = 0.37F * (coef - min) / (max - min);
+		return Color.getHSBColor(H,S,B);
 	}
 }

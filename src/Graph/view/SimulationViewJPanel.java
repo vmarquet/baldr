@@ -29,15 +29,14 @@ public class SimulationViewJPanel extends JPanel implements SimulationView {
 	}
 	@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
 		// on caste l'objet Graphics en Graphics2D car plus de fonctionnalités
 		Graphics2D g2d = (Graphics2D) g;
 		//g2d.setRenderingHints(Graphics2D.ANTIALIASING,Graphics2D.ANTIALIAS_ON);
 
 		// we clear the background
 		Color backgroundColor = Color.decode("#000000");
-		this.setBackground(backgroundColor);
+		g2d.setBackground(backgroundColor);
+		g2d.clearRect(0,0,this.getWidth(),this.getHeight());
 
 		// we compute the ratio for the display
 		computeMargin(g2d);
@@ -45,7 +44,7 @@ public class SimulationViewJPanel extends JPanel implements SimulationView {
 		// we paint the objetcs
 		paintLinks(g2d);
 		paintNodes(g2d);
-		//paintForce(g2d);
+		//paintForce(g2d); // debug
 	}
 	private void paintNodes(Graphics2D g) {
 		for (Node node : model.getNodes()) {
@@ -81,6 +80,7 @@ public class SimulationViewJPanel extends JPanel implements SimulationView {
 			           (int)(margin_y+node2.pos_y*min_size));
 		}
 	}
+	// debug:
 	private void paintForce(Graphics2D g) {
 		for (Node node : model.getNodes()) {
 			g.setColor(Color.BLUE);

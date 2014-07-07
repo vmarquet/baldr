@@ -11,7 +11,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.lang.Math;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class SimulationViewJPanel extends JPanel implements SimulationView {
@@ -22,6 +25,7 @@ public class SimulationViewJPanel extends JPanel implements SimulationView {
 	private int margin_y;
 	private int min_size;  // minimum between window size and height
 	private double scale = 1.0;
+	private boolean drawLinks = true;
 
 	public SimulationViewJPanel(SimulationModel model) {
 		this.model = model;
@@ -36,6 +40,16 @@ public class SimulationViewJPanel extends JPanel implements SimulationView {
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseReleased(MouseEvent e) {}
 			public void mousePressed(MouseEvent e) {}
+		});
+		// we add a button to choose display parameters
+		this.setLayout(null);
+		JButton button = new JButton("Draw links");
+		button.setBounds(5,5,100,20);
+		this.add(button);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				drawLinks = ! drawLinks;
+			}
 		});
 	}
 
@@ -56,8 +70,9 @@ public class SimulationViewJPanel extends JPanel implements SimulationView {
 		// we compute the ratio for the display
 		computeMargin();
 
-		// we paint the objetcs
-		paintLinks(g2d);
+		// we paint the objects
+		if (drawLinks == true)
+			paintLinks(g2d);
 		paintNodes(g2d);
 	}
 	private void paintNodes(Graphics2D g) {
@@ -140,7 +155,7 @@ public class SimulationViewJPanel extends JPanel implements SimulationView {
 			double gap_x = X - x;
 			double gap_y = Y - y;
 			double distance = Math.sqrt(gap_x*gap_x + gap_y*gap_y);
-			if (distance <= convertNodeDiameterToPixel(node)) {
+			if (distance <= convertNodeDiameterToPixel(node)/2) {
 				n = node;
 				break;
 			}

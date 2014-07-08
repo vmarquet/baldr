@@ -1,0 +1,11 @@
+pygments: true
+markdown: rdiscount
+
+links:
+  index                   : [ 'index.html'              , 'Page d&apos;accueil'          ]
+  intro_FR                : [ 'intro_FR.html'           , 'Introduction'                 ]
+  analysis_FR             : [ 'analysis_FR.html'        , 'Analyse'                      ]
+  graphics_FR             : [ 'graphics_FR.html'        , 'Graphiques'                   ]
+  results_FR              : [ 'results_FR.html'         , 'Résultats'                    ]
+  download_FR             : [ 'download_FR.html'        , 'Téléchargement'               ]
+  about_FR                : [ 'about_FR.html'           , 'A propos'                     ]

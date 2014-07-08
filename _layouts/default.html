@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/style.css" charset="utf-8" type="text/css" />
+	<link rel="stylesheet" href="css/bootstrap.min.css" charset="utf-8" type="text/css" />
+	<link rel="stylesheet" href="css/pygments.css" charset="utf-8" type="text/css" />
+	<title>{{ page.title }} &laquo; Baldr</title>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<div id="title"><h2><a href="index.html">Baldr</a></h2></div>
+			<div id="slogan">Plagiarism prevention software</div>
+		</div>
+		<div id="content">
+			<h1>{{ page.title }}</h1>
+			{{ content }}
+
+			<div id="guide">
+				{% if (site.links[page.previous]) %}
+				<span class="left"><a href="{{ site.links[page.previous][0] }}">&laquo; {{ site.links[page.previous][1] }}</a></span>
+				{% endif %}
+				{% if (site.links[page.next]) %}
+				<span class="right"><a href="{{ site.links[page.next][0] }}">{{ site.links[page.next][1] }} &raquo;</a></span>
+				{% endif %}
+			</div>
+		</div>
+
+		<div id="menu">
+			<ul>
+				<li><a href="index.html">Page d'accueil</a></li>
+				<li><a href="intro_FR.html">Introduction</a></li>
+				<li><a href="analysis_FR.html">Analyse</a></li>
+				<li><a href="graphics_FR.html">Graphiques</a></li>
+				<li><a href="results_FR.html">Résultats</a></li>
+				<li><a href="download_FR.html">Téléchargement</a></li>
+				<li><a href="about_FR.html">A propos</a></li>
+			</ul>
+
+		</div>
+		<div id="footer">
+			<!-- add a footer here -->
+		</div>
+
+	</div>
+	<a href="https://github.com/vmarquet/baldr">
+		<img style="position: absolute; top: 0; right: 0; border: 0;"
+		src="images/forkme.png"
+		alt="Fork me on GitHub">
+	</a>
+</body>
+</html>

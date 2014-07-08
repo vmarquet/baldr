@@ -1,0 +1,179 @@
+/* CSS Document for Dave Eddy's 409 page */
+/* DEBUG 
+div {
+        border-style:solid;
+        border-color:RED;
+        border-width:1px;
+}
+/* */
+
+body {
+	background-color: #ddd;
+}
+
+
+/* Paragraphs indendted */
+p {
+	text-indent: 10px;
+}
+
+/* links */
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+
+/* The Page Layout */
+#container {
+	position: relative;
+	margin-left:  auto;
+	margin-right: auto;
+	width: 1000px;
+/*	background-color: #e9f1f1;
+ */
+	padding: 10px;
+}
+
+/* The header */
+#header {
+	position: relative;
+	width: 100%;
+	height: 150px;
+	background: url('../images/header.jpg');
+	background-repeat: no-repeat;
+	background-position: left top;
+	border-color: #555;
+	border-width: 4px;
+	border-style: solid;
+	margin-bottom: 20px;
+}
+
+#header a {
+	color: #000000;
+	font-size: 60px;
+}
+#header a:hover {
+	color: #000000;
+}
+
+#header #title {
+	position: relative;
+	float: left;
+	padding-top: 40px;
+	padding-left: 120px;
+	color: #000000;
+}
+#header #title h2 {
+	padding: 0;
+	margin: 0;
+}
+
+#header #slogan {
+	position: relative;
+	float: left;
+	clear: left;
+	font-style: italic;
+	padding-top: 15px;
+	padding-left: 100px;
+	color: #000000;
+}
+
+/* Content */
+#content {
+	position: relative;
+	float: left;
+	width: 740px;
+	padding-left: 10px;
+	font-size: 17px;
+	line-height: 25px;
+}
+#content h1 {
+	width: 100%;
+	border-bottom: 1px dashed #111;
+	margin-bottom: 8px;
+}
+
+#content p code {
+	color: green;
+}
+#content pre {
+	margin: 8px 2px;
+	padding: 8px 12px;
+	color: #eee;
+	background: #252525;
+	overflow: auto;
+	border: #050505 solid 1px;
+}
+#content pre code {
+	font-size: 11px;
+	font-family: Monaco,Courier,monospace;
+}
+
+#content p {
+}
+
+#content #guide .left {
+	position: relative;
+	float: left;
+	font-size: 10pt;
+}
+#content #guide .right {
+	position: relative;
+	float: right;
+	font-size: 10pt;
+}
+#content #guide a {
+	color: #051555;
+}
+
+/* Menu */
+#menu {
+	position: relative;
+	float: right;
+	width: 240px;
+	height: 100%;
+	font-size: 11pt;
+}
+
+#menu .current {
+	color: #169;
+}
+
+#menu ul {
+	list-style: none;
+	font-family: helvetica, arial, sans-serif;
+	line-height: 15pt;
+}
+#menu ul li ul {
+
+	text-indent: 5px;
+	margin-left: 3px;
+	padding-left: 3px;
+	font-size: 10pt;
+}
+
+#menu ul li ul li {
+	list-style: none;
+}
+
+#menu ul li ul li:before {
+	content: "\00BB";
+}
+
+#menu a {
+	color: #000;
+}
+
+#menu a:hover {
+	color: #333;
+}
+
+/* Footer */
+#footer {
+	position: relative;
+	clear: both;
+	top: 40px;
+}
